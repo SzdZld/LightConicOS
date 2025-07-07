@@ -1,6 +1,7 @@
 {
     "SERVER_IP" : "127.0.0.1",
-    "SERVER_PORT" : 10810,
+    "SERVER_DATA_PORT" : 10809,
+    "SERVER_STREAM_PORT" : 10810,
     "SERVER_BUFFER" : 2048,
     "Version" : "0.1.a1"
 }

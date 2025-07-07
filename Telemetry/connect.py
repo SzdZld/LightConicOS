@@ -1,6 +1,4 @@
-import socket
-import json
-import sys
+import threading, socket, json, sys
 
 with open(r"Telemetry\connect.json", 'r') as f:
     connect_info = json.load(f)
@@ -9,7 +7,8 @@ with open(r"Telemetry\connect.json", 'r') as f:
         print("please update to new version")
         sys.exit()
     SERVER_IP = connect_info["SERVER_IP"]
-    SERVER_PORT = connect_info["SERVER_PORT"]
+    SERVER_DATA_PORT = connect_info["SERVER_DATA_PORT"]
+    SERVER_STREAM_PORT = connect_info["SERVER_STREAM_PORT"]
     SERVER_BUFFER = connect_info["SERVER_BUFFER"]
 
 
@@ -55,29 +54,47 @@ def parse_message_to_list(message):
     items = message.split("<<")
     return [convert_value(item) for item in items if item.strip()]
 
-def connect():
+def data_connect():
     try:
-        # Test Connect
-        global client_socket
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect((SERVER_IP, SERVER_PORT))
+        client_socket.connect((SERVER_IP, SERVER_DATA_PORT))
         return client_socket
     except Exception as e:
         print(f"Error occurred: {e}")
 
-
-
-def send_message(message:str, skt):
+def stream_connect():
     try:
-        send_message_with_length(client_socket, message)
-        response = receive_message_with_length(client_socket)
+        stream_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        stream_socket.connect((SERVER_IP, SERVER_STREAM_PORT))
+        return stream_socket
+    except Exception as e:
+        print(f"Error occurred: {e}")
+
+def send_message(message:str, socket):
+    try:
+        send_message_with_length(socket, message)
+        response = receive_message_with_length(socket)
         if response is None or not convert_value(response):
             print("Send Failed")
         else:
-            return response
+            data = parse_message_to_list(response)
+            return data
 
 
     except Exception as e:
         print(f"Error occurred: {e}")
     # finally:
     #     client_socket.close()
+
+def stream_message(socket):
+    try:
+        send_message_with_length(socket, "stream_message")
+
+        response = receive_message_with_length(socket)
+        if response is not None:
+            return response
+
+
+    except Exception as e:
+        pass
+        # print(f"Error occurred: {e}")
