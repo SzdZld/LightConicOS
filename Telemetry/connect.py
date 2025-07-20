@@ -16,11 +16,13 @@ def send_message_with_length(sock, message):
     message_bytes = message.encode('utf-8')
     sock.sendall(message_bytes)
 
+
 def receive_message_with_length(sock):
     message_bytes = sock.recv(SERVER_BUFFER)
     if not message_bytes:
         return None
     return message_bytes.decode('utf-8')
+
 
 def convert_value(item):
     s = item.strip()
@@ -49,10 +51,12 @@ def convert_value(item):
     # Return the original string if no conversion applies
     return s
 
+
 def parse_message_to_list(message):
     # Split the message by "<<" delimiter, trim and convert the type of each item
     items = message.split("<<")
     return [convert_value(item) for item in items if item.strip()]
+
 
 def data_connect():
     try:
@@ -62,13 +66,15 @@ def data_connect():
     except Exception as e:
         print(f"Error occurred: {e}")
 
-def stream_connect():
-    try:
-        stream_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        stream_socket.connect((SERVER_IP, SERVER_STREAM_PORT))
-        return stream_socket
-    except Exception as e:
-        print(f"Error occurred: {e}")
+
+# def stream_connect():
+#     try:
+#         stream_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#         stream_socket.connect((SERVER_IP, SERVER_STREAM_PORT))
+#         return stream_socket
+#     except Exception as e:
+#         print(f"Error occurred: {e}")
+
 
 def send_message(message:str, socket):
     try:
@@ -80,21 +86,20 @@ def send_message(message:str, socket):
             data = parse_message_to_list(response)
             return data
 
-
     except Exception as e:
         print(f"Error occurred: {e}")
-    # finally:
-    #     client_socket.close()
-
-def stream_message(socket):
-    try:
-        send_message_with_length(socket, "stream_message")
-
-        response = receive_message_with_length(socket)
-        if response is not None:
-            return response
 
 
-    except Exception as e:
-        pass
-        # print(f"Error occurred: {e}")
+
+# def stream_message(socket):
+#     try:
+#         send_message_with_length(socket, "stream_message")
+
+#         response = receive_message_with_length(socket)
+#         if response is not None:
+#             return response
+
+
+#     except Exception as e:
+#         pass
+#         # print(f"Error occurred: {e}")
