@@ -1,4 +1,4 @@
-from Telemetry import connect
+from JMOT import connect
 from typing import Literal
 import sys
 
