@@ -6,4 +6,5 @@
 
 # develop
 /test.py
-/Telemetry/__pycache__
+/JMOT/__pycache__/
+/JMOT/*.pyc

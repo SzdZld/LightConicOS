@@ -1,6 +1,6 @@
 from JMOT import connect
 from typing import Literal
-import sys
+
 
 def verify(response):
         if response[0]:

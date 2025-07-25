@@ -1,6 +1,6 @@
-import threading, socket, json, sys
+import socket, json, sys
 
-with open(r"Telemetry\connect.json", 'r') as f:
+with open(r"JMOT\connect.json", 'r') as f:
     connect_info = json.load(f)
     VERSION = connect_info["Version"]
     if VERSION != "0.1.a1":
