@@ -15,7 +15,7 @@
 
 #### 使用说明
 
-1.  xxxx
+1.  确保本地电脑安装python（3.8及以上）并能正常使用（`python --version`)
 2.  xxxx
 3.  xxxx
 
