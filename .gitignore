@@ -6,5 +6,4 @@
 
 # develop
 /test.py
-/JMOT/__pycache__/
-/JMOT/*.pyc
+/JMOT/__pycache__

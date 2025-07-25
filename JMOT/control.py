@@ -98,8 +98,12 @@ class control:
         ack = connect.send_message(f"false<<setslider<<{slider}<<{slider_value}", socket)
         verify(ack)
 
-    def set_heading_vector(heading:tuple[float, float, float], socket):
-        ack = connect.send_message(f"false<<setheadvec<<{heading}", socket)
+    def set_heading_vector(heading:list[float, float, float], socket):
+        tmp = heading[1]
+        heading[1] = heading[2]
+        heading[2] = tmp
+        vec = tuple(heading)
+        ack = connect.send_message(f"false<<setheadvec<<{vec}", socket)
         verify(ack)
 
     def set_translate(translate:Literal['forward', 'right', 'up', 'mode'], value:float, socket):
