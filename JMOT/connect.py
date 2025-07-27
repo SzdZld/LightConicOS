@@ -1,11 +1,7 @@
-import socket, json, sys
+import socket, json, sys, JMOT
 
 with open(r"JMOT\connect.json", 'r') as f:
     connect_info = json.load(f)
-    VERSION = connect_info["Version"]
-    if VERSION != "0.1.a1":
-        print("please update to new version")
-        sys.exit()
     SERVER_IP = connect_info["SERVER_IP"]
     SERVER_DATA_PORT = connect_info["SERVER_DATA_PORT"]
     SERVER_STREAM_PORT = connect_info["SERVER_STREAM_PORT"]
@@ -62,6 +58,9 @@ def data_connect():
     try:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((SERVER_IP, SERVER_DATA_PORT))
+        version = send_message("version", client_socket)[0]
+        if version is not JMOT.__version__:
+            sys.exit(1)
         return client_socket
     except Exception as e:
         print(f"Error occurred: {e}")

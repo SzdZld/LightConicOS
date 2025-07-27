@@ -5,3 +5,6 @@
 <2025/7/21>:项目名称更改为JMOT(Jno Monitoring and Operation Tools)
 <2025/7/25>:craft更新至attitude,上传JMOT JNO端
 <2025/7/27>:更新README的提交流程
+            完成craft类
+            修改control类中的油门刹车操作方式
+            init中添加版本号

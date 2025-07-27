@@ -86,8 +86,12 @@ class control:
         ack = connect.send_message(f"false<<setatt<<{ATTITUDE[attitude]}<<{value}", socket)
         verify(ack)
 
-    def set_throttle_brake(throttle:float, socket):
-        ack = connect.send_message(f"false<<setlvr<<{throttle}", socket)
+    def set_throttle(throttle:float, socket):
+        ack = connect.send_message(f"false<<setthr<<{throttle}", socket)
+        verify(ack)
+
+    def set_brake(brake:float, socket):
+        ack = connect.send_message(f"false<<setbrk<<{brake}", socket)
         verify(ack)
 
     def set_pitch_heading(set_value:Literal["pitch", "heading"], value:float, socket):
