@@ -304,7 +304,7 @@ class misc:
             return rec[0]
         def get_int(funkexpression:str, socket)->int:
             rec = connect.send_message(f"true<<157<<{funkexpression}", socket)
-            return rec[0][0]
+            return rec[0]
         def get_vector(funkexpression:str, socket)->list[float, float, float]:
             rec = connect.send_message(f"true<<157<<{funkexpression}", socket)
             return tuple2list(rec[0])
