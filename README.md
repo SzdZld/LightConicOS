@@ -21,6 +21,9 @@
 4.  从载具里选择任意部件，点击Add Flight Program并加载JMOTvX
 
 
+#### PR说明
+1. python里所有的新代码均在pull.py中编写，格式参照pull_example.py（该文件误删），函数内列表第一位是是否有回参，第二位识别码从500开始写。
+2. vizzy里将程序块按是否有回参放入new_request_instruct或new_norequest_instruct里。
 
 #### 特技
 
