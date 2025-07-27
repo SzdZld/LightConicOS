@@ -136,17 +136,17 @@ class misc():
 
 class funk():
     def get_float(funkexpression:str, socket)->float:
-        rec = connect.send_message(f"true<<151<<{funkexpression}", socket)
+        rec = connect.send_message(f"true<<157<<{funkexpression}", socket)
         return rec[0]
     def get_bool(funkexpression:str, socket)->bool:
-        rec = connect.send_message(f"true<<151<<{funkexpression}", socket)
+        rec = connect.send_message(f"true<<157<<{funkexpression}", socket)
         return bool(rec[0])
     def get_string(funkexpression:str, socket)->str:
-        rec = connect.send_message(f"true<<151<<{funkexpression}", socket)
+        rec = connect.send_message(f"true<<157<<{funkexpression}", socket)
         return rec[0]
     def get_int(funkexpression:str, socket)->int:
-        rec = connect.send_message(f"true<<151<<{funkexpression}", socket)
+        rec = connect.send_message(f"true<<157<<{funkexpression}", socket)
         return rec[0]
     def get_vector(funkexpression:str, socket)->list[float, float, float]:
-        rec = connect.send_message(f"true<<151<<{funkexpression}", socket)
+        rec = connect.send_message(f"true<<157<<{funkexpression}", socket)
         return tuple2list(rec[0])
