@@ -56,11 +56,16 @@ def parse_message_to_list(message):
 
 def data_connect():
     try:
+        print("JMOT connecting...")
+        global client_socket
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((SERVER_IP, SERVER_DATA_PORT))
         version = send_message("version", client_socket)[0]
-        if version is not JMOT.__version__:
+        if version != JMOT.__version__:
+            print("version error, please updates")
             sys.exit(1)
+        else:
+            print(f"JMOT v{JMOT.__version__} connect successful")
         return client_socket
     except Exception as e:
         print(f"Error occurred: {e}")
@@ -75,8 +80,11 @@ def data_connect():
 #         print(f"Error occurred: {e}")
 
 
-def send_message(message:str, socket):
+def send_message(message:str, socket = None):
+    if socket is None:
+        socket = client_socket
     try:
+        print(message)
         send_message_with_length(socket, message)
         response = receive_message_with_length(socket)
         if response is None or not convert_value(response):
