@@ -6,7 +6,7 @@ import sys
 
 
 __all__ = ['connect', 'control', 'craft', 'extra']
-__version__ = "0.1.a1"
+__version__ = "0.1.a2"
 
 
 REQUIRED_PACKAGES = {

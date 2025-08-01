@@ -1,5 +1,6 @@
 from JMOT import connect
 from typing import Literal
+import datetime, sys
 
 def tuple2list(vec:tuple[float, float, float])->list[float, float, float]:
     vec = list(vec)
@@ -7,6 +8,10 @@ def tuple2list(vec:tuple[float, float, float])->list[float, float, float]:
     vec[1] = vec[2]
     vec[2] = tmp
     return vec
+
+def write_to_file(message:str):
+    with open(r"JMOT\tran.log", "a", encoding="utf-8") as f:
+        f.writelines(message + '\n')
 
 class info:
     def get_name()->str:
