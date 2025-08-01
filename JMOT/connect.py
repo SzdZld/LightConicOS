@@ -84,7 +84,6 @@ def send_message(message:str, socket = None):
     if socket is None:
         socket = client_socket
     try:
-        print(message)
         send_message_with_length(socket, message)
         response = receive_message_with_length(socket)
         if response is None or not convert_value(response):
