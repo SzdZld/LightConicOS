@@ -74,3 +74,35 @@ def compute_heading_angle(r_eci, v_eci):
     heading = math.atan2(v_east, v_north)  # [-π, π]
     heading_deg = np.degrees(heading) % 360  # [0°, 360°]
     return heading_deg
+
+def calculate_roll_angle(pitch_axis, roll_axis, gravity_vector):
+    """
+    计算航天器的滚转角（roll angle）。
+    
+    参数:
+        pitch_axis: ECI坐标系下的pitch轴矢量 (3维数组)
+        roll_axis: ECI坐标系下的roll轴矢量 (3维数组)
+        gravity_vector: ECI坐标系下的重力矢量 (3维数组)
+    
+    返回:
+        滚转角（弧度），范围 [-pi, pi]
+    """
+    roll_axis_normalized = roll_axis / np.linalg.norm(roll_axis)
+    gravity_normalized = gravity_vector / np.linalg.norm(gravity_vector)
+    
+    up_direction = -gravity_normalized
+    up_direction = up_direction - np.dot(up_direction, roll_axis_normalized) * roll_axis_normalized
+    up_direction_normalized = up_direction / np.linalg.norm(up_direction)
+    
+    pitch_projection = pitch_axis - np.dot(pitch_axis, roll_axis_normalized) * roll_axis_normalized
+    pitch_projection_normalized = pitch_projection / np.linalg.norm(pitch_projection)
+    
+    right_direction = np.cross(roll_axis_normalized, up_direction_normalized)
+    right_direction_normalized = right_direction / np.linalg.norm(right_direction)
+    
+    roll_angle = np.arctan2(
+        np.dot(pitch_projection_normalized, right_direction_normalized),
+        np.dot(pitch_projection_normalized, up_direction_normalized)
+    )
+    
+    return np.degrees(roll_angle) -90
