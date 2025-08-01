@@ -12,57 +12,136 @@
     <Variable name="var">
       <Items />
     </Variable>
+    <Variable name="version" number="0" />
   </Variables>
   <Instructions>
-    <Event event="ReceiveMessage" id="0" style="receive-msg" pos="1875.482,525.2905">
-      <Constant canReplace="false" text="10809" />
-    </Event>
-    <Comment id="1" style="comment">
-      <Constant style="comment-text" canReplace="false" text="bool&lt;&lt;msg" />
-    </Comment>
-    <If id="2" style="if">
-      <Comparison op="ge" style="op-gte">
-        <ListOp op="length" style="list-length">
+    <CustomInstruction callFormat="control1" format="control1" name="control1" id="0" style="custom-instruction" pos="1314.357,-494.5267" />
+    <If id="1" style="if">
+      <StringOp op="contains" style="contains">
+        <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
         </ListOp>
-        <Constant text="2" />
-      </Comparison>
+        <Constant text="setatt" />
+      </StringOp>
       <Instructions>
-        <If id="3" style="if">
-          <ListOp op="get" style="list-get">
-            <Variable list="false" local="true" variableName="data" />
-            <Constant text="1" />
-          </ListOp>
-          <Instructions>
-            <Comment id="4" style="comment">
-              <Constant style="comment-text" canReplace="false" text="should request" />
-            </Comment>
-            <CallCustomInstruction call="craft" id="5" style="call-custom-instruction" />
-            <CallCustomInstruction call="time" id="6" style="call-custom-instruction" />
-            <CallCustomInstruction call="attitude" id="7" style="call-custom-instruction" />
-            <CallCustomInstruction call="position" id="8" style="call-custom-instruction" />
-            <CallCustomInstruction call="performance" id="9" style="call-custom-instruction" />
-            <CallCustomInstruction call="misc" id="10" style="call-custom-instruction" />
-            <CallCustomInstruction call="new_request_instruct" id="11" style="call-custom-instruction" />
-          </Instructions>
-        </If>
-        <ElseIf id="12" style="else-if">
-          <Not style="op-not">
+        <If id="2" style="if">
+          <Comparison op="=" style="op-eq">
             <ListOp op="get" style="list-get">
               <Variable list="false" local="true" variableName="data" />
-              <Constant text="1" />
+              <Constant text="3" />
             </ListOp>
-          </Not>
+            <Constant text="1" />
+          </Comparison>
           <Instructions>
-            <Comment id="13" style="comment">
-              <Constant style="comment-text" canReplace="false" text="not should request" />
-            </Comment>
-            <CallCustomInstruction call="display" id="14" style="call-custom-instruction" />
-            <CallCustomInstruction call="action" id="15" style="call-custom-instruction" />
-            <CallCustomInstruction call="control1" id="16" style="call-custom-instruction" />
-            <CallCustomInstruction call="control2" id="17" style="call-custom-instruction" />
-            <CallCustomInstruction call="other" id="18" style="call-custom-instruction" />
-            <CallCustomInstruction call="new_norequest_instruct" id="19" style="call-custom-instruction" />
+            <SetInput input="pitch" id="3" style="set-input">
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="4" />
+              </ListOp>
+            </SetInput>
+            <CallCustomInstruction call="send" id="4" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </If>
+        <ElseIf id="5" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="2" />
+          </Comparison>
+          <Instructions>
+            <SetInput input="yaw" id="6" style="set-input">
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="4" />
+              </ListOp>
+            </SetInput>
+            <CallCustomInstruction call="send" id="7" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="8" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="3" />
+          </Comparison>
+          <Instructions>
+            <SetInput input="roll" id="9" style="set-input">
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="4" />
+              </ListOp>
+            </SetInput>
+            <CallCustomInstruction call="send" id="10" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="11" style="else">
+          <Constant bool="true" />
+          <Instructions>
+            <CallCustomInstruction call="send" id="12" style="call-custom-instruction">
+              <Constant style="false" bool="false" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+      </Instructions>
+    </If>
+    <ElseIf id="13" style="else-if">
+      <StringOp op="contains" style="contains">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="sethead" />
+      </StringOp>
+      <Instructions>
+        <If id="14" style="if">
+          <StringOp op="contains" style="contains">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="pitch" />
+          </StringOp>
+          <Instructions>
+            <SetTargetHeading property="pitch" id="15" style="set-heading">
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="4" />
+              </ListOp>
+            </SetTargetHeading>
+            <CallCustomInstruction call="send" id="16" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </If>
+        <ElseIf id="17" style="else-if">
+          <StringOp op="contains" style="contains">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="heading" />
+          </StringOp>
+          <Instructions>
+            <SetTargetHeading property="heading" id="18" style="set-heading">
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="4" />
+              </ListOp>
+            </SetTargetHeading>
+            <CallCustomInstruction call="send" id="19" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
           </Instructions>
         </ElseIf>
         <ElseIf id="20" style="else">
@@ -74,28 +153,57 @@
           </Instructions>
         </ElseIf>
       </Instructions>
-    </If>
-    <ElseIf id="22" style="else">
-      <Constant bool="true" />
-      <Instructions>
-        <CallCustomInstruction call="send" id="23" style="call-custom-instruction">
-          <Constant style="false" bool="false" />
-        </CallCustomInstruction>
-      </Instructions>
     </ElseIf>
-  </Instructions>
-  <Instructions>
-    <CustomInstruction callFormat="control1" format="control1" name="control1" id="24" style="custom-instruction" pos="1314.357,-494.5267" />
-    <If id="25" style="if">
+    <ElseIf id="22" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
           <Constant text="2" />
         </ListOp>
-        <Constant text="setatt" />
+        <Constant text="setthr" />
       </StringOp>
       <Instructions>
-        <If id="26" style="if">
+        <SetInput input="throttle" id="23" style="set-input">
+          <ListOp op="get" style="list-get">
+            <Variable list="false" local="true" variableName="data" />
+            <Constant text="3" />
+          </ListOp>
+        </SetInput>
+        <CallCustomInstruction call="send" id="24" style="call-custom-instruction">
+          <Constant style="true" bool="true" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="25" style="else-if">
+      <StringOp op="contains" style="contains">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="setbrk" />
+      </StringOp>
+      <Instructions>
+        <SetInput input="brake" id="26" style="set-input">
+          <ListOp op="get" style="list-get">
+            <Variable list="false" local="true" variableName="data" />
+            <Constant text="3" />
+          </ListOp>
+        </SetInput>
+        <CallCustomInstruction call="send" id="27" style="call-custom-instruction">
+          <Constant style="true" bool="true" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="28" style="else-if">
+      <StringOp op="contains" style="contains">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="setslider" />
+      </StringOp>
+      <Instructions>
+        <If id="29" style="if">
           <Comparison op="=" style="op-eq">
             <ListOp op="get" style="list-get">
               <Variable list="false" local="true" variableName="data" />
@@ -104,27 +212,7 @@
             <Constant text="1" />
           </Comparison>
           <Instructions>
-            <SetInput input="pitch" id="27" style="set-input">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="4" />
-              </ListOp>
-            </SetInput>
-            <CallCustomInstruction call="send" id="28" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </If>
-        <ElseIf id="29" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="2" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="yaw" id="30" style="set-input">
+            <SetInput input="slider1" id="30" style="set-input">
               <ListOp op="get" style="list-get">
                 <Variable list="false" local="true" variableName="data" />
                 <Constant text="4" />
@@ -134,17 +222,17 @@
               <Constant style="true" bool="true" />
             </CallCustomInstruction>
           </Instructions>
-        </ElseIf>
+        </If>
         <ElseIf id="32" style="else-if">
           <Comparison op="=" style="op-eq">
             <ListOp op="get" style="list-get">
               <Variable list="false" local="true" variableName="data" />
               <Constant text="3" />
             </ListOp>
-            <Constant text="3" />
+            <Constant text="2" />
           </Comparison>
           <Instructions>
-            <SetInput input="roll" id="33" style="set-input">
+            <SetInput input="slider2" id="33" style="set-input">
               <ListOp op="get" style="list-get">
                 <Variable list="false" local="true" variableName="data" />
                 <Constant text="4" />
@@ -155,227 +243,50 @@
             </CallCustomInstruction>
           </Instructions>
         </ElseIf>
-        <ElseIf id="35" style="else">
-          <Constant bool="true" />
-          <Instructions>
-            <CallCustomInstruction call="send" id="36" style="call-custom-instruction">
-              <Constant style="false" bool="false" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-      </Instructions>
-    </If>
-    <ElseIf id="37" style="else-if">
-      <StringOp op="contains" style="contains">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="sethead" />
-      </StringOp>
-      <Instructions>
-        <If id="38" style="if">
-          <StringOp op="contains" style="contains">
+        <ElseIf id="35" style="else-if">
+          <Comparison op="=" style="op-eq">
             <ListOp op="get" style="list-get">
               <Variable list="false" local="true" variableName="data" />
               <Constant text="3" />
             </ListOp>
-            <Constant text="pitch" />
-          </StringOp>
+            <Constant text="3" />
+          </Comparison>
           <Instructions>
-            <SetTargetHeading property="pitch" id="39" style="set-heading">
+            <SetInput input="slider3" id="36" style="set-input">
               <ListOp op="get" style="list-get">
                 <Variable list="false" local="true" variableName="data" />
                 <Constant text="4" />
               </ListOp>
-            </SetTargetHeading>
+            </SetInput>
+            <CallCustomInstruction call="send" id="37" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="38" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="4" />
+          </Comparison>
+          <Instructions>
+            <SetInput input="slider4" id="39" style="set-input">
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="4" />
+              </ListOp>
+            </SetInput>
             <CallCustomInstruction call="send" id="40" style="call-custom-instruction">
               <Constant style="true" bool="true" />
             </CallCustomInstruction>
           </Instructions>
-        </If>
-        <ElseIf id="41" style="else-if">
-          <StringOp op="contains" style="contains">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="heading" />
-          </StringOp>
-          <Instructions>
-            <SetTargetHeading property="heading" id="42" style="set-heading">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="4" />
-              </ListOp>
-            </SetTargetHeading>
-            <CallCustomInstruction call="send" id="43" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
         </ElseIf>
-        <ElseIf id="44" style="else">
+        <ElseIf id="41" style="else">
           <Constant bool="true" />
           <Instructions>
-            <CallCustomInstruction call="send" id="45" style="call-custom-instruction">
-              <Constant style="false" bool="false" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="46" style="else-if">
-      <StringOp op="contains" style="contains">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="setlvr" />
-      </StringOp>
-      <Instructions>
-        <If id="47" style="if">
-          <Comparison op="ge" style="op-gte">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant number="0" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="throttle" id="48" style="set-input">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="3" />
-              </ListOp>
-            </SetInput>
-            <SetInput input="brake" id="49" style="set-input">
-              <Constant number="0" />
-            </SetInput>
-            <CallCustomInstruction call="send" id="50" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </If>
-        <ElseIf id="51" style="else-if">
-          <Comparison op="le" style="op-lte">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant number="0" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="throttle" id="52" style="set-input">
-              <Constant number="0" />
-            </SetInput>
-            <SetInput input="brake" id="53" style="set-input">
-              <MathFunction function="abs" style="op-math">
-                <ListOp op="get" style="list-get">
-                  <Variable list="false" local="true" variableName="data" />
-                  <Constant text="3" />
-                </ListOp>
-              </MathFunction>
-            </SetInput>
-            <CallCustomInstruction call="send" id="54" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="55" style="else-if">
-      <StringOp op="contains" style="contains">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="setslider" />
-      </StringOp>
-      <Instructions>
-        <If id="56" style="if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="1" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="slider1" id="57" style="set-input">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="4" />
-              </ListOp>
-            </SetInput>
-            <CallCustomInstruction call="send" id="58" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </If>
-        <ElseIf id="59" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="2" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="slider2" id="60" style="set-input">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="4" />
-              </ListOp>
-            </SetInput>
-            <CallCustomInstruction call="send" id="61" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="62" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="3" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="slider3" id="63" style="set-input">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="4" />
-              </ListOp>
-            </SetInput>
-            <CallCustomInstruction call="send" id="64" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="65" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="4" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="slider4" id="66" style="set-input">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="4" />
-              </ListOp>
-            </SetInput>
-            <CallCustomInstruction call="send" id="67" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="68" style="else">
-          <Constant bool="true" />
-          <Instructions>
-            <CallCustomInstruction call="send" id="69" style="call-custom-instruction">
+            <CallCustomInstruction call="send" id="42" style="call-custom-instruction">
               <Constant style="false" bool="false" />
             </CallCustomInstruction>
           </Instructions>
@@ -384,239 +295,8 @@
     </ElseIf>
   </Instructions>
   <Instructions>
-    <CustomInstruction callFormat="control2" format="control2" name="control2" id="70" style="custom-instruction" pos="1997.418,-478.5794" />
-    <If id="71" style="if">
-      <StringOp op="contains" style="contains">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="setheadvec" />
-      </StringOp>
-      <Instructions>
-        <LockNavSphere indicatorType="Vector" id="72" style="lock-nav-sphere-vector">
-          <ListOp op="get" style="list-get">
-            <Variable list="false" local="true" variableName="data" />
-            <Constant text="3" />
-          </ListOp>
-        </LockNavSphere>
-        <CallCustomInstruction call="send" id="73" style="call-custom-instruction">
-          <Constant style="true" bool="true" />
-        </CallCustomInstruction>
-      </Instructions>
-    </If>
-    <ElseIf id="74" style="else-if">
-      <StringOp op="contains" style="contains">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="settsl" />
-      </StringOp>
-      <Instructions>
-        <If id="75" style="if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="1" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="translateForward" id="76" style="set-input">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="4" />
-              </ListOp>
-            </SetInput>
-            <CallCustomInstruction call="send" id="77" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </If>
-        <ElseIf id="78" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="2" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="translateRight" id="79" style="set-input">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="4" />
-              </ListOp>
-            </SetInput>
-            <CallCustomInstruction call="send" id="80" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="81" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="3" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="translateUp" id="82" style="set-input">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="4" />
-              </ListOp>
-            </SetInput>
-            <CallCustomInstruction call="send" id="83" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="84" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="4" />
-          </Comparison>
-          <Instructions>
-            <SetInput input="translationMode" id="85" style="set-input">
-              <ListOp op="get" style="list-get">
-                <Variable list="false" local="true" variableName="data" />
-                <Constant text="4" />
-              </ListOp>
-            </SetInput>
-            <CallCustomInstruction call="send" id="86" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="87" style="else">
-          <Constant bool="true" />
-          <Instructions>
-            <CallCustomInstruction call="send" id="88" style="call-custom-instruction">
-              <Constant style="false" bool="false" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="89" style="else-if">
-      <StringOp op="contains" style="contains">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="lockhead" />
-      </StringOp>
-      <Instructions>
-        <If id="90" style="if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="1" />
-          </Comparison>
-          <Instructions>
-            <LockNavSphere indicatorType="None" id="91" style="lock-nav-sphere" />
-            <CallCustomInstruction call="send" id="92" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </If>
-        <ElseIf id="93" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="2" />
-          </Comparison>
-          <Instructions>
-            <LockNavSphere indicatorType="Prograde" id="94" style="lock-nav-sphere" />
-            <CallCustomInstruction call="send" id="95" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="96" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="3" />
-          </Comparison>
-          <Instructions>
-            <LockNavSphere indicatorType="Retrograde" id="97" style="lock-nav-sphere" />
-            <CallCustomInstruction call="send" id="98" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="99" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="4" />
-          </Comparison>
-          <Instructions>
-            <LockNavSphere indicatorType="Target" id="100" style="lock-nav-sphere" />
-            <CallCustomInstruction call="send" id="101" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="102" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="5" />
-          </Comparison>
-          <Instructions>
-            <LockNavSphere indicatorType="BurnNode" id="103" style="lock-nav-sphere" />
-            <CallCustomInstruction call="send" id="104" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="105" style="else-if">
-          <Comparison op="=" style="op-eq">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-            <Constant text="6" />
-          </Comparison>
-          <Instructions>
-            <LockNavSphere indicatorType="Current" id="106" style="lock-nav-sphere" />
-            <CallCustomInstruction call="send" id="107" style="call-custom-instruction">
-              <Constant style="true" bool="true" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-        <ElseIf id="108" style="else">
-          <Constant bool="true" />
-          <Instructions>
-            <CallCustomInstruction call="send" id="109" style="call-custom-instruction">
-              <Constant style="false" bool="false" />
-            </CallCustomInstruction>
-          </Instructions>
-        </ElseIf>
-      </Instructions>
-    </ElseIf>
-  </Instructions>
-  <Instructions>
-    <CustomInstruction callFormat="display" format="display" name="display" id="110" style="custom-instruction" pos="203.0236,-2273.259" />
-    <If id="111" style="if">
+    <CustomInstruction callFormat="display" format="display" name="display" id="43" style="custom-instruction" pos="203.0236,-2273.259" />
+    <If id="44" style="if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -625,19 +305,19 @@
         <Constant text="display" />
       </StringOp>
       <Instructions>
-        <DisplayMessage id="112" style="display">
+        <DisplayMessage id="45" style="display">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
           </ListOp>
           <Constant number="7" />
         </DisplayMessage>
-        <CallCustomInstruction call="send" id="113" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="46" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
       </Instructions>
     </If>
-    <ElseIf id="114" style="else-if">
+    <ElseIf id="47" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -646,18 +326,18 @@
         <Constant text="lolog" />
       </StringOp>
       <Instructions>
-        <LogMessage id="115" style="log">
+        <LogMessage id="48" style="log">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
           </ListOp>
         </LogMessage>
-        <CallCustomInstruction call="send" id="116" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="49" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="117" style="else-if">
+    <ElseIf id="50" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -666,7 +346,7 @@
         <Constant text="fllog" />
       </StringOp>
       <Instructions>
-        <LogFlight id="118" style="flightlog">
+        <LogFlight id="51" style="flightlog">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
@@ -683,17 +363,17 @@
             <Constant style="false" bool="false" />
           </Conditional>
         </LogFlight>
-        <CallCustomInstruction call="send" id="119" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="52" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
   </Instructions>
   <Instructions>
-    <Event event="ReceiveMessage" id="120" style="receive-msg" pos="784.8527,-171.7717">
+    <Event event="ReceiveMessage" id="53" style="receive-msg" pos="784.8527,-171.7717">
       <Constant canReplace="false" text="{part_id}" />
     </Event>
-    <SetVariable id="121" style="set-variable">
+    <SetVariable id="54" style="set-variable">
       <ListOp op="get" style="list-get">
         <Variable list="false" local="true" variableName="data" />
         <Constant text="1" />
@@ -705,32 +385,32 @@
     </SetVariable>
   </Instructions>
   <Instructions>
-    <CustomInstruction callFormat="send (0) " format="send |text| " name="send" id="122" style="custom-instruction" pos="2417.066,533.9369" />
-    <SetList op="clear" id="123" style="list-clear">
+    <CustomInstruction callFormat="send (0) " format="send |text| " name="send" id="55" style="custom-instruction" pos="2417.066,533.9369" />
+    <SetList op="clear" id="56" style="list-clear">
       <Variable list="true" local="false" variableName="DATA_SEND" />
     </SetList>
-    <SetList op="add" id="124" style="list-add">
+    <SetList op="add" id="57" style="list-add">
       <Variable list="true" local="false" variableName="DATA_SEND" />
       <Variable list="false" local="true" variableName="text" />
     </SetList>
-    <SentSockets id="125" style="SentSockets">
+    <SentSockets id="58" style="SentSockets">
       <Variable list="true" local="false" variableName="DATA_SEND" />
       <Constant text="10809" />
     </SentSockets>
-    <Break id="126" style="break" />
+    <Break id="59" style="break" />
   </Instructions>
   <Instructions>
-    <Event event="ReceiveMessage" id="127" style="receive-msg" pos="2966.761,534.9965">
+    <Event event="ReceiveMessage" id="60" style="receive-msg" pos="2966.761,534.9965">
       <Constant canReplace="false" text="socket error" />
     </Event>
-    <SetVariable id="128" style="set-variable">
+    <SetVariable id="61" style="set-variable">
       <Variable list="false" local="false" variableName="SocketErrorLog" />
       <Constant text=" " />
     </SetVariable>
-    <Comment id="129" style="comment">
+    <Comment id="62" style="comment">
       <Constant style="comment-text" canReplace="false" text="StartSockets" />
     </Comment>
-    <If id="130" style="if">
+    <If id="63" style="if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -739,7 +419,7 @@
         <Constant text="StartSockets : port error" />
       </StringOp>
       <Instructions>
-        <SetVariable id="131" style="set-variable">
+        <SetVariable id="64" style="set-variable">
           <Variable list="false" local="false" variableName="SocketErrorLog" />
           <StringOp op="join" style="join">
             <Constant text="Invalid port number: " />
@@ -752,7 +432,7 @@
         </SetVariable>
       </Instructions>
     </If>
-    <ElseIf id="132" style="else-if">
+    <ElseIf id="65" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -761,7 +441,7 @@
         <Constant text="StartSockets : buffer error" />
       </StringOp>
       <Instructions>
-        <SetVariable id="133" style="set-variable">
+        <SetVariable id="66" style="set-variable">
           <Variable list="false" local="false" variableName="SocketErrorLog" />
           <StringOp op="join" style="join">
             <Constant text="Invalid buffer number: " />
@@ -774,7 +454,7 @@
         </SetVariable>
       </Instructions>
     </ElseIf>
-    <ElseIf id="134" style="else-if">
+    <ElseIf id="67" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -783,7 +463,7 @@
         <Constant text="StartSockets : create error" />
       </StringOp>
       <Instructions>
-        <SetVariable id="135" style="set-variable">
+        <SetVariable id="68" style="set-variable">
           <Variable list="false" local="false" variableName="SocketErrorLog" />
           <StringOp op="join" style="join">
             <Constant text="Failed to create server on port: " />
@@ -796,10 +476,10 @@
         </SetVariable>
       </Instructions>
     </ElseIf>
-    <Comment id="136" style="comment">
+    <Comment id="69" style="comment">
       <Constant style="comment-text" canReplace="false" text="SentSockets" />
     </Comment>
-    <ElseIf id="137" style="else-if">
+    <ElseIf id="70" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -808,7 +488,7 @@
         <Constant text="SentSockets : port error" />
       </StringOp>
       <Instructions>
-        <SetVariable id="138" style="set-variable">
+        <SetVariable id="71" style="set-variable">
           <Variable list="false" local="false" variableName="SocketErrorLog" />
           <StringOp op="join" style="join">
             <Constant text="Invalid port number: " />
@@ -819,17 +499,17 @@
             <Constant text="" />
           </StringOp>
         </SetVariable>
-        <Comment id="139" style="comment">
+        <Comment id="72" style="comment">
           <Constant style="comment-text" canReplace="false" text="The send failure broadcast contains the message that was sent" />
         </Comment>
-        <For var="i" id="140" style="for">
+        <For var="i" id="73" style="for">
           <Constant text="3" />
           <ListOp op="length" style="list-length">
             <Variable list="false" local="true" variableName="data" />
           </ListOp>
           <Constant number="1" />
           <Instructions>
-            <SetVariable id="141" style="set-variable">
+            <SetVariable id="74" style="set-variable">
               <Variable list="false" local="false" variableName="SocketErrorLog" />
               <StringOp op="join" style="join">
                 <Variable list="false" local="false" variableName="SocketErrorLog" />
@@ -853,7 +533,7 @@
         </For>
       </Instructions>
     </ElseIf>
-    <ElseIf id="142" style="else-if">
+    <ElseIf id="75" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -862,7 +542,7 @@
         <Constant text="SentSockets : send error" />
       </StringOp>
       <Instructions>
-        <SetVariable id="143" style="set-variable">
+        <SetVariable id="76" style="set-variable">
           <Variable list="false" local="false" variableName="SocketErrorLog" />
           <StringOp op="join" style="join">
             <Constant text="Failed to send data to port: " />
@@ -873,17 +553,17 @@
             <Constant text="" />
           </StringOp>
         </SetVariable>
-        <Comment id="144" style="comment">
+        <Comment id="77" style="comment">
           <Constant style="comment-text" canReplace="false" text="The send failure broadcast contains the message that was sent" />
         </Comment>
-        <For var="i" id="145" style="for">
+        <For var="i" id="78" style="for">
           <Constant text="3" />
           <ListOp op="length" style="list-length">
             <Variable list="false" local="true" variableName="data" />
           </ListOp>
           <Constant number="1" />
           <Instructions>
-            <SetVariable id="146" style="set-variable">
+            <SetVariable id="79" style="set-variable">
               <Variable list="false" local="false" variableName="SocketErrorLog" />
               <StringOp op="join" style="join">
                 <Variable list="false" local="false" variableName="SocketErrorLog" />
@@ -907,10 +587,10 @@
         </For>
       </Instructions>
     </ElseIf>
-    <Comment id="147" style="comment">
+    <Comment id="80" style="comment">
       <Constant style="comment-text" canReplace="false" text="StopSockets" />
     </Comment>
-    <ElseIf id="148" style="else-if">
+    <ElseIf id="81" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -919,7 +599,7 @@
         <Constant text="StopSockets : port error" />
       </StringOp>
       <Instructions>
-        <SetVariable id="149" style="set-variable">
+        <SetVariable id="82" style="set-variable">
           <Variable list="false" local="false" variableName="SocketErrorLog" />
           <StringOp op="join" style="join">
             <Constant text="Invalid port number: " />
@@ -932,7 +612,7 @@
         </SetVariable>
       </Instructions>
     </ElseIf>
-    <ElseIf id="150" style="else-if">
+    <ElseIf id="83" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -941,7 +621,7 @@
         <Constant text="StopSockets : close error" />
       </StringOp>
       <Instructions>
-        <SetVariable id="151" style="set-variable">
+        <SetVariable id="84" style="set-variable">
           <Variable list="false" local="false" variableName="SocketErrorLog" />
           <StringOp op="join" style="join">
             <Constant text="Failed to close server on port: " />
@@ -954,16 +634,16 @@
         </SetVariable>
       </Instructions>
     </ElseIf>
-    <Comment id="152" style="comment">
+    <Comment id="85" style="comment">
       <Constant style="comment-text" canReplace="false" text=" " />
     </Comment>
-    <LogMessage id="153" style="log">
+    <LogMessage id="86" style="log">
       <Variable list="false" local="false" variableName="SocketErrorLog" />
     </LogMessage>
   </Instructions>
   <Instructions>
-    <CustomInstruction callFormat="other" format="other" name="other" id="154" style="custom-instruction" pos="714.9172,-514.456" />
-    <If id="155" style="if">
+    <CustomInstruction callFormat="other" format="other" name="other" id="87" style="custom-instruction" pos="714.9172,-514.456" />
+    <If id="88" style="if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -972,39 +652,39 @@
         <Constant text="setvar" />
       </StringOp>
       <Instructions>
-        <SetList op="clear" id="156" style="list-clear">
+        <SetList op="clear" id="89" style="list-clear">
           <Variable list="true" local="false" variableName="var" />
         </SetList>
-        <SetList op="add" id="157" style="list-add">
+        <SetList op="add" id="90" style="list-add">
           <Variable list="true" local="false" variableName="var" />
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="4" />
           </ListOp>
         </SetList>
-        <SetList op="add" id="158" style="list-add">
+        <SetList op="add" id="91" style="list-add">
           <Variable list="true" local="false" variableName="var" />
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="5" />
           </ListOp>
         </SetList>
-        <BroadcastMessage global="false" local="false" id="159" style="broadcast-msg-craft">
+        <BroadcastMessage global="false" local="false" id="92" style="broadcast-msg-craft">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
           </ListOp>
           <Variable list="true" local="false" variableName="var" />
         </BroadcastMessage>
-        <CallCustomInstruction call="send" id="160" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="93" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
       </Instructions>
     </If>
   </Instructions>
   <Instructions>
-    <CustomInstruction callFormat="action" format="action" name="action" id="161" style="custom-instruction" pos="209.2143,-507.8533" />
-    <If id="162" style="if">
+    <CustomInstruction callFormat="action" format="action" name="action" id="94" style="custom-instruction" pos="209.2143,-507.8533" />
+    <If id="95" style="if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1013,12 +693,12 @@
         <Constant text="actstg" />
       </StringOp>
       <Instructions>
-        <SetVariable id="163" style="set-variable">
+        <SetVariable id="96" style="set-variable">
           <Variable list="false" local="false" variableName="stg" />
           <CraftProperty property="Misc.Stage" style="prop-misc" />
         </SetVariable>
-        <ActivateStage id="164" style="activate-stage" />
-        <If id="165" style="if">
+        <ActivateStage id="97" style="activate-stage" />
+        <If id="98" style="if">
           <Comparison op="ge" style="op-gte">
             <BinaryOp op="-" style="op-sub">
               <CraftProperty property="Misc.Stage" style="prop-misc" />
@@ -1027,22 +707,22 @@
             <Constant text="1" />
           </Comparison>
           <Instructions>
-            <CallCustomInstruction call="send" id="166" style="call-custom-instruction">
+            <CallCustomInstruction call="send" id="99" style="call-custom-instruction">
               <Constant style="true" bool="true" />
             </CallCustomInstruction>
           </Instructions>
         </If>
-        <ElseIf id="167" style="else">
+        <ElseIf id="100" style="else">
           <Constant bool="true" />
           <Instructions>
-            <CallCustomInstruction call="send" id="168" style="call-custom-instruction">
+            <CallCustomInstruction call="send" id="101" style="call-custom-instruction">
               <Constant style="false" bool="false" />
             </CallCustomInstruction>
           </Instructions>
         </ElseIf>
       </Instructions>
     </If>
-    <ElseIf id="169" style="else-if">
+    <ElseIf id="102" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1051,10 +731,10 @@
         <Constant text="swcft" />
       </StringOp>
       <Instructions>
-        <CallCustomInstruction call="send" id="170" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="103" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
-        <SwitchCraft id="171" style="switch-craft">
+        <SwitchCraft id="104" style="switch-craft">
           <CraftProperty property="Craft.NameToID" style="craft-id">
             <ListOp op="get" style="list-get">
               <Variable list="false" local="true" variableName="data" />
@@ -1064,7 +744,7 @@
         </SwitchCraft>
       </Instructions>
     </ElseIf>
-    <ElseIf id="172" style="else-if">
+    <ElseIf id="105" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1073,18 +753,18 @@
         <Constant text="settarget" />
       </StringOp>
       <Instructions>
-        <SetTarget id="173" style="set-target">
+        <SetTarget id="106" style="set-target">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
           </ListOp>
         </SetTarget>
-        <CallCustomInstruction call="send" id="174" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="107" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="175" style="else-if">
+    <ElseIf id="108" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1093,7 +773,7 @@
         <Constant text="setag" />
       </StringOp>
       <Instructions>
-        <SetActivationGroup id="176" style="set-ag">
+        <SetActivationGroup id="109" style="set-ag">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
@@ -1110,12 +790,12 @@
             <Constant style="false" bool="false" />
           </Conditional>
         </SetActivationGroup>
-        <CallCustomInstruction call="send" id="177" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="110" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="178" style="else-if">
+    <ElseIf id="111" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1124,7 +804,7 @@
         <Constant text="partact" />
       </StringOp>
       <Instructions>
-        <SetCraftProperty property="Part.SetActivated" id="179" style="set-part">
+        <SetCraftProperty property="Part.SetActivated" id="112" style="set-part">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
@@ -1141,12 +821,12 @@
             <Constant style="false" bool="false" />
           </Conditional>
         </SetCraftProperty>
-        <CallCustomInstruction call="send" id="180" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="113" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="181" style="else-if">
+    <ElseIf id="114" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1155,7 +835,7 @@
         <Constant text="partfoc" />
       </StringOp>
       <Instructions>
-        <SetCraftProperty property="Part.SetFocused" id="182" style="set-part">
+        <SetCraftProperty property="Part.SetFocused" id="115" style="set-part">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
@@ -1172,12 +852,12 @@
             <Constant style="false" bool="false" />
           </Conditional>
         </SetCraftProperty>
-        <CallCustomInstruction call="send" id="183" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="116" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="184" style="else-if">
+    <ElseIf id="117" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1186,7 +866,7 @@
         <Constant text="setpartname" />
       </StringOp>
       <Instructions>
-        <SetCraftProperty property="Part.SetName" id="185" style="set-part">
+        <SetCraftProperty property="Part.SetName" id="118" style="set-part">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
@@ -1196,7 +876,7 @@
             <Constant text="4" />
           </ListOp>
         </SetCraftProperty>
-        <If id="186" style="if">
+        <If id="119" style="if">
           <StringOp op="contains" style="contains">
             <CraftProperty property="Part.IDToName" style="part">
               <ListOp op="get" style="list-get">
@@ -1210,22 +890,22 @@
             </ListOp>
           </StringOp>
           <Instructions>
-            <CallCustomInstruction call="send" id="187" style="call-custom-instruction">
+            <CallCustomInstruction call="send" id="120" style="call-custom-instruction">
               <Constant style="true" bool="true" />
             </CallCustomInstruction>
           </Instructions>
         </If>
-        <ElseIf id="188" style="else">
+        <ElseIf id="121" style="else">
           <Constant bool="true" />
           <Instructions>
-            <CallCustomInstruction call="send" id="189" style="call-custom-instruction">
+            <CallCustomInstruction call="send" id="122" style="call-custom-instruction">
               <Constant style="false" bool="false" />
             </CallCustomInstruction>
           </Instructions>
         </ElseIf>
       </Instructions>
     </ElseIf>
-    <ElseIf id="190" style="else-if">
+    <ElseIf id="123" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1234,7 +914,7 @@
         <Constant text="partexp" />
       </StringOp>
       <Instructions>
-        <SetCraftProperty property="Part.SetExplode" id="191" style="set-part">
+        <SetCraftProperty property="Part.SetExplode" id="124" style="set-part">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
@@ -1244,12 +924,12 @@
             <Constant text="4" />
           </ListOp>
         </SetCraftProperty>
-        <CallCustomInstruction call="send" id="192" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="125" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="193" style="else-if">
+    <ElseIf id="126" style="else-if">
       <StringOp op="contains" style="contains">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1258,7 +938,7 @@
         <Constant text="fueltran" />
       </StringOp>
       <Instructions>
-        <SetCraftProperty property="Part.FuelTransfer" id="194" style="set-part">
+        <SetCraftProperty property="Part.FuelTransfer" id="127" style="set-part">
           <ListOp op="get" style="list-get">
             <Variable list="false" local="true" variableName="data" />
             <Constant text="3" />
@@ -1268,103 +948,15 @@
             <Constant text="4" />
           </ListOp>
         </SetCraftProperty>
-        <CallCustomInstruction call="send" id="195" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="128" style="call-custom-instruction">
           <Constant style="true" bool="true" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
   </Instructions>
   <Instructions>
-    <CustomInstruction callFormat="craft" format="craft" name="craft" id="196" style="custom-instruction" pos="170.1114,211.6347" />
-    <If id="197" style="if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="79" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="198" style="call-custom-instruction">
-          <CraftProperty property="Name.Craft" style="prop-name" />
-        </CallCustomInstruction>
-      </Instructions>
-    </If>
-    <ElseIf id="199" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="81" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="200" style="call-custom-instruction">
-          <CraftProperty property="Target.Name" style="prop-name" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="201" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="104" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="202" style="call-custom-instruction">
-          <CraftProperty property="Craft.IDToName" style="craft">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-          </CraftProperty>
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="203" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="105" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="204" style="call-custom-instruction">
-          <CraftProperty property="Craft.PartCount" style="craft">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-          </CraftProperty>
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="205" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="150" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="206" style="call-custom-instruction">
-          <CraftProperty property="Craft.NameToID" style="craft-id">
-            <ListOp op="get" style="list-get">
-              <Variable list="false" local="true" variableName="data" />
-              <Constant text="3" />
-            </ListOp>
-          </CraftProperty>
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-  </Instructions>
-  <Instructions>
-    <CustomInstruction callFormat="performance" format="performance" name="performance" id="207" style="custom-instruction" pos="-501.9633,-418.7871" />
-    <If id="208" style="if">
+    <CustomInstruction callFormat="performance" format="performance" name="performance" id="129" style="custom-instruction" pos="-501.9633,-418.7871" />
+    <If id="130" style="if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1373,12 +965,12 @@
         <Constant text="8" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="209" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="131" style="call-custom-instruction">
           <CraftProperty property="Fuel.Battery" style="prop-fuel" />
         </CallCustomInstruction>
       </Instructions>
     </If>
-    <ElseIf id="210" style="else-if">
+    <ElseIf id="132" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1387,12 +979,12 @@
         <Constant text="9" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="211" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="133" style="call-custom-instruction">
           <CraftProperty property="Fuel.FuelInStage" style="prop-fuel" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="212" style="else-if">
+    <ElseIf id="134" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1401,12 +993,12 @@
         <Constant text="10" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="213" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="135" style="call-custom-instruction">
           <CraftProperty property="Fuel.Mono" style="prop-fuel" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="214" style="else-if">
+    <ElseIf id="136" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1415,12 +1007,12 @@
         <Constant text="19" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="215" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="137" style="call-custom-instruction">
           <CraftProperty property="Performance.CurrentEngineThrust" style="prop-performance" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="216" style="else-if">
+    <ElseIf id="138" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1429,12 +1021,12 @@
         <Constant text="20" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="217" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="139" style="call-custom-instruction">
           <CraftProperty property="Performance.Mass" style="prop-performance" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="218" style="else-if">
+    <ElseIf id="140" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1443,12 +1035,12 @@
         <Constant text="23" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="219" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="141" style="call-custom-instruction">
           <CraftProperty property="Performance.MaxActiveEngineThrust" style="prop-performance" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="220" style="else-if">
+    <ElseIf id="142" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1457,12 +1049,12 @@
         <Constant text="24" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="221" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="143" style="call-custom-instruction">
           <CraftProperty property="Performance.TWR" style="prop-performance" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="222" style="else-if">
+    <ElseIf id="144" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1471,12 +1063,12 @@
         <Constant text="25" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="223" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="145" style="call-custom-instruction">
           <CraftProperty property="Performance.CurrentIsp" style="prop-performance" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="224" style="else-if">
+    <ElseIf id="146" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1485,12 +1077,12 @@
         <Constant text="26" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="225" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="147" style="call-custom-instruction">
           <CraftProperty property="Performance.StageDeltaV" style="prop-performance" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="226" style="else-if">
+    <ElseIf id="148" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1499,12 +1091,12 @@
         <Constant text="27" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="227" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="149" style="call-custom-instruction">
           <CraftProperty property="Performance.BurnTime" style="prop-performance" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="228" style="else-if">
+    <ElseIf id="150" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1513,7 +1105,7 @@
         <Constant text="103" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="229" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="151" style="call-custom-instruction">
           <CraftProperty property="Craft.Mass" style="craft">
             <ListOp op="get" style="list-get">
               <Variable list="false" local="true" variableName="data" />
@@ -1525,220 +1117,8 @@
     </ElseIf>
   </Instructions>
   <Instructions>
-    <ElseIf id="230" style="else-if" pos="-1768.646,980.2216">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="231" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="232" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="233" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="234" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="235" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="236" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="237" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="238" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="239" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="240" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="241" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="242" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="243" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="244" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="245" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="246" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="247" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="248" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="249" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="250" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="251" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="252" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="253" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="254" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="255" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="256" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="257" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-    <ElseIf id="258" style="else-if">
-      <Comparison op="=" style="op-eq">
-        <ListOp op="get" style="list-get">
-          <Variable list="false" local="true" variableName="data" />
-          <Constant text="2" />
-        </ListOp>
-        <Constant text="76" />
-      </Comparison>
-      <Instructions>
-        <CallCustomInstruction call="send" id="259" style="call-custom-instruction">
-          <Constant text="" />
-        </CallCustomInstruction>
-      </Instructions>
-    </ElseIf>
-  </Instructions>
-  <Instructions>
-    <CustomInstruction callFormat="attitude" format="attitude" name="attitude" id="260" style="custom-instruction" pos="-1014.119,-451.3264" />
-    <If id="261" style="if">
+    <CustomInstruction callFormat="attitude" format="attitude" name="attitude" id="152" style="custom-instruction" pos="-1014.119,-451.3264" />
+    <If id="153" style="if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1747,12 +1127,12 @@
         <Constant text="30" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="262" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="154" style="call-custom-instruction">
           <CraftProperty property="Nav.CraftHeading" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </If>
-    <ElseIf id="263" style="else-if">
+    <ElseIf id="155" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1761,12 +1141,12 @@
         <Constant text="31" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="264" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="156" style="call-custom-instruction">
           <CraftProperty property="Nav.Pitch" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="265" style="else-if">
+    <ElseIf id="157" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1775,12 +1155,12 @@
         <Constant text="32" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="266" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="158" style="call-custom-instruction">
           <CraftProperty property="Nav.AutopilotHeading" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="267" style="else-if">
+    <ElseIf id="159" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1789,12 +1169,12 @@
         <Constant text="33" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="268" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="160" style="call-custom-instruction">
           <CraftProperty property="Nav.AutopilotPitch" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="269" style="else-if">
+    <ElseIf id="161" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1803,12 +1183,12 @@
         <Constant text="34" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="270" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="162" style="call-custom-instruction">
           <CraftProperty property="Nav.BankAngle" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="271" style="else-if">
+    <ElseIf id="163" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1817,12 +1197,12 @@
         <Constant text="35" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="272" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="164" style="call-custom-instruction">
           <CraftProperty property="Nav.AngleOfAttack" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="273" style="else-if">
+    <ElseIf id="165" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1831,12 +1211,12 @@
         <Constant text="36" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="274" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="166" style="call-custom-instruction">
           <CraftProperty property="Nav.SideSlip" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="275" style="else-if">
+    <ElseIf id="167" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1845,12 +1225,12 @@
         <Constant text="37" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="276" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="168" style="call-custom-instruction">
           <CraftProperty property="Nav.North" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="277" style="else-if">
+    <ElseIf id="169" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1859,12 +1239,12 @@
         <Constant text="38" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="278" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="170" style="call-custom-instruction">
           <CraftProperty property="Nav.East" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="279" style="else-if">
+    <ElseIf id="171" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1873,12 +1253,12 @@
         <Constant text="39" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="280" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="172" style="call-custom-instruction">
           <CraftProperty property="Nav.CraftDirection" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="281" style="else-if">
+    <ElseIf id="173" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1887,12 +1267,12 @@
         <Constant text="40" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="282" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="174" style="call-custom-instruction">
           <CraftProperty property="Nav.CraftRight" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="283" style="else-if">
+    <ElseIf id="175" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1901,15 +1281,15 @@
         <Constant text="41" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="284" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="176" style="call-custom-instruction">
           <CraftProperty property="Nav.CraftUp" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
   </Instructions>
   <Instructions>
-    <CustomInstruction callFormat="misc" format="misc" name="misc" id="285" style="custom-instruction" pos="-309.924,431.3807" />
-    <If id="286" style="if">
+    <CustomInstruction callFormat="misc" format="misc" name="misc" id="177" style="custom-instruction" pos="-309.924,431.3807" />
+    <If id="178" style="if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1918,7 +1298,7 @@
         <Constant text="157" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="287" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="179" style="call-custom-instruction">
           <EvaluateExpression style="evaluate-expression">
             <StringOp op="join" style="join">
               <ListOp op="get" style="list-get">
@@ -1933,42 +1313,26 @@
     </If>
   </Instructions>
   <Instructions>
-    <Event event="FlightStart" id="288" style="flight-start" pos="1263.099,525.1146" />
-    <Comment id="289" style="comment">
+    <Event event="FlightStart" id="180" style="flight-start" pos="1263.099,525.1146" />
+    <SetVariable id="181" style="set-variable">
+      <Variable list="false" local="false" variableName="version" />
+      <Constant text="0.1.a1" />
+    </SetVariable>
+    <Comment id="182" style="comment">
       <Constant style="comment-text" canReplace="false" text="main teletry" />
     </Comment>
-    <WaitSeconds id="290" style="wait-seconds">
+    <WaitSeconds id="183" style="wait-seconds">
       <Constant number="1" />
     </WaitSeconds>
-    <While id="291" style="while">
-      <Constant style="true" bool="true" />
-      <Instructions>
-        <WaitUntil id="292" style="wait-until">
-          <ActivationGroup style="activation-group">
-            <Constant text="9" />
-          </ActivationGroup>
-        </WaitUntil>
-        <StartSockets id="293" style="StartSockets">
-          <Constant text="10809" />
-          <Constant text="2048" />
-          <Constant text="10808" />
-        </StartSockets>
-        <WaitUntil id="294" style="wait-until">
-          <Not style="op-not">
-            <ActivationGroup style="activation-group">
-              <Constant text="9" />
-            </ActivationGroup>
-          </Not>
-        </WaitUntil>
-        <StopSockets id="295" style="StopSockets">
-          <Constant text="10809" />
-        </StopSockets>
-      </Instructions>
-    </While>
+    <StartSockets id="184" style="StartSockets">
+      <Constant text="10809" />
+      <Constant text="2048" />
+      <Constant text="10808" />
+    </StartSockets>
   </Instructions>
   <Instructions>
-    <CustomInstruction callFormat="new_request_instruct" format="new_request_instruct" name="new_request_instruct" id="296" style="custom-instruction" pos="344.6768,556.6219" />
-    <If id="297" style="if">
+    <CustomInstruction callFormat="new_request_instruct" format="new_request_instruct" name="new_request_instruct" id="185" style="custom-instruction" pos="344.6768,556.6219" />
+    <If id="186" style="if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1979,8 +1343,8 @@
     </If>
   </Instructions>
   <Instructions>
-    <CustomInstruction callFormat="new_norequest_instruct" format="new_norequest_instruct" name="new_norequest_instruct" id="298" style="custom-instruction" pos="787.5325,566.8715" />
-    <If id="299" style="if">
+    <CustomInstruction callFormat="new_norequest_instruct" format="new_norequest_instruct" name="new_norequest_instruct" id="187" style="custom-instruction" pos="787.5325,566.8715" />
+    <If id="188" style="if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -1991,8 +1355,8 @@
     </If>
   </Instructions>
   <Instructions>
-    <CustomInstruction callFormat="position" format="position" name="position" id="300" style="custom-instruction" pos="-1009.947,-9.149861" />
-    <If id="301" style="if">
+    <CustomInstruction callFormat="position" format="position" name="position" id="189" style="custom-instruction" pos="-1009.947,-9.149861" />
+    <If id="190" style="if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -2001,12 +1365,12 @@
         <Constant text="28" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="302" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="191" style="call-custom-instruction">
           <CraftProperty property="Nav.Position" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </If>
-    <ElseIf id="303" style="else-if">
+    <ElseIf id="192" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -2015,12 +1379,12 @@
         <Constant text="29" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="304" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="193" style="call-custom-instruction">
           <CraftProperty property="Target.Position" style="prop-nav" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
-    <ElseIf id="305" style="else-if">
+    <ElseIf id="194" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -2029,7 +1393,7 @@
         <Constant text="107" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="306" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="195" style="call-custom-instruction">
           <CraftProperty property="Craft.Position" style="craft">
             <ListOp op="get" style="list-get">
               <Variable list="false" local="true" variableName="data" />
@@ -2041,8 +1405,8 @@
     </ElseIf>
   </Instructions>
   <Instructions>
-    <CustomInstruction callFormat="time" format="time" name="time" id="307" style="custom-instruction" pos="-495.88,-16.17445" />
-    <If id="308" style="if">
+    <CustomInstruction callFormat="time" format="time" name="time" id="196" style="custom-instruction" pos="-495.88,-16.17445" />
+    <If id="197" style="if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -2051,12 +1415,12 @@
         <Constant text="75" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="309" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="198" style="call-custom-instruction">
           <CraftProperty property="Time.TimeSinceLaunch" style="prop-time" />
         </CallCustomInstruction>
       </Instructions>
     </If>
-    <ElseIf id="310" style="else-if">
+    <ElseIf id="199" style="else-if">
       <Comparison op="=" style="op-eq">
         <ListOp op="get" style="list-get">
           <Variable list="false" local="true" variableName="data" />
@@ -2065,8 +1429,1218 @@
         <Constant text="76" />
       </Comparison>
       <Instructions>
-        <CallCustomInstruction call="send" id="311" style="call-custom-instruction">
+        <CallCustomInstruction call="send" id="200" style="call-custom-instruction">
           <CraftProperty property="Time.TotalTime" style="prop-time" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+  </Instructions>
+  <Instructions>
+    <CustomInstruction callFormat="velocity" format="velocity" name="velocity" id="201" style="custom-instruction" pos="-500.1273,-1623.494" />
+    <If id="202" style="if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="42" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="203" style="call-custom-instruction">
+          <CraftProperty property="Vel.SurfaceVelocity" style="prop-velocity" />
+        </CallCustomInstruction>
+      </Instructions>
+    </If>
+    <ElseIf id="204" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="43" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="205" style="call-custom-instruction">
+          <CraftProperty property="Vel.OrbitVelocity" style="prop-velocity" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="206" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="44" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="207" style="call-custom-instruction">
+          <CraftProperty property="Target.Velocity" style="prop-velocity" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="208" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="45" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="209" style="call-custom-instruction">
+          <CraftProperty property="Vel.Gravity" style="prop-velocity" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="210" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="46" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="211" style="call-custom-instruction">
+          <CraftProperty property="Vel.Drag" style="prop-velocity" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="212" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="47" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="213" style="call-custom-instruction">
+          <CraftProperty property="Vel.Acceleration" style="prop-velocity" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="214" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="48" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="215" style="call-custom-instruction">
+          <CraftProperty property="Vel.AngularVelocity" style="prop-velocity" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="216" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="49" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="217" style="call-custom-instruction">
+          <CraftProperty property="Vel.LateralSurfaceVelocity" style="prop-velocity" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="218" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="50" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="219" style="call-custom-instruction">
+          <CraftProperty property="Vel.VerticalSurfaceVelocity" style="prop-velocity" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="220" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="51" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="221" style="call-custom-instruction">
+          <CraftProperty property="Vel.MachNumber" style="prop-velocity" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="222" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="108" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="223" style="call-custom-instruction">
+          <CraftProperty property="Craft.Velocity" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+  </Instructions>
+  <Instructions>
+    <CustomInstruction callFormat="craft_info" format="craft_info" name="craft_info" id="224" style="custom-instruction" pos="199.8131,130.191" />
+    <If id="225" style="if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="79" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="226" style="call-custom-instruction">
+          <CraftProperty property="Name.Craft" style="prop-name" />
+        </CallCustomInstruction>
+      </Instructions>
+    </If>
+    <ElseIf id="227" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="81" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="228" style="call-custom-instruction">
+          <CraftProperty property="Target.Name" style="prop-name" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="229" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="104" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="230" style="call-custom-instruction">
+          <CraftProperty property="Craft.IDToName" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="231" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="105" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="232" style="call-custom-instruction">
+          <CraftProperty property="Craft.PartCount" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="233" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="150" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="234" style="call-custom-instruction">
+          <CraftProperty property="Craft.NameToID" style="craft-id">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+  </Instructions>
+  <Instructions>
+    <CustomInstruction callFormat="craft_orbit" format="craft_orbit" name="craft_orbit" id="235" style="custom-instruction" pos="-1658.547,12.15436" />
+    <If id="236" style="if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="1" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="237" style="call-custom-instruction">
+          <CraftProperty property="Altitude.AGL" style="prop-altitude" />
+        </CallCustomInstruction>
+      </Instructions>
+    </If>
+    <ElseIf id="238" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="2" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="239" style="call-custom-instruction">
+          <CraftProperty property="Altitude.ASL" style="prop-altitude" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="240" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="3" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="241" style="call-custom-instruction">
+          <CraftProperty property="Altitude.ASF" style="prop-altitude" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="242" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="12" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="243" style="call-custom-instruction">
+          <CraftProperty property="Orbit.Apoapsis" style="prop-orbit" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="244" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="13" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="245" style="call-custom-instruction">
+          <CraftProperty property="Orbit.Periapsis" style="prop-orbit" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="246" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="14" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="247" style="call-custom-instruction">
+          <CraftProperty property="Orbit.TimeToApoapsis" style="prop-orbit" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="248" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="15" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="249" style="call-custom-instruction">
+          <CraftProperty property="Orbit.TimeToPeriapsis" style="prop-orbit" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="250" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="16" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="251" style="call-custom-instruction">
+          <CraftProperty property="Orbit.Eccentricity" style="prop-orbit" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="252" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="17" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="253" style="call-custom-instruction">
+          <CraftProperty property="Orbit.Inclination" style="prop-orbit" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="254" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="18" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="255" style="call-custom-instruction">
+          <CraftProperty property="Orbit.Period" style="prop-orbit" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="256" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="100" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="257" style="call-custom-instruction">
+          <CraftProperty property="Craft.Altitude" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="258" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="110" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="259" style="call-custom-instruction">
+          <CraftProperty property="Craft.Apoapsis" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="260" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="111" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="261" style="call-custom-instruction">
+          <CraftProperty property="Craft.Periapsis" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="262" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="112" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="263" style="call-custom-instruction">
+          <CraftProperty property="Craft.Period" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="264" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="115" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="265" style="call-custom-instruction">
+          <CraftProperty property="Craft.Inclination" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="266" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="116" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="267" style="call-custom-instruction">
+          <CraftProperty property="Craft.Eccentricity" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="268" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="117" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="269" style="call-custom-instruction">
+          <CraftProperty property="Craft.MeanAnomaly" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="270" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="118" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="271" style="call-custom-instruction">
+          <CraftProperty property="Craft.MeanMotion" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="272" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="119" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="273" style="call-custom-instruction">
+          <CraftProperty property="Craft.PeriapsisArgument" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="274" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="120" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="275" style="call-custom-instruction">
+          <CraftProperty property="Craft.RightAscension" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="276" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="121" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="277" style="call-custom-instruction">
+          <CraftProperty property="Craft.TrueAnomaly" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="278" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="122" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="279" style="call-custom-instruction">
+          <CraftProperty property="Craft.SemiMajorAxis" style="craft">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+          </CraftProperty>
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+  </Instructions>
+  <Instructions>
+    <ElseIf id="280" style="else-if" pos="-3109.099,-2361.812">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="122" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="281" style="call-custom-instruction">
+          <Constant number="0" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="282" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="122" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="283" style="call-custom-instruction">
+          <Constant number="0" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="284" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="122" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="285" style="call-custom-instruction">
+          <Constant number="0" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="286" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="122" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="287" style="call-custom-instruction">
+          <Constant number="0" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+  </Instructions>
+  <Instructions>
+    <CustomInstruction callFormat="input" format="input" name="input" id="288" style="custom-instruction" pos="-1005.789,-1745.317" />
+    <If id="289" style="if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="52" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="290" style="call-custom-instruction">
+          <CraftProperty property="Input.Roll" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </If>
+    <ElseIf id="291" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="53" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="292" style="call-custom-instruction">
+          <CraftProperty property="Input.Pitch" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="293" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="54" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="294" style="call-custom-instruction">
+          <CraftProperty property="Input.Yaw" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="295" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="55" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="296" style="call-custom-instruction">
+          <CraftProperty property="Input.Throttle" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="297" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="56" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="298" style="call-custom-instruction">
+          <CraftProperty property="Input.Brake" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="299" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="57" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="300" style="call-custom-instruction">
+          <CraftProperty property="Input.Slider1" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="301" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="58" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="302" style="call-custom-instruction">
+          <CraftProperty property="Input.Slider2" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="303" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="59" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="304" style="call-custom-instruction">
+          <CraftProperty property="Input.Slider3" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="305" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="60" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="306" style="call-custom-instruction">
+          <CraftProperty property="Input.Slider4" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="307" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="61" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="308" style="call-custom-instruction">
+          <CraftProperty property="Input.TranslateForward" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="309" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="62" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="310" style="call-custom-instruction">
+          <CraftProperty property="Input.TranslateRight" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="311" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="63" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="312" style="call-custom-instruction">
+          <CraftProperty property="Input.TranslateUp" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="313" style="else-if">
+      <Comparison op="=" style="op-eq">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="64" />
+      </Comparison>
+      <Instructions>
+        <CallCustomInstruction call="send" id="314" style="call-custom-instruction">
+          <CraftProperty property="Input.TranslationMode" style="prop-input" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+  </Instructions>
+  <Instructions>
+    <While id="315" style="while" pos="1156.903,270.9113">
+      <Constant style="true" bool="true" />
+      <Instructions>
+        <WaitUntil id="316" style="wait-until">
+          <ActivationGroup style="activation-group">
+            <Constant text="9" />
+          </ActivationGroup>
+        </WaitUntil>
+        <StartSockets id="317" style="StartSockets">
+          <Constant text="10809" />
+          <Constant text="2048" />
+          <Constant text="10808" />
+        </StartSockets>
+        <WaitUntil id="318" style="wait-until">
+          <Not style="op-not">
+            <ActivationGroup style="activation-group">
+              <Constant text="9" />
+            </ActivationGroup>
+          </Not>
+        </WaitUntil>
+        <StopSockets id="319" style="StopSockets">
+          <Constant text="10809" />
+        </StopSockets>
+      </Instructions>
+    </While>
+  </Instructions>
+  <Instructions>
+    <CustomInstruction callFormat="control2" format="control2" name="control2" id="320" style="custom-instruction" pos="2004.047,-539.5709" />
+    <If id="321" style="if">
+      <StringOp op="contains" style="contains">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="setheadvec" />
+      </StringOp>
+      <Instructions>
+        <LockNavSphere indicatorType="Vector" id="322" style="lock-nav-sphere-vector">
+          <ListOp op="get" style="list-get">
+            <Variable list="false" local="true" variableName="data" />
+            <Constant text="3" />
+          </ListOp>
+        </LockNavSphere>
+        <CallCustomInstruction call="send" id="323" style="call-custom-instruction">
+          <Constant style="true" bool="true" />
+        </CallCustomInstruction>
+      </Instructions>
+    </If>
+    <ElseIf id="324" style="else-if">
+      <StringOp op="contains" style="contains">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="settsl" />
+      </StringOp>
+      <Instructions>
+        <If id="325" style="if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="1" />
+          </Comparison>
+          <Instructions>
+            <SetInput input="translateForward" id="326" style="set-input">
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="4" />
+              </ListOp>
+            </SetInput>
+            <CallCustomInstruction call="send" id="327" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </If>
+        <ElseIf id="328" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="2" />
+          </Comparison>
+          <Instructions>
+            <SetInput input="translateRight" id="329" style="set-input">
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="4" />
+              </ListOp>
+            </SetInput>
+            <CallCustomInstruction call="send" id="330" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="331" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="3" />
+          </Comparison>
+          <Instructions>
+            <SetInput input="translateUp" id="332" style="set-input">
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="4" />
+              </ListOp>
+            </SetInput>
+            <CallCustomInstruction call="send" id="333" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="334" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="4" />
+          </Comparison>
+          <Instructions>
+            <SetInput input="translationMode" id="335" style="set-input">
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="4" />
+              </ListOp>
+            </SetInput>
+            <CallCustomInstruction call="send" id="336" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="337" style="else">
+          <Constant bool="true" />
+          <Instructions>
+            <CallCustomInstruction call="send" id="338" style="call-custom-instruction">
+              <Constant style="false" bool="false" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="339" style="else-if">
+      <StringOp op="contains" style="contains">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="lockhead" />
+      </StringOp>
+      <Instructions>
+        <If id="340" style="if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="1" />
+          </Comparison>
+          <Instructions>
+            <LockNavSphere indicatorType="None" id="341" style="lock-nav-sphere" />
+            <CallCustomInstruction call="send" id="342" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </If>
+        <ElseIf id="343" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="2" />
+          </Comparison>
+          <Instructions>
+            <LockNavSphere indicatorType="Prograde" id="344" style="lock-nav-sphere" />
+            <CallCustomInstruction call="send" id="345" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="346" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="3" />
+          </Comparison>
+          <Instructions>
+            <LockNavSphere indicatorType="Retrograde" id="347" style="lock-nav-sphere" />
+            <CallCustomInstruction call="send" id="348" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="349" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="4" />
+          </Comparison>
+          <Instructions>
+            <LockNavSphere indicatorType="Target" id="350" style="lock-nav-sphere" />
+            <CallCustomInstruction call="send" id="351" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="352" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="5" />
+          </Comparison>
+          <Instructions>
+            <LockNavSphere indicatorType="BurnNode" id="353" style="lock-nav-sphere" />
+            <CallCustomInstruction call="send" id="354" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="355" style="else-if">
+          <Comparison op="=" style="op-eq">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="6" />
+          </Comparison>
+          <Instructions>
+            <LockNavSphere indicatorType="Current" id="356" style="lock-nav-sphere" />
+            <CallCustomInstruction call="send" id="357" style="call-custom-instruction">
+              <Constant style="true" bool="true" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="358" style="else">
+          <Constant bool="true" />
+          <Instructions>
+            <CallCustomInstruction call="send" id="359" style="call-custom-instruction">
+              <Constant style="false" bool="false" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+      </Instructions>
+    </ElseIf>
+  </Instructions>
+  <Instructions>
+    <Event event="ReceiveMessage" id="360" style="receive-msg" pos="1822.801,1002.73">
+      <Constant canReplace="false" text="10809" />
+    </Event>
+    <Comment id="361" style="comment">
+      <Constant style="comment-text" canReplace="false" text="bool&lt;&lt;msg" />
+    </Comment>
+    <If id="362" style="if">
+      <Comparison op="ge" style="op-gte">
+        <ListOp op="length" style="list-length">
+          <Variable list="false" local="true" variableName="data" />
+        </ListOp>
+        <Constant text="2" />
+      </Comparison>
+      <Instructions>
+        <If id="363" style="if">
+          <ListOp op="get" style="list-get">
+            <Variable list="false" local="true" variableName="data" />
+            <Constant text="1" />
+          </ListOp>
+          <Instructions>
+            <Comment id="364" style="comment">
+              <Constant style="comment-text" canReplace="false" text="should request" />
+            </Comment>
+            <CallCustomInstruction call="craft_info" id="365" style="call-custom-instruction" />
+            <CallCustomInstruction call="craft_orbit" id="366" style="call-custom-instruction" />
+            <CallCustomInstruction call="time" id="367" style="call-custom-instruction" />
+            <CallCustomInstruction call="attitude" id="368" style="call-custom-instruction" />
+            <CallCustomInstruction call="position" id="369" style="call-custom-instruction" />
+            <CallCustomInstruction call="performance" id="370" style="call-custom-instruction" />
+            <CallCustomInstruction call="velocity" id="371" style="call-custom-instruction" />
+            <CallCustomInstruction call="input" id="372" style="call-custom-instruction" />
+            <CallCustomInstruction call="misc" id="373" style="call-custom-instruction" />
+            <CallCustomInstruction call="new_request_instruct" id="374" style="call-custom-instruction" />
+          </Instructions>
+        </If>
+        <ElseIf id="375" style="else-if">
+          <Not style="op-not">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="1" />
+            </ListOp>
+          </Not>
+          <Instructions>
+            <Comment id="376" style="comment">
+              <Constant style="comment-text" canReplace="false" text="not should request" />
+            </Comment>
+            <CallCustomInstruction call="display" id="377" style="call-custom-instruction" />
+            <CallCustomInstruction call="action" id="378" style="call-custom-instruction" />
+            <CallCustomInstruction call="control1" id="379" style="call-custom-instruction" />
+            <CallCustomInstruction call="control2" id="380" style="call-custom-instruction" />
+            <CallCustomInstruction call="other" id="381" style="call-custom-instruction" />
+            <CallCustomInstruction call="new_norequest_instruct" id="382" style="call-custom-instruction" />
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="383" style="else">
+          <Constant bool="true" />
+          <Instructions>
+            <CallCustomInstruction call="send" id="384" style="call-custom-instruction">
+              <Constant style="false" bool="false" />
+            </CallCustomInstruction>
+          </Instructions>
+        </ElseIf>
+      </Instructions>
+    </If>
+    <ElseIf id="385" style="else-if">
+      <StringOp op="contains" style="contains">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="1" />
+        </ListOp>
+        <Constant text="version" />
+      </StringOp>
+      <Instructions>
+        <CallCustomInstruction call="send" id="386" style="call-custom-instruction">
+          <Variable list="false" local="false" variableName="version" />
+        </CallCustomInstruction>
+      </Instructions>
+    </ElseIf>
+    <ElseIf id="387" style="else">
+      <Constant bool="true" />
+      <Instructions>
+        <CallCustomInstruction call="send" id="388" style="call-custom-instruction">
+          <Constant style="false" bool="false" />
         </CallCustomInstruction>
       </Instructions>
     </ElseIf>
