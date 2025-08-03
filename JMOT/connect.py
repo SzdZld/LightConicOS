@@ -1,6 +1,6 @@
 import socket, json, sys, JMOT, logging
 
-with open(r"JMOT\log\connect.json", 'r') as f:
+with open(r"JMOT\connect.json", 'r') as f:
     connect_info = json.load(f)
     SERVER_IP = connect_info["SERVER_IP"]
     SERVER_DATA_PORT = connect_info["SERVER_DATA_PORT"]
@@ -8,7 +8,7 @@ with open(r"JMOT\log\connect.json", 'r') as f:
     SERVER_BUFFER = connect_info["SERVER_BUFFER"]
     f.close()
 
-logging.basicConfig(filename=r'JMOT\tran.log', level=logging.INFO, format='%(asctime)s %(message)s')
+logging.basicConfig(filename=r'JMOT\log\tran.log', level=logging.INFO, format='%(asctime)s %(message)s')
 
 def send_message_with_length(sock, message):
     message_bytes = message.encode('utf-8')

@@ -1,12 +1,12 @@
-import JMOT.connect, JMOT.control, JMOT.craft
+import JMOT.connect, JMOT.control, JMOT.craft, JMOT.planet, JMOT.part, JMOT.extra
 
 import importlib
 import subprocess
 import sys
 
 
-__all__ = ['connect', 'control', 'craft', 'extra']
-__version__ = "0.1.a2"
+__all__ = ['connect', 'control', 'craft', 'planet', 'part', 'extra']
+__version__ = "0.2.a1"
 
 
 REQUIRED_PACKAGES = {
