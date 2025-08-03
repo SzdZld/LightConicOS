@@ -1,6 +1,6 @@
 import socket, json, sys, JMOT, logging
 
-with open(r"JMOT\log\connect.json", 'r') as f:
+with open(r"JMOT\connect.json", 'r') as f:
     connect_info = json.load(f)
     SERVER_IP = connect_info["SERVER_IP"]
     SERVER_DATA_PORT = connect_info["SERVER_DATA_PORT"]
