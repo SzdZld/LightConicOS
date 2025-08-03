@@ -4,7 +4,6 @@ import importlib
 import subprocess
 import sys
 
-
 __all__ = ['connect', 'control', 'craft', 'planet', 'part', 'extra']
 __version__ = "0.2.a1"
 
