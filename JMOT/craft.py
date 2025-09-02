@@ -410,6 +410,10 @@ class misc:
         vec = tuple2list(rec)
         return vec
     def camera_direction()->list[float, float, float]:
-        rec = connect.send_message(f"true<<3534")
+        rec = connect.send_message(f"true<<354")
         vec = tuple2list(rec)
         return vec
+
+def get_variable(part_id:int, variable_name:str)->str:
+    rec = connect.send_message(f"true<<355<<{part_id}<<{variable_name}")
+    return rec[0]
