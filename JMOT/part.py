@@ -69,3 +69,24 @@ def part_eci_to_local(partID:int, vector:list[float, float, float])->list[float,
 def partID_of_partname(part_name:str)->int:
     rec = connect.send_message(f"true<<415<<{part_name}")
     return rec[0]
+
+class control:
+    def part_active(part_id:int, part_status:bool):
+        ack = connect.send_message(f"false<<9<<{part_id}<<{part_status}")
+        connect.verify(ack)
+
+    def part_focuse(part_id:int, part_focuse:bool):
+        ack = connect.send_message(f"false<<10<<{part_id}<<{part_focuse}")
+        connect.verify(ack)
+
+    def part_name(part_id:int, part_name:str):
+        ack = connect.send_message(f"false<<11<<{part_id}<<{part_name}")
+        connect.verify(ack)
+
+    def part_explode(part_id:int, part_explode_power:float):
+        ack = connect.send_message(f"false<<12<<{part_id}<<{part_explode_power}")
+        connect.verify(ack)
+
+    def part_transfer(part_id:int, part_trans:float):
+        ack = connect.send_message(f"false<<13<<{part_id}<<{part_trans}")
+        connect.verify(ack)

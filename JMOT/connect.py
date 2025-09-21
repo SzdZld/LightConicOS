@@ -1,5 +1,11 @@
 import socket, json, sys, JMOT, logging
 
+def verify(response):
+        if response[0]:
+            pass
+        else:
+            print("send error")
+
 with open(r"JMOT\connect.json", 'r') as f:
     connect_info = json.load(f)
     SERVER_IP = connect_info["SERVER_IP"]
