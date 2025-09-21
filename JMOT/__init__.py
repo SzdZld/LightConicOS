@@ -29,6 +29,6 @@ def _validate_dependencies():
 
 _validate_dependencies()
 
-import JMOT.connect, JMOT.control, JMOT.craft, JMOT.planet, JMOT.part, JMOT.extra
+import JMOT.connect, JMOT.craft, JMOT.planet, JMOT.part, JMOT.extra
 __all__ = ['connect', 'control', 'craft', 'planet', 'part', 'extra']
 __version__ = "0.3.a1"
