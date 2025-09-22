@@ -60,10 +60,10 @@ class info:
     def planet_of_craft(craft_ID:int)->str:
         rec = connect.send_message(f"true<<205<<{craft_ID}")
         return rec[0]
-    def is_destroyed(craft_ID:int)->bool:
+    def craft_is_destroyed(craft_ID:int)->bool:
         rec = connect.send_message(f"true<<206<<{craft_ID}")
         return rec[0]
-    def is_player(craft_ID:int)->bool:
+    def craft_is_player(craft_ID:int)->bool:
         rec = connect.send_message(f"true<<207<<{craft_ID}")
         return rec[0]
     def is_ground()->bool:
