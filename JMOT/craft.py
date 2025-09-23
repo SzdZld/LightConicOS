@@ -347,7 +347,7 @@ class input:
     def translate_up()->float:
         rec = connect.send_message(f"true<<331")
         return rec[0]
-    def translate_mode()->float:
+    def translate_mode()->int:
         rec = connect.send_message(f"true<<332")
         return rec[0]
     def pitch_pids()->np.ndarray:
