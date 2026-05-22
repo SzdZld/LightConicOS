@@ -1,9 +1,25 @@
 import math
 import numpy as np
 
-import numpy as np
+def tuple2array(vec:tuple[float, float, float])->np.ndarray:
+    '''Convert a tuple to a numpy array, and swap the second and third elements'''
+    vec = list(vec)
+    tmp = vec[1]
+    vec[1] = vec[2]
+    vec[2] = tmp
+    return np.array(vec)
+
+def array2tuple(vec:np.ndarray)->tuple[float, float, float]:
+    '''Convert a numpy array to a tuple, and swap the second and third elements'''
+    vec = vec.tolist()
+    tmp = vec[1]
+    vec[1] = vec[2]
+    vec[2] = tmp
+    vec = tuple(vec)
+    return vec
 
 def eci2ecef(r_eci, total_seconds):
+    '''DO NOT USE THIS FUNCTION, IT IS NOT ACCURATE ENOUGH'''
     theta = 2 * np.pi * (total_seconds / 86400)
     r_eci = np.array([r_eci[0], r_eci[1], r_eci[2]])
     Rz = np.array([
@@ -16,6 +32,7 @@ def eci2ecef(r_eci, total_seconds):
     return r_ecef
 
 def lla2ecef(lon, lat, h, R=6371010.0):
+    '''DO NOT USE THIS FUNCTION, IT IS NOT ACCURATE ENOUGH'''
     lon_rad = np.radians(lon)
     lat_rad = np.radians(lat)
     X = (R + h) * np.cos(lat_rad) * np.cos(lon_rad)
@@ -25,6 +42,7 @@ def lla2ecef(lon, lat, h, R=6371010.0):
 
 
 def ecef2enu(lon, lat, v_ECEF):
+    '''DO NOT USE THIS FUNCTION, IT IS NOT ACCURATE ENOUGH'''
     lon = np.radians(lon)
     lat = np.radians(lat)
     v_ECEF = np.array([v_ECEF[0], v_ECEF[1], v_ECEF[2]])
@@ -39,6 +57,7 @@ def ecef2enu(lon, lat, v_ECEF):
 
 
 def enu_to_pitch_heading(v_e, v_n, v_u):
+    '''DO NOT USE THIS FUNCTION, IT IS NOT ACCURATE ENOUGH'''
     heading = np.degrees(np.arctan2(v_e, v_n))
     
     norm = np.sqrt(v_e**2 + v_n**2 + v_u**2)
@@ -48,6 +67,7 @@ def enu_to_pitch_heading(v_e, v_n, v_u):
 
 
 def eci_to_enu_velocity(r_eci, v_eci):
+    '''DO NOT USE THIS FUNCTION, IT IS NOT ACCURATE ENOUGH'''
     """Convert ECI velocity to ENU velocity."""
     x, y, z = r_eci
     vx, vy, vz = v_eci
@@ -68,6 +88,7 @@ def eci_to_enu_velocity(r_eci, v_eci):
 
 def compute_heading_angle(r_eci, v_eci):
     """Compute heading angle from ECI position and velocity."""
+    '''DO NOT USE THIS FUNCTION, IT IS NOT ACCURATE ENOUGH'''
     v_enu = eci_to_enu_velocity(r_eci, v_eci)
     v_east, v_north, v_up = v_enu
     
@@ -79,14 +100,15 @@ def calculate_roll_angle(pitch_axis, roll_axis, gravity_vector):
     """
     计算航天器的滚转角（roll angle）。
     
-    参数:
-        pitch_axis: ECI坐标系下的pitch轴矢量 (3维数组)
-        roll_axis: ECI坐标系下的roll轴矢量 (3维数组)
-        gravity_vector: ECI坐标系下的重力矢量 (3维数组)
+    参数:\n
+        pitch_axis: ECI坐标系下的pitch轴矢量 (3维数组)\n
+        roll_axis: ECI坐标系下的roll轴矢量 (3维数组)\n
+        gravity_vector: ECI坐标系下的重力矢量 (3维数组)\n
     
     返回:
         滚转角（弧度），范围 [-pi, pi]
     """
+    '''DO NOT USE THIS FUNCTION, IT IS NOT ACCURATE ENOUGH'''
     roll_axis_normalized = roll_axis / np.linalg.norm(roll_axis)
     gravity_normalized = gravity_vector / np.linalg.norm(gravity_vector)
     

@@ -1,22 +1,6 @@
-from JMOT import connect
+from JMOT import connect, extra
 from typing import Literal
 import numpy as np
-
-def tuple2array(vec:tuple[float, float, float])->np.ndarray:
-    vec = list(vec)
-    tmp = vec[1]
-    vec[1] = vec[2]
-    vec[2] = tmp
-    return np.array(vec)
-
-def array2tuple(vec:np.ndarray)->tuple[float, float, float]:
-    vec = vec.tolist()
-    tmp = vec[1]
-    vec[1] = vec[2]
-    vec[2] = tmp
-    vec = tuple(vec)
-    return vec
-
 
 def partname_of_partID(partID:int)->str:
     rec = connect.send_message(f"true<<400<<{partID}")
@@ -38,7 +22,7 @@ def part_type(partID:int)->str:
     return rec[0]
 def part_position(partID:int)->np.ndarray:
     rec = connect.send_message(f"true<<406<<{partID}")
-    vec = tuple2array(rec[0])
+    vec = extra.tuple2array(rec[0])
     return vec
 def part_temperature(partID:int)->float:
     rec = connect.send_message(f"true<<407<<{partID}")
@@ -59,14 +43,14 @@ def is_part_under_water(partID:int)->float:
     rec = connect.send_message(f"true<<412<<{partID}")
     return rec[0]
 def part_loacl_to_eci(partID:int, vector:np.ndarray)->np.ndarray:
-    v = array2tuple(vector)
+    v = extra.array2tuple(vector)
     rec = connect.send_message(f"true<<413<<{partID}<<{v}")
-    vec = tuple2array(rec[0])
+    vec = extra.tuple2array(rec[0])
     return vec
 def part_eci_to_local(partID:int, vector:np.ndarray)->np.ndarray:
-    v = array2tuple(vector)
+    v = extra.array2tuple(vector)
     rec = connect.send_message(f"true<<414<<{partID}<<{v}")
-    vec = tuple2array(rec[0])
+    vec = extra.tuple2array(rec[0])
     return vec
 def partID_of_partname(part_name:str)->int:
     rec = connect.send_message(f"true<<415<<{part_name}")

@@ -1,13 +1,6 @@
-from JMOT import connect
+from JMOT import connect, extra
 from typing import Literal
 import numpy as np
-
-def tuple2array(vec:tuple[float, float, float])->np.ndarray:
-    vec = list(vec)
-    tmp = vec[1]
-    vec[1] = vec[2]
-    vec[2] = tmp
-    return np.array(vec)
 
 
 class info:
@@ -77,19 +70,19 @@ class atmosphere:
 class orbit:
     def planet_solar_position(planet:str)->np.ndarray:
         rec = connect.send_message(f"true<<150<<{planet}")
-        vec = tuple2array(rec)
+        vec = extra.tuple2array(rec)
         return vec
     def planet_velocity(planet:str)->np.ndarray:
         rec = connect.send_message(f"true<<151<<{planet}")
-        vec = tuple2array(rec)
+        vec = extra.tuple2array(rec)
         return vec
     def planet_apoapsis_position(planet:str)->np.ndarray:
         rec = connect.send_message(f"true<<152<<{planet}")
-        vec = tuple2array(rec)
+        vec = extra.tuple2array(rec)
         return vec
     def planet_periapsis_position(planet:str)->np.ndarray:
         rec = connect.send_message(f"true<<153<<{planet}")
-        vec = tuple2array(rec)
+        vec = extra.tuple2array(rec)
         return vec
     def planet_period(planet:str)->float:
         rec = connect.send_message(f"true<<154<<{planet}")

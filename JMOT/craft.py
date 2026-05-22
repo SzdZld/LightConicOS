@@ -1,4 +1,4 @@
-from JMOT import connect
+from JMOT import connect, extra
 from typing import Literal
 import numpy as np
 
@@ -23,22 +23,6 @@ HEADMODE = {
     'burnmode' : 5, 
     'current' : 6
 }
-
-
-def tuple2array(vec:tuple[float, float, float])->np.ndarray:
-    vec = list(vec)
-    tmp = vec[1]
-    vec[1] = vec[2]
-    vec[2] = tmp
-    return np.array(vec)
-
-def array2tuple(vec:np.ndarray)->tuple[float, float, float]:
-    vec = vec.tolist()
-    tmp = vec[1]
-    vec[1] = vec[2]
-    vec[2] = tmp
-    vec = tuple(vec)
-    return vec
 
 
 class info:
@@ -137,15 +121,15 @@ class performance:
 class position:
     def ECI_position()->np.ndarray:
         rec = connect.send_message(f"true<<250")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def target_ECI_position()->np.ndarray:
         rec = connect.send_message(f"true<<251")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def craft_ECI_position(craft_ID:int)->np.ndarray:
         rec = connect.send_message(f"true<<252<<{craft_ID}")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
 
 class attitude:
@@ -172,53 +156,53 @@ class attitude:
         return rec[0]
     def craft_north_vector()->np.ndarray:
         rec = connect.send_message(f"true<<262")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def craft_east_vector()->np.ndarray:
         rec = connect.send_message(f"true<<263")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def craft_roll_axis()->np.ndarray:
         rec = connect.send_message(f"true<<264")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def craft_pitch_axis()->np.ndarray:
         rec = connect.send_message(f"true<<265")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def craft_yaw_axis()->np.ndarray:
         rec = connect.send_message(f"true<<266")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
 
 class velocity:
     def surface_velocity()->np.ndarray:
         rec = connect.send_message(f"true<<270")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def orbit_velocity()->np.ndarray:
         rec = connect.send_message(f"true<<271")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def target_velocity()->np.ndarray:
         rec = connect.send_message(f"true<<272")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def gravity()->np.ndarray:
         rec = connect.send_message(f"true<<273")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def drag()->np.ndarray:
         rec = connect.send_message(f"true<<274")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def acceleration()->np.ndarray:
         rec = connect.send_message(f"true<<275")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def angular()->np.ndarray:
         rec = connect.send_message(f"true<<276")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def lateral()->float:
         rec = connect.send_message(f"true<<277")
@@ -231,7 +215,7 @@ class velocity:
         return rec[0]
     def craft_velocity(craft_ID:int)->np.ndarray:
         rec = connect.send_message(f"true<<280")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
 
 class orbit:
@@ -270,11 +254,11 @@ class orbit:
         return rec[0]
     def craft_apoapsis_position(craft_ID:int)->np.ndarray:
         rec = connect.send_message(f"true<<301<<{craft_ID}")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def craft_periapsis_position(craft_ID:int)->np.ndarray:
         rec = connect.send_message(f"true<<302<<{craft_ID}")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def craft_period(craft_ID:int)->float:
         rec = connect.send_message(f"true<<303<<{craft_ID}")
@@ -352,11 +336,11 @@ class input:
         return rec[0]
     def pitch_pids()->np.ndarray:
         rec = connect.send_message(f"true<<333")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     def roll_pids()->np.ndarray:
         rec = connect.send_message(f"true<<334")
-        vec = tuple2array(rec[0])
+        vec = extra.tuple2array(rec[0])
         return vec
     
 class misc:
@@ -371,10 +355,10 @@ class misc:
         rec = connect.send_message(f"true<<342<<{ag}")
         return rec[0]
     def cast_ray(vec1:np.ndarray, vec2:np.ndarray)->np.ndarray:
-        vec1 = array2tuple(vec1)
-        vec2 = array2tuple(vec2)
+        vec1 = extra.array2tuple(vec1)
+        vec2 = extra.array2tuple(vec2)
         rec = connect.send_message(f"true<<343<<{vec1}<<{vec2}")
-        vec = tuple2array(rec)
+        vec = extra.tuple2array(rec)
         return vec
     
     class funk:
@@ -392,24 +376,24 @@ class misc:
             return rec[0]
         def get_vector(funkexpression:str)->np.ndarray:
             rec = connect.send_message(f"true<<344<<{funkexpression}")
-            return tuple2array(rec[0])
+            return extra.tuple2array(rec[0])
 
     class convert:
         def position2LL_AGL(position:np.ndarray)->np.ndarray:
-            vec = array2tuple(position)
+            vec = extra.array2tuple(position)
             rec = connect.send_message(f"true<<345<<{vec}")
             return list(rec[0])
         def position2LL_ASL(position:np.ndarray)->np.ndarray:
-            vec = array2tuple(position)
+            vec = extra.array2tuple(position)
             rec = connect.send_message(f"true<<346<<{vec}")
             return list(rec[0])
         def LL_AGL2position(position:np.ndarray)->np.ndarray:
             rec = connect.send_message(f"true<<347<<{tuple(position)}")
-            vec = tuple2array(rec[0])
+            vec = extra.tuple2array(rec[0])
             return vec
         def LL_ASL2position(position:np.ndarray)->np.ndarray:
             rec = connect.send_message(f"true<<348<<{tuple(position)}")
-            vec = tuple2array(rec[0])
+            vec = extra.tuple2array(rec[0])
             return vec
         
     
@@ -426,15 +410,15 @@ class misc:
         return rec[0]
     def camera_position()->np.ndarray:
         rec = connect.send_message(f"true<<352")
-        vec = tuple2array(rec)
+        vec = extra.tuple2array(rec)
         return vec
     def camera_pointing()->np.ndarray:
         rec = connect.send_message(f"true<<353")
-        vec = tuple2array(rec)
+        vec = extra.tuple2array(rec)
         return vec
     def camera_direction()->np.ndarray:
         rec = connect.send_message(f"true<<354")
-        vec = tuple2array(rec)
+        vec = extra.tuple2array(rec)
         return vec
     def get_variable(part_id:int, variable_name:str)->str:
         rec = connect.send_message(f"true<<355<<{part_id}<<{variable_name}")

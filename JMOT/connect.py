@@ -1,6 +1,9 @@
 import socket, json, sys, JMOT, logging
 
 def verify(response):
+        '''
+        verify the response from server
+        '''
         if response[0]:
             pass
         else:
@@ -28,6 +31,9 @@ def receive_message_with_length(sock):
 
 
 def convert_value(item):
+    '''
+    Convert the string item to the appropriate type (boolean, 3D vector, float, or string)
+    '''
     s = item.strip()
     # Attempt to convert to boolean
     if s.lower() == "true":
@@ -55,11 +61,14 @@ def convert_value(item):
     return s
 
 def parse_message_to_list(message):
-    # Split the message by "<<" delimiter, trim and convert the type of each item
+    ''' Split the message by "<<" delimiter, trim and convert the type of each item'''
     items = message.split("<<")
     return [convert_value(item) for item in items if item.strip()]
 
 def data_connect():
+    '''
+    JMOT data connect from Juno New Origin
+    '''
     try:
         print("JMOT connecting...")
         global client_socket
@@ -76,6 +85,9 @@ def data_connect():
         print(f"Error occurred: {e}")
 
 def send_message(message:str, socket = None):
+    '''
+    send message to server and receive response
+    '''
     if socket is None:
         socket = client_socket
     try:
