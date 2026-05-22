@@ -23,9 +23,11 @@ class info:
         rec = connect.send_message(f"true<<105<<{planet}")
         return rec[0]
     def name()->str:
+        '''Get the name of the current vessel's main celestial body.'''
         rec = connect.send_message(f"true<<106")
         return rec[0]
-    def target_name()->str:
+    def target_planet()->str:
+        '''Get the name of the current vessel's target celestial body.'''
         rec = connect.send_message(f"true<<107")
         return rec[0]
     def planet_parent(planet:str)->str:
@@ -46,15 +48,19 @@ class info:
 
 class atmosphere:
     def air_desity()->float:
+        '''Get the air density at the current vessel's location in kg/m^3.'''
         rec = connect.send_message(f"true<<130")
         return rec[0]
     def air_pressure()->float:
+        '''Get the air pressure at the current vessel's location in Pa.'''
         rec = connect.send_message(f"true<<131")
         return rec[0]
     def speed_of_sound()->float:
+        '''Get the speed of sound at the current vessel's location in m/s.'''
         rec = connect.send_message(f"true<<132")
         return rec[0]
     def temperature()->float:
+        '''Get the temperature at the current vessel's location in K.'''
         rec = connect.send_message(f"true<<133")
         return rec[0]
     def atmosphere_air_desity(planet:str)->float:
