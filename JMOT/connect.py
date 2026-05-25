@@ -1,6 +1,6 @@
 import socket, json, sys, JMOT, logging
 
-def verify(response):
+def _verify(response):
         '''
         verify the response from server
         '''
@@ -19,18 +19,18 @@ with open(r"JMOT\connect.json", 'r') as f:
 
 logging.basicConfig(filename=r'JMOT\log\tran.log', level=logging.INFO, format='%(asctime)s %(message)s')
 
-def send_message_with_length(sock, message):
+def _send_message_with_length(sock, message):
     message_bytes = message.encode('utf-8')
     sock.sendall(message_bytes)
 
-def receive_message_with_length(sock):
+def _receive_message_with_length(sock):
     message_bytes = sock.recv(SERVER_BUFFER)
     if not message_bytes:
         return None
     return message_bytes.decode('utf-8')
 
 
-def convert_value(item):
+def _convert_value(item):
     '''
     Convert the string item to the appropriate type (boolean, 3D vector, float, or string)
     '''
@@ -60,10 +60,10 @@ def convert_value(item):
     # Return the original string if no conversion applies
     return s
 
-def parse_message_to_list(message):
+def _parse_message_to_list(message):
     ''' Split the message by "<<" delimiter, trim and convert the type of each item'''
     items = message.split("<<")
-    return [convert_value(item) for item in items if item.strip()]
+    return [_convert_value(item) for item in items if item.strip()]
 
 def data_connect():
     '''
@@ -74,7 +74,7 @@ def data_connect():
         global client_socket
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((SERVER_IP, SERVER_DATA_PORT))
-        version = send_message("version", client_socket)[0]
+        version = _send_message("version", client_socket)[0]
         if version != JMOT.__version__:
             print("version error, please updates")
             sys.exit(1)
@@ -84,21 +84,21 @@ def data_connect():
     except Exception as e:
         print(f"Error occurred: {e}")
 
-def send_message(message:str, socket = None):
+def _send_message(message:str, socket = None):
     '''
     send message to server and receive response
     '''
     if socket is None:
         socket = client_socket
     try:
-        send_message_with_length(socket, message)
+        _send_message_with_length(socket, message)
         logging.info(f'-> {message}')
-        response = receive_message_with_length(socket)
-        if response is None or not convert_value(response):
+        response = _receive_message_with_length(socket)
+        if response is None or not _convert_value(response):
             logging.info("Send Failed")
             print("Send Failed")
         else:
-            data = parse_message_to_list(response)
+            data = _parse_message_to_list(response)
             logging.info(f'<- {data}')
             return data
 

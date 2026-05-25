@@ -32,25 +32,7 @@
             <h2>API Documentation</h2>
                 <ul class="memberlist">
             <li>
-                    <a class="function" href="#verify">verify</a>
-            </li>
-            <li>
-                    <a class="function" href="#send_message_with_length">send_message_with_length</a>
-            </li>
-            <li>
-                    <a class="function" href="#receive_message_with_length">receive_message_with_length</a>
-            </li>
-            <li>
-                    <a class="function" href="#convert_value">convert_value</a>
-            </li>
-            <li>
-                    <a class="function" href="#parse_message_to_list">parse_message_to_list</a>
-            </li>
-            <li>
                     <a class="function" href="#data_connect">data_connect</a>
-            </li>
-            <li>
-                    <a class="function" href="#send_message">send_message</a>
             </li>
     </ul>
 
@@ -75,7 +57,7 @@
 
                         <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">socket</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">JMOT</span><span class="o">,</span><span class="w"> </span><span class="nn">logging</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a>
-</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="k">def</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="k">def</span><span class="w"> </span><span class="nf">_verify</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 </span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="sd">        verify the response from server</span>
 </span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="sd">        &#39;&#39;&#39;</span>
@@ -94,18 +76,18 @@
 </span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>
 </span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;JMOT\log\tran.log&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
 </span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>
-</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a><span class="k">def</span><span class="w"> </span><span class="nf">send_message_with_length</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a><span class="k">def</span><span class="w"> </span><span class="nf">_send_message_with_length</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
 </span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>    <span class="n">message_bytes</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 </span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>    <span class="n">sock</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">message_bytes</span><span class="p">)</span>
 </span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a><span class="k">def</span><span class="w"> </span><span class="nf">receive_message_with_length</span><span class="p">(</span><span class="n">sock</span><span class="p">):</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a><span class="k">def</span><span class="w"> </span><span class="nf">_receive_message_with_length</span><span class="p">(</span><span class="n">sock</span><span class="p">):</span>
 </span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>    <span class="n">message_bytes</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">SERVER_BUFFER</span><span class="p">)</span>
 </span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">message_bytes</span><span class="p">:</span>
 </span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="k">return</span> <span class="kc">None</span>
 </span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>    <span class="k">return</span> <span class="n">message_bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 </span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>
 </span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="k">def</span><span class="w"> </span><span class="nf">convert_value</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="k">def</span><span class="w"> </span><span class="nf">_convert_value</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
 </span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 </span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">    Convert the string item to the appropriate type (boolean, 3D vector, float, or string)</span>
 </span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">    &#39;&#39;&#39;</span>
@@ -135,10 +117,10 @@
 </span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>    <span class="c1"># Return the original string if no conversion applies</span>
 </span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>    <span class="k">return</span> <span class="n">s</span>
 </span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="k">def</span><span class="w"> </span><span class="nf">parse_message_to_list</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="k">def</span><span class="w"> </span><span class="nf">_parse_message_to_list</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
 </span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39; Split the message by &quot;&lt;&lt;&quot; delimiter, trim and convert the type of each item&#39;&#39;&#39;</span>
 </span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>    <span class="n">items</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;&lt;&quot;</span><span class="p">)</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>    <span class="k">return</span> <span class="p">[</span><span class="n">convert_value</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span> <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>    <span class="k">return</span> <span class="p">[</span><span class="n">_convert_value</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span> <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
 </span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>
 </span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="k">def</span><span class="w"> </span><span class="nf">data_connect</span><span class="p">():</span>
 </span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
@@ -149,7 +131,7 @@
 </span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>        <span class="k">global</span> <span class="n">client_socket</span>
 </span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>        <span class="n">client_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
 </span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>        <span class="n">client_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">SERVER_IP</span><span class="p">,</span> <span class="n">SERVER_DATA_PORT</span><span class="p">))</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>        <span class="n">version</span> <span class="o">=</span> <span class="n">send_message</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">client_socket</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>        <span class="n">version</span> <span class="o">=</span> <span class="n">_send_message</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">client_socket</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>        <span class="k">if</span> <span class="n">version</span> <span class="o">!=</span> <span class="n">JMOT</span><span class="o">.</span><span class="n">__version__</span><span class="p">:</span>
 </span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;version error, please updates&quot;</span><span class="p">)</span>
 </span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -159,21 +141,21 @@
 </span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 </span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="k">def</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">socket</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="k">def</span><span class="w"> </span><span class="nf">_send_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">socket</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 </span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 </span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">    send message to server and receive response</span>
 </span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">    &#39;&#39;&#39;</span>
 </span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>    <span class="k">if</span> <span class="n">socket</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>        <span class="n">socket</span> <span class="o">=</span> <span class="n">client_socket</span>
 </span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>        <span class="n">send_message_with_length</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>        <span class="n">_send_message_with_length</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 </span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;-&gt; </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>        <span class="n">response</span> <span class="o">=</span> <span class="n">receive_message_with_length</span><span class="p">(</span><span class="n">socket</span><span class="p">)</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>        <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">convert_value</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>        <span class="n">response</span> <span class="o">=</span> <span class="n">_receive_message_with_length</span><span class="p">(</span><span class="n">socket</span><span class="p">)</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>        <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_convert_value</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
 </span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Send Failed&quot;</span><span class="p">)</span>
 </span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Send Failed&quot;</span><span class="p">)</span>
 </span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>            <span class="n">data</span> <span class="o">=</span> <span class="n">parse_message_to_list</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>            <span class="n">data</span> <span class="o">=</span> <span class="n">_parse_message_to_list</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt;- </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>            <span class="k">return</span> <span class="n">data</span>
 </span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>
@@ -183,146 +165,6 @@
 
 
             </section>
-                <section id="verify">
-                            <input id="verify-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">verify</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">response</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="verify-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#verify"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="verify-4"><a href="#verify-4"><span class="linenos"> 4</span></a><span class="k">def</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
-</span><span id="verify-5"><a href="#verify-5"><span class="linenos"> 5</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="verify-6"><a href="#verify-6"><span class="linenos"> 6</span></a><span class="sd">        verify the response from server</span>
-</span><span id="verify-7"><a href="#verify-7"><span class="linenos"> 7</span></a><span class="sd">        &#39;&#39;&#39;</span>
-</span><span id="verify-8"><a href="#verify-8"><span class="linenos"> 8</span></a>        <span class="k">if</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-</span><span id="verify-9"><a href="#verify-9"><span class="linenos"> 9</span></a>            <span class="k">pass</span>
-</span><span id="verify-10"><a href="#verify-10"><span class="linenos">10</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="verify-11"><a href="#verify-11"><span class="linenos">11</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;send error&quot;</span><span class="p">)</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>verify the response from server</p>
-</div>
-
-
-                </section>
-                <section id="send_message_with_length">
-                            <input id="send_message_with_length-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">send_message_with_length</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">sock</span>, </span><span class="param"><span class="n">message</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="send_message_with_length-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#send_message_with_length"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="send_message_with_length-23"><a href="#send_message_with_length-23"><span class="linenos">23</span></a><span class="k">def</span><span class="w"> </span><span class="nf">send_message_with_length</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-</span><span id="send_message_with_length-24"><a href="#send_message_with_length-24"><span class="linenos">24</span></a>    <span class="n">message_bytes</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-</span><span id="send_message_with_length-25"><a href="#send_message_with_length-25"><span class="linenos">25</span></a>    <span class="n">sock</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">message_bytes</span><span class="p">)</span>
-</span></pre></div>
-
-
-    
-
-                </section>
-                <section id="receive_message_with_length">
-                            <input id="receive_message_with_length-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">receive_message_with_length</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">sock</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="receive_message_with_length-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#receive_message_with_length"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="receive_message_with_length-27"><a href="#receive_message_with_length-27"><span class="linenos">27</span></a><span class="k">def</span><span class="w"> </span><span class="nf">receive_message_with_length</span><span class="p">(</span><span class="n">sock</span><span class="p">):</span>
-</span><span id="receive_message_with_length-28"><a href="#receive_message_with_length-28"><span class="linenos">28</span></a>    <span class="n">message_bytes</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">SERVER_BUFFER</span><span class="p">)</span>
-</span><span id="receive_message_with_length-29"><a href="#receive_message_with_length-29"><span class="linenos">29</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">message_bytes</span><span class="p">:</span>
-</span><span id="receive_message_with_length-30"><a href="#receive_message_with_length-30"><span class="linenos">30</span></a>        <span class="k">return</span> <span class="kc">None</span>
-</span><span id="receive_message_with_length-31"><a href="#receive_message_with_length-31"><span class="linenos">31</span></a>    <span class="k">return</span> <span class="n">message_bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-</span></pre></div>
-
-
-    
-
-                </section>
-                <section id="convert_value">
-                            <input id="convert_value-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">convert_value</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">item</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="convert_value-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#convert_value"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="convert_value-34"><a href="#convert_value-34"><span class="linenos">34</span></a><span class="k">def</span><span class="w"> </span><span class="nf">convert_value</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
-</span><span id="convert_value-35"><a href="#convert_value-35"><span class="linenos">35</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="convert_value-36"><a href="#convert_value-36"><span class="linenos">36</span></a><span class="sd">    Convert the string item to the appropriate type (boolean, 3D vector, float, or string)</span>
-</span><span id="convert_value-37"><a href="#convert_value-37"><span class="linenos">37</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="convert_value-38"><a href="#convert_value-38"><span class="linenos">38</span></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span><span id="convert_value-39"><a href="#convert_value-39"><span class="linenos">39</span></a>    <span class="c1"># Attempt to convert to boolean</span>
-</span><span id="convert_value-40"><a href="#convert_value-40"><span class="linenos">40</span></a>    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span><span class="p">:</span>
-</span><span id="convert_value-41"><a href="#convert_value-41"><span class="linenos">41</span></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="convert_value-42"><a href="#convert_value-42"><span class="linenos">42</span></a>    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;false&quot;</span><span class="p">:</span>
-</span><span id="convert_value-43"><a href="#convert_value-43"><span class="linenos">43</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="convert_value-44"><a href="#convert_value-44"><span class="linenos">44</span></a>
-</span><span id="convert_value-45"><a href="#convert_value-45"><span class="linenos">45</span></a>    <span class="c1"># Attempt to convert to a 3D vector (a, b, c)</span>
-</span><span id="convert_value-46"><a href="#convert_value-46"><span class="linenos">46</span></a>    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;)&quot;</span><span class="p">):</span>
-</span><span id="convert_value-47"><a href="#convert_value-47"><span class="linenos">47</span></a>        <span class="n">inner</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</span><span id="convert_value-48"><a href="#convert_value-48"><span class="linenos">48</span></a>        <span class="n">parts</span> <span class="o">=</span> <span class="n">inner</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
-</span><span id="convert_value-49"><a href="#convert_value-49"><span class="linenos">49</span></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-</span><span id="convert_value-50"><a href="#convert_value-50"><span class="linenos">50</span></a>            <span class="k">try</span><span class="p">:</span>
-</span><span id="convert_value-51"><a href="#convert_value-51"><span class="linenos">51</span></a>                <span class="k">return</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()),</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()),</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
-</span><span id="convert_value-52"><a href="#convert_value-52"><span class="linenos">52</span></a>            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-</span><span id="convert_value-53"><a href="#convert_value-53"><span class="linenos">53</span></a>                <span class="k">pass</span>
-</span><span id="convert_value-54"><a href="#convert_value-54"><span class="linenos">54</span></a>
-</span><span id="convert_value-55"><a href="#convert_value-55"><span class="linenos">55</span></a>    <span class="c1"># Attempt to convert to a floating point number</span>
-</span><span id="convert_value-56"><a href="#convert_value-56"><span class="linenos">56</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="convert_value-57"><a href="#convert_value-57"><span class="linenos">57</span></a>        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</span><span id="convert_value-58"><a href="#convert_value-58"><span class="linenos">58</span></a>    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-</span><span id="convert_value-59"><a href="#convert_value-59"><span class="linenos">59</span></a>        <span class="k">pass</span>
-</span><span id="convert_value-60"><a href="#convert_value-60"><span class="linenos">60</span></a>
-</span><span id="convert_value-61"><a href="#convert_value-61"><span class="linenos">61</span></a>    <span class="c1"># Return the original string if no conversion applies</span>
-</span><span id="convert_value-62"><a href="#convert_value-62"><span class="linenos">62</span></a>    <span class="k">return</span> <span class="n">s</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Convert the string item to the appropriate type (boolean, 3D vector, float, or string)</p>
-</div>
-
-
-                </section>
-                <section id="parse_message_to_list">
-                            <input id="parse_message_to_list-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">parse_message_to_list</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">message</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="parse_message_to_list-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#parse_message_to_list"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="parse_message_to_list-64"><a href="#parse_message_to_list-64"><span class="linenos">64</span></a><span class="k">def</span><span class="w"> </span><span class="nf">parse_message_to_list</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
-</span><span id="parse_message_to_list-65"><a href="#parse_message_to_list-65"><span class="linenos">65</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39; Split the message by &quot;&lt;&lt;&quot; delimiter, trim and convert the type of each item&#39;&#39;&#39;</span>
-</span><span id="parse_message_to_list-66"><a href="#parse_message_to_list-66"><span class="linenos">66</span></a>    <span class="n">items</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;&lt;&quot;</span><span class="p">)</span>
-</span><span id="parse_message_to_list-67"><a href="#parse_message_to_list-67"><span class="linenos">67</span></a>    <span class="k">return</span> <span class="p">[</span><span class="n">convert_value</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span> <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Split the message by "&lt;&lt;" delimiter, trim and convert the type of each item</p>
-</div>
-
-
-                </section>
                 <section id="data_connect">
                             <input id="data_connect-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
@@ -343,7 +185,7 @@
 </span><span id="data_connect-75"><a href="#data_connect-75"><span class="linenos">75</span></a>        <span class="k">global</span> <span class="n">client_socket</span>
 </span><span id="data_connect-76"><a href="#data_connect-76"><span class="linenos">76</span></a>        <span class="n">client_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
 </span><span id="data_connect-77"><a href="#data_connect-77"><span class="linenos">77</span></a>        <span class="n">client_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">SERVER_IP</span><span class="p">,</span> <span class="n">SERVER_DATA_PORT</span><span class="p">))</span>
-</span><span id="data_connect-78"><a href="#data_connect-78"><span class="linenos">78</span></a>        <span class="n">version</span> <span class="o">=</span> <span class="n">send_message</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">client_socket</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="data_connect-78"><a href="#data_connect-78"><span class="linenos">78</span></a>        <span class="n">version</span> <span class="o">=</span> <span class="n">_send_message</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">client_socket</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </span><span id="data_connect-79"><a href="#data_connect-79"><span class="linenos">79</span></a>        <span class="k">if</span> <span class="n">version</span> <span class="o">!=</span> <span class="n">JMOT</span><span class="o">.</span><span class="n">__version__</span><span class="p">:</span>
 </span><span id="data_connect-80"><a href="#data_connect-80"><span class="linenos">80</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;version error, please updates&quot;</span><span class="p">)</span>
 </span><span id="data_connect-81"><a href="#data_connect-81"><span class="linenos">81</span></a>            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -356,45 +198,6 @@
 
 
             <div class="docstring"><p>JMOT data connect from Juno New Origin</p>
-</div>
-
-
-                </section>
-                <section id="send_message">
-                            <input id="send_message-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">send_message</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">message</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">socket</span><span class="o">=</span><span class="kc">None</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="send_message-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#send_message"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="send_message-88"><a href="#send_message-88"><span class="linenos"> 88</span></a><span class="k">def</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">socket</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-</span><span id="send_message-89"><a href="#send_message-89"><span class="linenos"> 89</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="send_message-90"><a href="#send_message-90"><span class="linenos"> 90</span></a><span class="sd">    send message to server and receive response</span>
-</span><span id="send_message-91"><a href="#send_message-91"><span class="linenos"> 91</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="send_message-92"><a href="#send_message-92"><span class="linenos"> 92</span></a>    <span class="k">if</span> <span class="n">socket</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="send_message-93"><a href="#send_message-93"><span class="linenos"> 93</span></a>        <span class="n">socket</span> <span class="o">=</span> <span class="n">client_socket</span>
-</span><span id="send_message-94"><a href="#send_message-94"><span class="linenos"> 94</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="send_message-95"><a href="#send_message-95"><span class="linenos"> 95</span></a>        <span class="n">send_message_with_length</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-</span><span id="send_message-96"><a href="#send_message-96"><span class="linenos"> 96</span></a>        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;-&gt; </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</span><span id="send_message-97"><a href="#send_message-97"><span class="linenos"> 97</span></a>        <span class="n">response</span> <span class="o">=</span> <span class="n">receive_message_with_length</span><span class="p">(</span><span class="n">socket</span><span class="p">)</span>
-</span><span id="send_message-98"><a href="#send_message-98"><span class="linenos"> 98</span></a>        <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">convert_value</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
-</span><span id="send_message-99"><a href="#send_message-99"><span class="linenos"> 99</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Send Failed&quot;</span><span class="p">)</span>
-</span><span id="send_message-100"><a href="#send_message-100"><span class="linenos">100</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Send Failed&quot;</span><span class="p">)</span>
-</span><span id="send_message-101"><a href="#send_message-101"><span class="linenos">101</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="send_message-102"><a href="#send_message-102"><span class="linenos">102</span></a>            <span class="n">data</span> <span class="o">=</span> <span class="n">parse_message_to_list</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</span><span id="send_message-103"><a href="#send_message-103"><span class="linenos">103</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt;- </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</span><span id="send_message-104"><a href="#send_message-104"><span class="linenos">104</span></a>            <span class="k">return</span> <span class="n">data</span>
-</span><span id="send_message-105"><a href="#send_message-105"><span class="linenos">105</span></a>
-</span><span id="send_message-106"><a href="#send_message-106"><span class="linenos">106</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="send_message-107"><a href="#send_message-107"><span class="linenos">107</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>send message to server and receive response</p>
 </div>
 
 
