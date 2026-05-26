@@ -1,35 +1,27 @@
 # LightConicOS
 
-#### 介绍
-**Light Conic OS（光锥操作系统）** 是由失踪的质量点开发的火箭制导导航与控制系统及其附属工具，应用于Juno New Origin。
+## 介绍
+**Light Conic OS(光锥)** 是一款专为3D航空航天沙盒游戏《Juno New Origins》（朱诺：新起源，原简单火箭2）打造的外部辅助控制工具。软件集成全流程航天器操控与状态监控能力，助力玩家更高效、更专业地完成各类航天发射与在轨任务。
 
-#### 软件架构
-软件架构说明
+软件以C++作为主开发语言、Python作为辅助开发语言，搭载独立可视化图形用户界面，无需复杂代码与繁琐游戏内手动操作，可视化面板直观展示航天器实时飞行参数、轨道数据、姿态等信息，实现全程可视化监控与一键式操控，大幅降低高精度航天任务的操作门槛。
 
+软件由JMOT、AGS、VOMS、GTCC、DMS、RGS组成。
+|子模块|功能|状态|
+|----|----|----|
+|JMOT|Juno操作监控工具|JMOT_py开发完成，JMOT_cpp开发中|
+|AGS|上升制导系统|未开发|
+|RGS|再入制导系统|未开发|
+|DMS|交汇对接管理系统|未开发|
+|VOMS|载具在轨管理系统|未开发|
+|GTCC|地面遥测控制客户端|未开发|
 
-#### 安装教程
+## 安装和使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 安装
+### 使用
 
-#### 使用说明
-
-1.  确保本地电脑安装python（3.8及以上）并能正常使用（cmd能打出`python --version`)
-2.  朱诺新起源需安装Sockets service for Vizzy和Juno Harmony（安装地址：`https://www.simplerockets.com/Mods/View/234638/Juno-Harmony`，`https://www.simplerockets.com/Mods/View/298478/Sockets-service-for-Vizzy`），并启用模组
-3.  将JMOTvX.xml文件放入`C:\Users\本机用户\AppData\LocalLow\Jundroo\SimpleRockets 2\UserData\FlightPrograms`，v后数字需与JMOT版本号一致
-4.  从载具里选择任意部件，点击Add Flight Program并加载JMOTvX
-
-
-#### PR说明
-1. python里所有的新代码均在pull.py中编写，格式参照pull_example.py（该文件误删），函数内列表第一位是是否有回参，第二位识别码从500开始写。
-2. vizzy里将程序块按是否有回参放入new_request_instruct或new_norequest_instruct里。
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+## 许可证
+本项目采用CC-BY-SA-4.0许可证。
+### 许可协议核心条款
+- 署名（BY）：任何人可以自由复制、分发、修改本项目源码与程序内容，但使用、转载、二次分发时，必须明确标注原项目名称：LightConicOS（光锥），同时注明项目原始出处。
+- 相同方式共享（SA）：若你对本项目源码、程序界面、功能模块进行修改、二次开发与再分发，衍生作品必须沿用 CC-BY-SA-4.0 协议开源，不得闭源商用。

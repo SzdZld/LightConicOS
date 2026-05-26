@@ -1,35 +1,27 @@
 # LightConicOS
+## Introduction
+**Light Conic OS** is an external auxiliary control tool developed for the 3D aerospace sandbox game Juno New Origins (formerly SimpleRockets 2). This software integrates full-process spacecraft control and real-time status monitoring functions, helping players complete various space launch and on-orbit missions more efficiently and professionally.
 
-#### 介绍
-**Light Conic OS（光锥操作系统）** 是由失踪的质量点开发的火箭制导导航与控制系统及其附属工具，应用于Juno New Origin。
+Developed mainly with C++ and assisted by Python, Light Conic is equipped with an independent visual graphical user interface. No complex coding or tedious in-game manual operations are required. The built-in visual panel displays real-time spacecraft flight parameters, orbital data, flight attitude and other core information, supporting full-process visual monitoring and one-click control. It greatly lowers the operation threshold for high-precision aerospace missions.
 
-#### 软件架构
-软件架构说明
+The whole software consists of six independent functional modules: JMOT, AGS, VOMS, GTCC, DMS and RGS. The detailed module information and development progress are shown in the table below:
+|Sub-module|Function|Development Status|
+|---|---|---|
+|JMOT|Juno Monitoring Operation Tool|JMOT_py completed<br> JMOT_cpp under development|
+|AGS|Ascent Guidance System|Not started|
+|RGS|Reentry Guidance System|Not started|
+|DMS|Docking Management System|Not started|
+|VOMS|Vehicle On-orbit Management System|Not started|
+|GTCC|Ground Telemetry Control Client|Not started|
 
+## Installation & Usage Guide
+### Installation
+To be updated.
+### Usage
+To be updated.
 
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  确保本地电脑安装python（3.8及以上）并能正常使用（cmd能打出`python --version`)
-2.  朱诺新起源需安装Sockets service for Vizzy和Juno Harmony（安装地址：`https://www.simplerockets.com/Mods/View/234638/Juno-Harmony`，`https://www.simplerockets.com/Mods/View/298478/Sockets-service-for-Vizzy`），并启用模组
-3.  将JMOTvX.xml文件放入`C:\Users\本机用户\AppData\LocalLow\Jundroo\SimpleRockets 2\UserData\FlightPrograms`，v后数字需与JMOT版本号一致
-4.  从载具里选择任意部件，点击Add Flight Program并加载JMOTvX
-
-
-#### PR说明
-1. python里所有的新代码均在pull.py中编写，格式参照pull_example.py（该文件误删），函数内列表第一位是是否有回参，第二位识别码从500开始写。
-2. vizzy里将程序块按是否有回参放入new_request_instruct或new_norequest_instruct里。
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+## License
+This project is licensed under the CC-BY-SA-4.0 License.
+### Core License Terms
+- Attribution (BY): Everyone is free to copy, distribute and modify the source code and program contents of this project. Attribution to the original project LightConic (LightConicOS) and original project source is mandatory for all reproduction, redistribution and secondary development behaviors.
+- ShareAlike (SA): If you modify, rebuild or redistribute this project and its derivatives, all modified works must adopt the same CC-BY-SA-4.0 open-source license, and closed-source commercial use is strictly prohibited.
