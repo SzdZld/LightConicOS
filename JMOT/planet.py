@@ -9,14 +9,14 @@ _PLANET_INFO_SIGNALS = {
     "planet_SOI_radius":103,
     "planet_len_of_day":104,
     "planet_len_of_year":105,
-    "planet_name_local":106,
+    "planet_local_name":106,
     "target_planet":107,
     "planet_parent":108,
     "planet_child_list":109,
     "planet_craft_list":110,
     "planet_craft_ID_list":111,
     "planet_structure_list":112,
-    "get_terrain_color":349
+    "get_terrain_color":113
 }
 
 class info:
@@ -45,9 +45,9 @@ class info:
         '''Get the length of a year on a planet in seconds.\n'''
         rec = connect._send_message(f"true<<{_PLANET_INFO_SIGNALS['planet_len_of_year']}<<{planet}")
         return rec[0]
-    def planet_name_local()->str:
+    def planet_local_name()->str:
         '''Get the name of the current vessel's main celestial body.'''
-        rec = connect._send_message(f"true<<{_PLANET_INFO_SIGNALS['planet_name_local']}")
+        rec = connect._send_message(f"true<<{_PLANET_INFO_SIGNALS['planet_local_name']}")
         return rec[0]
     def target_planet()->str:
         '''Get the name of the current vessel's target celestial body.'''
@@ -121,7 +121,6 @@ class atmosphere:
         return rec[0]
 
 _PLANET_ORBIT_SIGNALS = {
-    "get_terrain_height":350,
     "planet_solar_position":150,
     "planet_velocity":151,
     "planet_apoapsis_position":152,
@@ -136,16 +135,11 @@ _PLANET_ORBIT_SIGNALS = {
     "planet_periapsis_argument":161,
     "planet_right_ascension":162,
     "planet_true_anomaly":163,
-    "planet_SMA":164
+    "planet_SMA":164,
+    "get_terrain_height":165
 }
 
 class orbit:
-    def get_terrain_height(position:np.ndarray)->float:
-        '''Get the terrain height at a position in latitude, longitude, and 0.\n
-        The Z value of the position is ignored.'''
-        position = tuple(position)
-        rec = connect._send_message(f"true<<{_PLANET_ORBIT_SIGNALS['get_terrain_height']}<<{position}")
-        return rec[0]
     def planet_solar_position(planet:str)->np.ndarray:
         '''Get the position of a planet relative to the sun in ECI coordinates in meters.\n'''
         rec = connect._send_message(f"true<<{_PLANET_ORBIT_SIGNALS['planet_solar_position']}<<{planet}")
@@ -209,4 +203,10 @@ class orbit:
     def planet_SMA(planet:str)->float:
         '''Get the semi-major axis of a planet in meters.\n'''
         rec = connect._send_message(f"true<<{_PLANET_ORBIT_SIGNALS['planet_SMA']}<<{planet}")
+        return rec[0]
+    def get_terrain_height(position:np.ndarray)->float:
+        '''Get the terrain height at a position in latitude, longitude, and 0.\n
+        The Z value of the position is ignored.'''
+        position = tuple(position)
+        rec = connect._send_message(f"true<<{_PLANET_ORBIT_SIGNALS['get_terrain_height']}<<{position}")
         return rec[0]

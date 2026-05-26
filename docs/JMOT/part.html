@@ -32,49 +32,70 @@
             <h2>API Documentation</h2>
                 <ul class="memberlist">
             <li>
-                    <a class="function" href="#partname_of_partID">partname_of_partID</a>
+                    <a class="class" href="#info">info</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#info.partname_of_partID">partname_of_partID</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#info.partID_of_partname">partID_of_partname</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#info.this_part_id">this_part_id</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#info.min_part_id">min_part_id</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#info.max_part_id">max_part_id</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#info.part_type">part_type</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#info.is_part_active">is_part_active</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#info.is_part_under_water">is_part_under_water</a>
+                        </li>
+                </ul>
+
             </li>
             <li>
-                    <a class="function" href="#part_mass">part_mass</a>
-            </li>
-            <li>
-                    <a class="function" href="#part_dry_mass">part_dry_mass</a>
-            </li>
-            <li>
-                    <a class="function" href="#part_fuel_mass">part_fuel_mass</a>
-            </li>
-            <li>
-                    <a class="function" href="#is_part_active">is_part_active</a>
-            </li>
-            <li>
-                    <a class="function" href="#part_type">part_type</a>
+                    <a class="class" href="#perfromance">perfromance</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#perfromance.part_mass">part_mass</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#perfromance.part_dry_mass">part_dry_mass</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#perfromance.part_fuel_mass">part_fuel_mass</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#perfromance.part_temperature">part_temperature</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#perfromance.part_drag">part_drag</a>
+                        </li>
+                </ul>
+
             </li>
             <li>
                     <a class="function" href="#part_position">part_position</a>
             </li>
             <li>
-                    <a class="function" href="#part_temperature">part_temperature</a>
+                    <a class="function" href="#part_loacl_to_eci">part_loacl_to_eci</a>
             </li>
             <li>
-                    <a class="function" href="#part_drag">part_drag</a>
-            </li>
-            <li>
-                    <a class="function" href="#this_part_id">this_part_id</a>
-            </li>
-            <li>
-                    <a class="function" href="#min_part_id">min_part_id</a>
-            </li>
-            <li>
-                    <a class="function" href="#max_part_id">max_part_id</a>
-            </li>
-            <li>
-                    <a class="function" href="#is_part_under_water">is_part_under_water</a>
-            </li>
-            <li>
-                    <a class="function" href="#partID_of_partname">partID_of_partname</a>
+                    <a class="function" href="#part_eci_to_local">part_eci_to_local</a>
             </li>
             <li>
                     <a class="function" href="#get_variable">get_variable</a>
+            </li>
+            <li>
+                    <a class="function" href="#get_variable_list">get_variable_list</a>
             </li>
     </ul>
 
@@ -97,113 +118,190 @@
 
                         <label class="view-source-button" for="mod-part-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">JMOT</span><span class="w"> </span><span class="kn">import</span> <span class="n">connect</span><span class="p">,</span> <span class="n">extra</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="n">_PART_SIGNALS</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>    <span class="s2">&quot;partname_of_partID&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="s2">&quot;part_mass&quot;</span><span class="p">:</span> <span class="mi">401</span><span class="p">,</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="s2">&quot;part_dry_mass&quot;</span><span class="p">:</span> <span class="mi">402</span><span class="p">,</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>    <span class="s2">&quot;part_fuel_mass&quot;</span><span class="p">:</span> <span class="mi">403</span><span class="p">,</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="s2">&quot;part_active&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="s2">&quot;part_type&quot;</span><span class="p">:</span> <span class="mi">405</span><span class="p">,</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="s2">&quot;part_position&quot;</span><span class="p">:</span> <span class="mi">406</span><span class="p">,</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="s2">&quot;part_temperature&quot;</span><span class="p">:</span> <span class="mi">407</span><span class="p">,</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="s2">&quot;part_drag&quot;</span><span class="p">:</span> <span class="mi">408</span><span class="p">,</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="s2">&quot;this_part_id&quot;</span><span class="p">:</span> <span class="mi">409</span><span class="p">,</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="s2">&quot;min_part_id&quot;</span><span class="p">:</span> <span class="mi">410</span><span class="p">,</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="s2">&quot;max_part_id&quot;</span><span class="p">:</span> <span class="mi">411</span><span class="p">,</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="s2">&quot;is_part_under_water&quot;</span><span class="p">:</span> <span class="mi">412</span><span class="p">,</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="s2">&quot;partID_of_partname&quot;</span><span class="p">:</span> <span class="mi">415</span><span class="p">,</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="s2">&quot;get_variable&quot;</span><span class="p">:</span> <span class="mi">355</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="p">}</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="k">def</span><span class="w"> </span><span class="nf">partname_of_partID</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the name of a part ID.\n&#39;&#39;&#39;</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;partname_of_partID&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the mass of a part ID.\n&#39;&#39;&#39;</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_dry_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the dry mass of a part ID.\n&#39;&#39;&#39;</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_dry_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_fuel_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the fuel mass of a part ID.\n&#39;&#39;&#39;</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_fuel_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a><span class="k">def</span><span class="w"> </span><span class="nf">is_part_active</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">bool</span><span class="p">:</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the status of whether a part is active.\n</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="sd">    if active, return True, else return False.&#39;&#39;&#39;</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_active&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_type</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the type of a part ID.\n</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="sd">    type???</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_position</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the position of a part ID in ECI coordinates.\n&#39;&#39;&#39;</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_position&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="n">vec</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">tuple2array</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="k">return</span> <span class="n">vec</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_temperature</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the temperature of a part ID in K.\n&#39;&#39;&#39;</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_temperature&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_drag</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the drag of a part ID in N.\n&#39;&#39;&#39;</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_drag&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a><span class="k">def</span><span class="w"> </span><span class="nf">this_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the part ID of the part that is currently being called.\n&#39;&#39;&#39;</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;this_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a><span class="k">def</span><span class="w"> </span><span class="nf">min_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the minimum part ID of the current vessel.\n&#39;&#39;&#39;</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;min_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a><span class="k">def</span><span class="w"> </span><span class="nf">max_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the maximum part ID of the current vessel.\n&#39;&#39;&#39;</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;max_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a><span class="k">def</span><span class="w"> </span><span class="nf">is_part_under_water</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the status of whether a part is under water.\n&#39;&#39;&#39;</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;is_part_under_water&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a><span class="k">def</span><span class="w"> </span><span class="nf">partID_of_partname</span><span class="p">(</span><span class="n">part_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the part ID of a part name.\n&#39;&#39;&#39;</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;partID_of_partname&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_variable</span><span class="p">(</span><span class="n">part_id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the value of a variable of a part.\n</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a><span class="sd">    i don&#39;t know what return when part_id is 0.???</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos">86</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos">87</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;get_variable&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_id</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos">88</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">JMOT</span><span class="w"> </span><span class="kn">import</span> <span class="n">connect</span><span class="p">,</span> <span class="n">extra</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="n">_PART_SIGNALS</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a>    <span class="s2">&quot;partname_of_partID&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a>    <span class="s2">&quot;part_mass&quot;</span><span class="p">:</span> <span class="mi">401</span><span class="p">,</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a>    <span class="s2">&quot;part_dry_mass&quot;</span><span class="p">:</span> <span class="mi">402</span><span class="p">,</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a>    <span class="s2">&quot;part_fuel_mass&quot;</span><span class="p">:</span> <span class="mi">403</span><span class="p">,</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>    <span class="s2">&quot;part_active&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>    <span class="s2">&quot;part_type&quot;</span><span class="p">:</span> <span class="mi">405</span><span class="p">,</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>    <span class="s2">&quot;part_position&quot;</span><span class="p">:</span> <span class="mi">406</span><span class="p">,</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>    <span class="s2">&quot;part_temperature&quot;</span><span class="p">:</span> <span class="mi">407</span><span class="p">,</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>    <span class="s2">&quot;part_drag&quot;</span><span class="p">:</span> <span class="mi">408</span><span class="p">,</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>    <span class="s2">&quot;this_part_id&quot;</span><span class="p">:</span> <span class="mi">409</span><span class="p">,</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>    <span class="s2">&quot;min_part_id&quot;</span><span class="p">:</span> <span class="mi">410</span><span class="p">,</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>    <span class="s2">&quot;max_part_id&quot;</span><span class="p">:</span> <span class="mi">411</span><span class="p">,</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>    <span class="s2">&quot;is_part_under_water&quot;</span><span class="p">:</span> <span class="mi">412</span><span class="p">,</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>    <span class="s2">&quot;partID_of_partname&quot;</span><span class="p">:</span> <span class="mi">415</span><span class="p">,</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>    <span class="s2">&quot;get_variable&quot;</span><span class="p">:</span> <span class="mi">416</span><span class="p">,</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>    <span class="s2">&quot;get_variable_list&quot;</span><span class="p">:</span> <span class="mi">417</span><span class="p">,</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>    <span class="s2">&quot;part_loacl_to_eci&quot;</span><span class="p">:</span><span class="mi">365</span><span class="p">,</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>    <span class="s2">&quot;part_eci_to_local&quot;</span><span class="p">:</span><span class="mi">366</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a><span class="p">}</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a><span class="k">class</span><span class="w"> </span><span class="nc">info</span><span class="p">:</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">partname_of_partID</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the name of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;partname_of_partID&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">partID_of_partname</span><span class="p">(</span><span class="n">part_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the part ID of a part name.\n&#39;&#39;&#39;</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;partID_of_partname&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">this_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the part ID of the part that is currently being called.\n&#39;&#39;&#39;</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;this_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">min_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the minimum part ID of the current vessel.\n&#39;&#39;&#39;</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;min_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">max_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the maximum part ID of the current vessel.\n&#39;&#39;&#39;</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;max_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_type</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the type of a part ID.\n</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">        type???</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">        &#39;&#39;&#39;</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_part_active</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">bool</span><span class="p">:</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the status of whether a part is active.\n</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">        if active, return True, else return False.&#39;&#39;&#39;</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_active&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_part_under_water</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the status of whether a part is under water.\n&#39;&#39;&#39;</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;is_part_under_water&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>    
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>    
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="k">class</span><span class="w"> </span><span class="nc">perfromance</span><span class="p">:</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the mass of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_dry_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the dry mass of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_dry_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_fuel_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the fuel mass of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_fuel_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_temperature</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the temperature of a part ID in K.\n&#39;&#39;&#39;</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_temperature&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_drag</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the drag of a part ID in N.\n&#39;&#39;&#39;</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_drag&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>    
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_position</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the position of a part ID in ECI coordinates.\n&#39;&#39;&#39;</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_position&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="n">vec</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">tuple2array</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>    <span class="k">return</span> <span class="n">vec</span>    
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_loacl_to_eci</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">vector</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Convert part vector in local coordinates of a part to ECI coordinates.\n&#39;&#39;&#39;</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>    <span class="n">v</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">array2tuple</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_loacl_to_eci&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>    <span class="n">vec</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">tuple2array</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>    <span class="k">return</span> <span class="n">vec</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_eci_to_local</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">vector</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Convert part vector in ECI coordinates to local coordinates of a part.\n&#39;&#39;&#39;</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="n">v</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">array2tuple</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_eci_to_local&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>    <span class="n">vec</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">tuple2array</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>    <span class="k">return</span> <span class="n">vec</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_variable</span><span class="p">(</span><span class="n">part_id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the value of a variable of a part.\n</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">    i don&#39;t know what return when part_id is 0.???</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;get_variable&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_id</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_variable_list</span><span class="p">(</span><span class="n">part_id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">list</span><span class="p">:</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the value of a list variable of a part.\n&#39;&#39;&#39;</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;get_variable_list&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_id</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>    <span class="k">return</span> <span class="n">rec</span>
 </span></pre></div>
 
 
             </section>
-                <section id="partname_of_partID">
-                            <input id="partname_of_partID-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="info">
+                            <input id="info-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">info</span>:
+
+                <label class="view-source-button" for="info-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#info"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="info-27"><a href="#info-27"><span class="linenos">27</span></a><span class="k">class</span><span class="w"> </span><span class="nc">info</span><span class="p">:</span>
+</span><span id="info-28"><a href="#info-28"><span class="linenos">28</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">partname_of_partID</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
+</span><span id="info-29"><a href="#info-29"><span class="linenos">29</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the name of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="info-30"><a href="#info-30"><span class="linenos">30</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;partname_of_partID&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info-31"><a href="#info-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="info-32"><a href="#info-32"><span class="linenos">32</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">partID_of_partname</span><span class="p">(</span><span class="n">part_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="info-33"><a href="#info-33"><span class="linenos">33</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the part ID of a part name.\n&#39;&#39;&#39;</span>
+</span><span id="info-34"><a href="#info-34"><span class="linenos">34</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;partID_of_partname&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info-35"><a href="#info-35"><span class="linenos">35</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="info-36"><a href="#info-36"><span class="linenos">36</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">this_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="info-37"><a href="#info-37"><span class="linenos">37</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the part ID of the part that is currently being called.\n&#39;&#39;&#39;</span>
+</span><span id="info-38"><a href="#info-38"><span class="linenos">38</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;this_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info-39"><a href="#info-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="info-40"><a href="#info-40"><span class="linenos">40</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">min_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="info-41"><a href="#info-41"><span class="linenos">41</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the minimum part ID of the current vessel.\n&#39;&#39;&#39;</span>
+</span><span id="info-42"><a href="#info-42"><span class="linenos">42</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;min_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info-43"><a href="#info-43"><span class="linenos">43</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="info-44"><a href="#info-44"><span class="linenos">44</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">max_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="info-45"><a href="#info-45"><span class="linenos">45</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the maximum part ID of the current vessel.\n&#39;&#39;&#39;</span>
+</span><span id="info-46"><a href="#info-46"><span class="linenos">46</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;max_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info-47"><a href="#info-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="info-48"><a href="#info-48"><span class="linenos">48</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_type</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
+</span><span id="info-49"><a href="#info-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the type of a part ID.\n</span>
+</span><span id="info-50"><a href="#info-50"><span class="linenos">50</span></a><span class="sd">        type???</span>
+</span><span id="info-51"><a href="#info-51"><span class="linenos">51</span></a><span class="sd">        &#39;&#39;&#39;</span>
+</span><span id="info-52"><a href="#info-52"><span class="linenos">52</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info-53"><a href="#info-53"><span class="linenos">53</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="info-54"><a href="#info-54"><span class="linenos">54</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_part_active</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">bool</span><span class="p">:</span>
+</span><span id="info-55"><a href="#info-55"><span class="linenos">55</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the status of whether a part is active.\n</span>
+</span><span id="info-56"><a href="#info-56"><span class="linenos">56</span></a><span class="sd">        if active, return True, else return False.&#39;&#39;&#39;</span>
+</span><span id="info-57"><a href="#info-57"><span class="linenos">57</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_active&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info-58"><a href="#info-58"><span class="linenos">58</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="info-59"><a href="#info-59"><span class="linenos">59</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_part_under_water</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="info-60"><a href="#info-60"><span class="linenos">60</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the status of whether a part is under water.\n&#39;&#39;&#39;</span>
+</span><span id="info-61"><a href="#info-61"><span class="linenos">61</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;is_part_under_water&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info-62"><a href="#info-62"><span class="linenos">62</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></pre></div>
+
+
+    
+
+                            <div id="info.partname_of_partID" class="classattr">
+                                        <input id="info.partname_of_partID-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
         <span class="name">partname_of_partID</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
 
-                <label class="view-source-button" for="partname_of_partID-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="info.partname_of_partID-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#partname_of_partID"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="partname_of_partID-24"><a href="#partname_of_partID-24"><span class="linenos">24</span></a><span class="k">def</span><span class="w"> </span><span class="nf">partname_of_partID</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
-</span><span id="partname_of_partID-25"><a href="#partname_of_partID-25"><span class="linenos">25</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the name of a part ID.\n&#39;&#39;&#39;</span>
-</span><span id="partname_of_partID-26"><a href="#partname_of_partID-26"><span class="linenos">26</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;partname_of_partID&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="partname_of_partID-27"><a href="#partname_of_partID-27"><span class="linenos">27</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a class="headerlink" href="#info.partname_of_partID"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="info.partname_of_partID-28"><a href="#info.partname_of_partID-28"><span class="linenos">28</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">partname_of_partID</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
+</span><span id="info.partname_of_partID-29"><a href="#info.partname_of_partID-29"><span class="linenos">29</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the name of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="info.partname_of_partID-30"><a href="#info.partname_of_partID-30"><span class="linenos">30</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;partname_of_partID&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info.partname_of_partID-31"><a href="#info.partname_of_partID-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></pre></div>
 
 
@@ -211,119 +309,116 @@
 </div>
 
 
-                </section>
-                <section id="part_mass">
-                            <input id="part_mass-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            </div>
+                            <div id="info.partID_of_partname" class="classattr">
+                                        <input id="info.partID_of_partname-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">part_mass</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+        <span class="name">partID_of_partname</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">part_name</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
 
-                <label class="view-source-button" for="part_mass-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="info.partID_of_partname-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#part_mass"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="part_mass-28"><a href="#part_mass-28"><span class="linenos">28</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="part_mass-29"><a href="#part_mass-29"><span class="linenos">29</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the mass of a part ID.\n&#39;&#39;&#39;</span>
-</span><span id="part_mass-30"><a href="#part_mass-30"><span class="linenos">30</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="part_mass-31"><a href="#part_mass-31"><span class="linenos">31</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a class="headerlink" href="#info.partID_of_partname"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="info.partID_of_partname-32"><a href="#info.partID_of_partname-32"><span class="linenos">32</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">partID_of_partname</span><span class="p">(</span><span class="n">part_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="info.partID_of_partname-33"><a href="#info.partID_of_partname-33"><span class="linenos">33</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the part ID of a part name.\n&#39;&#39;&#39;</span>
+</span><span id="info.partID_of_partname-34"><a href="#info.partID_of_partname-34"><span class="linenos">34</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;partID_of_partname&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info.partID_of_partname-35"><a href="#info.partID_of_partname-35"><span class="linenos">35</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Get the mass of a part ID.</p>
+            <div class="docstring"><p>Get the part ID of a part name.</p>
 </div>
 
 
-                </section>
-                <section id="part_dry_mass">
-                            <input id="part_dry_mass-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            </div>
+                            <div id="info.this_part_id" class="classattr">
+                                        <input id="info.this_part_id-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">part_dry_mass</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+        <span class="name">this_part_id</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="o">=</span><span class="mi">1</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
 
-                <label class="view-source-button" for="part_dry_mass-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="info.this_part_id-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#part_dry_mass"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="part_dry_mass-32"><a href="#part_dry_mass-32"><span class="linenos">32</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_dry_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="part_dry_mass-33"><a href="#part_dry_mass-33"><span class="linenos">33</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the dry mass of a part ID.\n&#39;&#39;&#39;</span>
-</span><span id="part_dry_mass-34"><a href="#part_dry_mass-34"><span class="linenos">34</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_dry_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="part_dry_mass-35"><a href="#part_dry_mass-35"><span class="linenos">35</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a class="headerlink" href="#info.this_part_id"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="info.this_part_id-36"><a href="#info.this_part_id-36"><span class="linenos">36</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">this_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="info.this_part_id-37"><a href="#info.this_part_id-37"><span class="linenos">37</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the part ID of the part that is currently being called.\n&#39;&#39;&#39;</span>
+</span><span id="info.this_part_id-38"><a href="#info.this_part_id-38"><span class="linenos">38</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;this_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info.this_part_id-39"><a href="#info.this_part_id-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Get the dry mass of a part ID.</p>
+            <div class="docstring"><p>Get the part ID of the part that is currently being called.</p>
 </div>
 
 
-                </section>
-                <section id="part_fuel_mass">
-                            <input id="part_fuel_mass-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            </div>
+                            <div id="info.min_part_id" class="classattr">
+                                        <input id="info.min_part_id-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">part_fuel_mass</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+        <span class="name">min_part_id</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="o">=</span><span class="mi">1</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
 
-                <label class="view-source-button" for="part_fuel_mass-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="info.min_part_id-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#part_fuel_mass"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="part_fuel_mass-36"><a href="#part_fuel_mass-36"><span class="linenos">36</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_fuel_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="part_fuel_mass-37"><a href="#part_fuel_mass-37"><span class="linenos">37</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the fuel mass of a part ID.\n&#39;&#39;&#39;</span>
-</span><span id="part_fuel_mass-38"><a href="#part_fuel_mass-38"><span class="linenos">38</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_fuel_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="part_fuel_mass-39"><a href="#part_fuel_mass-39"><span class="linenos">39</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a class="headerlink" href="#info.min_part_id"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="info.min_part_id-40"><a href="#info.min_part_id-40"><span class="linenos">40</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">min_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="info.min_part_id-41"><a href="#info.min_part_id-41"><span class="linenos">41</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the minimum part ID of the current vessel.\n&#39;&#39;&#39;</span>
+</span><span id="info.min_part_id-42"><a href="#info.min_part_id-42"><span class="linenos">42</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;min_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info.min_part_id-43"><a href="#info.min_part_id-43"><span class="linenos">43</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Get the fuel mass of a part ID.</p>
+            <div class="docstring"><p>Get the minimum part ID of the current vessel.</p>
 </div>
 
 
-                </section>
-                <section id="is_part_active">
-                            <input id="is_part_active-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            </div>
+                            <div id="info.max_part_id" class="classattr">
+                                        <input id="info.max_part_id-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">is_part_active</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">bool</span>:</span></span>
+        <span class="name">max_part_id</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="o">=</span><span class="mi">1</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
 
-                <label class="view-source-button" for="is_part_active-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="info.max_part_id-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#is_part_active"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="is_part_active-40"><a href="#is_part_active-40"><span class="linenos">40</span></a><span class="k">def</span><span class="w"> </span><span class="nf">is_part_active</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">bool</span><span class="p">:</span>
-</span><span id="is_part_active-41"><a href="#is_part_active-41"><span class="linenos">41</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the status of whether a part is active.\n</span>
-</span><span id="is_part_active-42"><a href="#is_part_active-42"><span class="linenos">42</span></a><span class="sd">    if active, return True, else return False.&#39;&#39;&#39;</span>
-</span><span id="is_part_active-43"><a href="#is_part_active-43"><span class="linenos">43</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_active&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="is_part_active-44"><a href="#is_part_active-44"><span class="linenos">44</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a class="headerlink" href="#info.max_part_id"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="info.max_part_id-44"><a href="#info.max_part_id-44"><span class="linenos">44</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">max_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+</span><span id="info.max_part_id-45"><a href="#info.max_part_id-45"><span class="linenos">45</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the maximum part ID of the current vessel.\n&#39;&#39;&#39;</span>
+</span><span id="info.max_part_id-46"><a href="#info.max_part_id-46"><span class="linenos">46</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;max_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info.max_part_id-47"><a href="#info.max_part_id-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Get the status of whether a part is active.</p>
-
-<p>if active, return True, else return False.</p>
+            <div class="docstring"><p>Get the maximum part ID of the current vessel.</p>
 </div>
 
 
-                </section>
-                <section id="part_type">
-                            <input id="part_type-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            </div>
+                            <div id="info.part_type" class="classattr">
+                                        <input id="info.part_type-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
         <span class="name">part_type</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
 
-                <label class="view-source-button" for="part_type-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="info.part_type-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#part_type"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="part_type-45"><a href="#part_type-45"><span class="linenos">45</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_type</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
-</span><span id="part_type-46"><a href="#part_type-46"><span class="linenos">46</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the type of a part ID.\n</span>
-</span><span id="part_type-47"><a href="#part_type-47"><span class="linenos">47</span></a><span class="sd">    type???</span>
-</span><span id="part_type-48"><a href="#part_type-48"><span class="linenos">48</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="part_type-49"><a href="#part_type-49"><span class="linenos">49</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="part_type-50"><a href="#part_type-50"><span class="linenos">50</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a class="headerlink" href="#info.part_type"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="info.part_type-48"><a href="#info.part_type-48"><span class="linenos">48</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_type</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
+</span><span id="info.part_type-49"><a href="#info.part_type-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the type of a part ID.\n</span>
+</span><span id="info.part_type-50"><a href="#info.part_type-50"><span class="linenos">50</span></a><span class="sd">        type???</span>
+</span><span id="info.part_type-51"><a href="#info.part_type-51"><span class="linenos">51</span></a><span class="sd">        &#39;&#39;&#39;</span>
+</span><span id="info.part_type-52"><a href="#info.part_type-52"><span class="linenos">52</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info.part_type-53"><a href="#info.part_type-53"><span class="linenos">53</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></pre></div>
 
 
@@ -333,6 +428,209 @@
 </div>
 
 
+                            </div>
+                            <div id="info.is_part_active" class="classattr">
+                                        <input id="info.is_part_active-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">is_part_active</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">bool</span>:</span></span>
+
+                <label class="view-source-button" for="info.is_part_active-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#info.is_part_active"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="info.is_part_active-54"><a href="#info.is_part_active-54"><span class="linenos">54</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_part_active</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">bool</span><span class="p">:</span>
+</span><span id="info.is_part_active-55"><a href="#info.is_part_active-55"><span class="linenos">55</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the status of whether a part is active.\n</span>
+</span><span id="info.is_part_active-56"><a href="#info.is_part_active-56"><span class="linenos">56</span></a><span class="sd">        if active, return True, else return False.&#39;&#39;&#39;</span>
+</span><span id="info.is_part_active-57"><a href="#info.is_part_active-57"><span class="linenos">57</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_active&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info.is_part_active-58"><a href="#info.is_part_active-58"><span class="linenos">58</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Get the status of whether a part is active.</p>
+
+<p>if active, return True, else return False.</p>
+</div>
+
+
+                            </div>
+                            <div id="info.is_part_under_water" class="classattr">
+                                        <input id="info.is_part_under_water-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">is_part_under_water</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+
+                <label class="view-source-button" for="info.is_part_under_water-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#info.is_part_under_water"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="info.is_part_under_water-59"><a href="#info.is_part_under_water-59"><span class="linenos">59</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_part_under_water</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="info.is_part_under_water-60"><a href="#info.is_part_under_water-60"><span class="linenos">60</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the status of whether a part is under water.\n&#39;&#39;&#39;</span>
+</span><span id="info.is_part_under_water-61"><a href="#info.is_part_under_water-61"><span class="linenos">61</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;is_part_under_water&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="info.is_part_under_water-62"><a href="#info.is_part_under_water-62"><span class="linenos">62</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Get the status of whether a part is under water.</p>
+</div>
+
+
+                            </div>
+                </section>
+                <section id="perfromance">
+                            <input id="perfromance-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">perfromance</span>:
+
+                <label class="view-source-button" for="perfromance-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#perfromance"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="perfromance-65"><a href="#perfromance-65"><span class="linenos">65</span></a><span class="k">class</span><span class="w"> </span><span class="nc">perfromance</span><span class="p">:</span>
+</span><span id="perfromance-66"><a href="#perfromance-66"><span class="linenos">66</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="perfromance-67"><a href="#perfromance-67"><span class="linenos">67</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the mass of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="perfromance-68"><a href="#perfromance-68"><span class="linenos">68</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="perfromance-69"><a href="#perfromance-69"><span class="linenos">69</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="perfromance-70"><a href="#perfromance-70"><span class="linenos">70</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_dry_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="perfromance-71"><a href="#perfromance-71"><span class="linenos">71</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the dry mass of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="perfromance-72"><a href="#perfromance-72"><span class="linenos">72</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_dry_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="perfromance-73"><a href="#perfromance-73"><span class="linenos">73</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="perfromance-74"><a href="#perfromance-74"><span class="linenos">74</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_fuel_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="perfromance-75"><a href="#perfromance-75"><span class="linenos">75</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the fuel mass of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="perfromance-76"><a href="#perfromance-76"><span class="linenos">76</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_fuel_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="perfromance-77"><a href="#perfromance-77"><span class="linenos">77</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="perfromance-78"><a href="#perfromance-78"><span class="linenos">78</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_temperature</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="perfromance-79"><a href="#perfromance-79"><span class="linenos">79</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the temperature of a part ID in K.\n&#39;&#39;&#39;</span>
+</span><span id="perfromance-80"><a href="#perfromance-80"><span class="linenos">80</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_temperature&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="perfromance-81"><a href="#perfromance-81"><span class="linenos">81</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="perfromance-82"><a href="#perfromance-82"><span class="linenos">82</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_drag</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="perfromance-83"><a href="#perfromance-83"><span class="linenos">83</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the drag of a part ID in N.\n&#39;&#39;&#39;</span>
+</span><span id="perfromance-84"><a href="#perfromance-84"><span class="linenos">84</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_drag&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="perfromance-85"><a href="#perfromance-85"><span class="linenos">85</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></pre></div>
+
+
+    
+
+                            <div id="perfromance.part_mass" class="classattr">
+                                        <input id="perfromance.part_mass-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">part_mass</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+
+                <label class="view-source-button" for="perfromance.part_mass-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#perfromance.part_mass"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="perfromance.part_mass-66"><a href="#perfromance.part_mass-66"><span class="linenos">66</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="perfromance.part_mass-67"><a href="#perfromance.part_mass-67"><span class="linenos">67</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the mass of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="perfromance.part_mass-68"><a href="#perfromance.part_mass-68"><span class="linenos">68</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="perfromance.part_mass-69"><a href="#perfromance.part_mass-69"><span class="linenos">69</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Get the mass of a part ID.</p>
+</div>
+
+
+                            </div>
+                            <div id="perfromance.part_dry_mass" class="classattr">
+                                        <input id="perfromance.part_dry_mass-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">part_dry_mass</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+
+                <label class="view-source-button" for="perfromance.part_dry_mass-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#perfromance.part_dry_mass"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="perfromance.part_dry_mass-70"><a href="#perfromance.part_dry_mass-70"><span class="linenos">70</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_dry_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="perfromance.part_dry_mass-71"><a href="#perfromance.part_dry_mass-71"><span class="linenos">71</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the dry mass of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="perfromance.part_dry_mass-72"><a href="#perfromance.part_dry_mass-72"><span class="linenos">72</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_dry_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="perfromance.part_dry_mass-73"><a href="#perfromance.part_dry_mass-73"><span class="linenos">73</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Get the dry mass of a part ID.</p>
+</div>
+
+
+                            </div>
+                            <div id="perfromance.part_fuel_mass" class="classattr">
+                                        <input id="perfromance.part_fuel_mass-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">part_fuel_mass</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+
+                <label class="view-source-button" for="perfromance.part_fuel_mass-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#perfromance.part_fuel_mass"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="perfromance.part_fuel_mass-74"><a href="#perfromance.part_fuel_mass-74"><span class="linenos">74</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_fuel_mass</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="perfromance.part_fuel_mass-75"><a href="#perfromance.part_fuel_mass-75"><span class="linenos">75</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the fuel mass of a part ID.\n&#39;&#39;&#39;</span>
+</span><span id="perfromance.part_fuel_mass-76"><a href="#perfromance.part_fuel_mass-76"><span class="linenos">76</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_fuel_mass&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="perfromance.part_fuel_mass-77"><a href="#perfromance.part_fuel_mass-77"><span class="linenos">77</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Get the fuel mass of a part ID.</p>
+</div>
+
+
+                            </div>
+                            <div id="perfromance.part_temperature" class="classattr">
+                                        <input id="perfromance.part_temperature-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">part_temperature</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+
+                <label class="view-source-button" for="perfromance.part_temperature-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#perfromance.part_temperature"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="perfromance.part_temperature-78"><a href="#perfromance.part_temperature-78"><span class="linenos">78</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_temperature</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="perfromance.part_temperature-79"><a href="#perfromance.part_temperature-79"><span class="linenos">79</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the temperature of a part ID in K.\n&#39;&#39;&#39;</span>
+</span><span id="perfromance.part_temperature-80"><a href="#perfromance.part_temperature-80"><span class="linenos">80</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_temperature&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="perfromance.part_temperature-81"><a href="#perfromance.part_temperature-81"><span class="linenos">81</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Get the temperature of a part ID in K.</p>
+</div>
+
+
+                            </div>
+                            <div id="perfromance.part_drag" class="classattr">
+                                        <input id="perfromance.part_drag-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">part_drag</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+
+                <label class="view-source-button" for="perfromance.part_drag-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#perfromance.part_drag"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="perfromance.part_drag-82"><a href="#perfromance.part_drag-82"><span class="linenos">82</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">part_drag</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="perfromance.part_drag-83"><a href="#perfromance.part_drag-83"><span class="linenos">83</span></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Get the drag of a part ID in N.\n&#39;&#39;&#39;</span>
+</span><span id="perfromance.part_drag-84"><a href="#perfromance.part_drag-84"><span class="linenos">84</span></a>        <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_drag&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="perfromance.part_drag-85"><a href="#perfromance.part_drag-85"><span class="linenos">85</span></a>        <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Get the drag of a part ID in N.</p>
+</div>
+
+
+                            </div>
                 </section>
                 <section id="part_position">
                             <input id="part_position-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
@@ -345,11 +643,11 @@
 
     </div>
     <a class="headerlink" href="#part_position"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="part_position-51"><a href="#part_position-51"><span class="linenos">51</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_position</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-</span><span id="part_position-52"><a href="#part_position-52"><span class="linenos">52</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the position of a part ID in ECI coordinates.\n&#39;&#39;&#39;</span>
-</span><span id="part_position-53"><a href="#part_position-53"><span class="linenos">53</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_position&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="part_position-54"><a href="#part_position-54"><span class="linenos">54</span></a>    <span class="n">vec</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">tuple2array</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="part_position-55"><a href="#part_position-55"><span class="linenos">55</span></a>    <span class="k">return</span> <span class="n">vec</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="part_position-87"><a href="#part_position-87"><span class="linenos">87</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_position</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+</span><span id="part_position-88"><a href="#part_position-88"><span class="linenos">88</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the position of a part ID in ECI coordinates.\n&#39;&#39;&#39;</span>
+</span><span id="part_position-89"><a href="#part_position-89"><span class="linenos">89</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_position&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="part_position-90"><a href="#part_position-90"><span class="linenos">90</span></a>    <span class="n">vec</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">tuple2array</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="part_position-91"><a href="#part_position-91"><span class="linenos">91</span></a>    <span class="k">return</span> <span class="n">vec</span>    
 </span></pre></div>
 
 
@@ -358,163 +656,52 @@
 
 
                 </section>
-                <section id="part_temperature">
-                            <input id="part_temperature-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="part_loacl_to_eci">
+                            <input id="part_loacl_to_eci-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">part_temperature</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+        <span class="name">part_loacl_to_eci</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span>, </span><span class="param"><span class="n">vector</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span></span><span class="return-annotation">) -> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>:</span></span>
 
-                <label class="view-source-button" for="part_temperature-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="part_loacl_to_eci-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#part_temperature"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="part_temperature-56"><a href="#part_temperature-56"><span class="linenos">56</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_temperature</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="part_temperature-57"><a href="#part_temperature-57"><span class="linenos">57</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the temperature of a part ID in K.\n&#39;&#39;&#39;</span>
-</span><span id="part_temperature-58"><a href="#part_temperature-58"><span class="linenos">58</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_temperature&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="part_temperature-59"><a href="#part_temperature-59"><span class="linenos">59</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a class="headerlink" href="#part_loacl_to_eci"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="part_loacl_to_eci-92"><a href="#part_loacl_to_eci-92"><span class="linenos">92</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_loacl_to_eci</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">vector</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+</span><span id="part_loacl_to_eci-93"><a href="#part_loacl_to_eci-93"><span class="linenos">93</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Convert part vector in local coordinates of a part to ECI coordinates.\n&#39;&#39;&#39;</span>
+</span><span id="part_loacl_to_eci-94"><a href="#part_loacl_to_eci-94"><span class="linenos">94</span></a>    <span class="n">v</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">array2tuple</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+</span><span id="part_loacl_to_eci-95"><a href="#part_loacl_to_eci-95"><span class="linenos">95</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_loacl_to_eci&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="part_loacl_to_eci-96"><a href="#part_loacl_to_eci-96"><span class="linenos">96</span></a>    <span class="n">vec</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">tuple2array</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="part_loacl_to_eci-97"><a href="#part_loacl_to_eci-97"><span class="linenos">97</span></a>    <span class="k">return</span> <span class="n">vec</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Get the temperature of a part ID in K.</p>
+            <div class="docstring"><p>Convert part vector in local coordinates of a part to ECI coordinates.</p>
 </div>
 
 
                 </section>
-                <section id="part_drag">
-                            <input id="part_drag-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="part_eci_to_local">
+                            <input id="part_eci_to_local-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">part_drag</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+        <span class="name">part_eci_to_local</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span>, </span><span class="param"><span class="n">vector</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span></span><span class="return-annotation">) -> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>:</span></span>
 
-                <label class="view-source-button" for="part_drag-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="part_eci_to_local-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#part_drag"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="part_drag-60"><a href="#part_drag-60"><span class="linenos">60</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_drag</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="part_drag-61"><a href="#part_drag-61"><span class="linenos">61</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the drag of a part ID in N.\n&#39;&#39;&#39;</span>
-</span><span id="part_drag-62"><a href="#part_drag-62"><span class="linenos">62</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_drag&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="part_drag-63"><a href="#part_drag-63"><span class="linenos">63</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a class="headerlink" href="#part_eci_to_local"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="part_eci_to_local-98"><a href="#part_eci_to_local-98"><span class="linenos"> 98</span></a><span class="k">def</span><span class="w"> </span><span class="nf">part_eci_to_local</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">vector</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+</span><span id="part_eci_to_local-99"><a href="#part_eci_to_local-99"><span class="linenos"> 99</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Convert part vector in ECI coordinates to local coordinates of a part.\n&#39;&#39;&#39;</span>
+</span><span id="part_eci_to_local-100"><a href="#part_eci_to_local-100"><span class="linenos">100</span></a>    <span class="n">v</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">array2tuple</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+</span><span id="part_eci_to_local-101"><a href="#part_eci_to_local-101"><span class="linenos">101</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;part_eci_to_local&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="part_eci_to_local-102"><a href="#part_eci_to_local-102"><span class="linenos">102</span></a>    <span class="n">vec</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">tuple2array</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="part_eci_to_local-103"><a href="#part_eci_to_local-103"><span class="linenos">103</span></a>    <span class="k">return</span> <span class="n">vec</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Get the drag of a part ID in N.</p>
-</div>
-
-
-                </section>
-                <section id="this_part_id">
-                            <input id="this_part_id-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">this_part_id</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="o">=</span><span class="mi">1</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
-
-                <label class="view-source-button" for="this_part_id-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#this_part_id"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="this_part_id-64"><a href="#this_part_id-64"><span class="linenos">64</span></a><span class="k">def</span><span class="w"> </span><span class="nf">this_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
-</span><span id="this_part_id-65"><a href="#this_part_id-65"><span class="linenos">65</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the part ID of the part that is currently being called.\n&#39;&#39;&#39;</span>
-</span><span id="this_part_id-66"><a href="#this_part_id-66"><span class="linenos">66</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;this_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="this_part_id-67"><a href="#this_part_id-67"><span class="linenos">67</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Get the part ID of the part that is currently being called.</p>
-</div>
-
-
-                </section>
-                <section id="min_part_id">
-                            <input id="min_part_id-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">min_part_id</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="o">=</span><span class="mi">1</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
-
-                <label class="view-source-button" for="min_part_id-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#min_part_id"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="min_part_id-68"><a href="#min_part_id-68"><span class="linenos">68</span></a><span class="k">def</span><span class="w"> </span><span class="nf">min_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
-</span><span id="min_part_id-69"><a href="#min_part_id-69"><span class="linenos">69</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the minimum part ID of the current vessel.\n&#39;&#39;&#39;</span>
-</span><span id="min_part_id-70"><a href="#min_part_id-70"><span class="linenos">70</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;min_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="min_part_id-71"><a href="#min_part_id-71"><span class="linenos">71</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Get the minimum part ID of the current vessel.</p>
-</div>
-
-
-                </section>
-                <section id="max_part_id">
-                            <input id="max_part_id-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">max_part_id</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="o">=</span><span class="mi">1</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
-
-                <label class="view-source-button" for="max_part_id-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#max_part_id"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="max_part_id-72"><a href="#max_part_id-72"><span class="linenos">72</span></a><span class="k">def</span><span class="w"> </span><span class="nf">max_part_id</span><span class="p">(</span><span class="n">partID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
-</span><span id="max_part_id-73"><a href="#max_part_id-73"><span class="linenos">73</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the maximum part ID of the current vessel.\n&#39;&#39;&#39;</span>
-</span><span id="max_part_id-74"><a href="#max_part_id-74"><span class="linenos">74</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;max_part_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="max_part_id-75"><a href="#max_part_id-75"><span class="linenos">75</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Get the maximum part ID of the current vessel.</p>
-</div>
-
-
-                </section>
-                <section id="is_part_under_water">
-                            <input id="is_part_under_water-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">is_part_under_water</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">partID</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
-
-                <label class="view-source-button" for="is_part_under_water-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#is_part_under_water"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="is_part_under_water-76"><a href="#is_part_under_water-76"><span class="linenos">76</span></a><span class="k">def</span><span class="w"> </span><span class="nf">is_part_under_water</span><span class="p">(</span><span class="n">partID</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
-</span><span id="is_part_under_water-77"><a href="#is_part_under_water-77"><span class="linenos">77</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the status of whether a part is under water.\n&#39;&#39;&#39;</span>
-</span><span id="is_part_under_water-78"><a href="#is_part_under_water-78"><span class="linenos">78</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;is_part_under_water&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">partID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="is_part_under_water-79"><a href="#is_part_under_water-79"><span class="linenos">79</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Get the status of whether a part is under water.</p>
-</div>
-
-
-                </section>
-                <section id="partID_of_partname">
-                            <input id="partID_of_partname-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">partID_of_partname</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">part_name</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
-
-                <label class="view-source-button" for="partID_of_partname-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#partID_of_partname"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="partID_of_partname-80"><a href="#partID_of_partname-80"><span class="linenos">80</span></a><span class="k">def</span><span class="w"> </span><span class="nf">partID_of_partname</span><span class="p">(</span><span class="n">part_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
-</span><span id="partID_of_partname-81"><a href="#partID_of_partname-81"><span class="linenos">81</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the part ID of a part name.\n&#39;&#39;&#39;</span>
-</span><span id="partID_of_partname-82"><a href="#partID_of_partname-82"><span class="linenos">82</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;partID_of_partname&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="partID_of_partname-83"><a href="#partID_of_partname-83"><span class="linenos">83</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Get the part ID of a part name.</p>
+            <div class="docstring"><p>Convert part vector in ECI coordinates to local coordinates of a part.</p>
 </div>
 
 
@@ -530,18 +717,41 @@
 
     </div>
     <a class="headerlink" href="#get_variable"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="get_variable-84"><a href="#get_variable-84"><span class="linenos">84</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_variable</span><span class="p">(</span><span class="n">part_id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
-</span><span id="get_variable-85"><a href="#get_variable-85"><span class="linenos">85</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the value of a variable of a part.\n</span>
-</span><span id="get_variable-86"><a href="#get_variable-86"><span class="linenos">86</span></a><span class="sd">    i don&#39;t know what return when part_id is 0.???</span>
-</span><span id="get_variable-87"><a href="#get_variable-87"><span class="linenos">87</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="get_variable-88"><a href="#get_variable-88"><span class="linenos">88</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;get_variable&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_id</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="get_variable-89"><a href="#get_variable-89"><span class="linenos">89</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="get_variable-105"><a href="#get_variable-105"><span class="linenos">105</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_variable</span><span class="p">(</span><span class="n">part_id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">str</span><span class="p">:</span>
+</span><span id="get_variable-106"><a href="#get_variable-106"><span class="linenos">106</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the value of a variable of a part.\n</span>
+</span><span id="get_variable-107"><a href="#get_variable-107"><span class="linenos">107</span></a><span class="sd">    i don&#39;t know what return when part_id is 0.???</span>
+</span><span id="get_variable-108"><a href="#get_variable-108"><span class="linenos">108</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="get_variable-109"><a href="#get_variable-109"><span class="linenos">109</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;get_variable&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_id</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="get_variable-110"><a href="#get_variable-110"><span class="linenos">110</span></a>    <span class="k">return</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Get the value of a variable of a part.</p>
 
 <p>i don't know what return when part_id is 0.???</p>
+</div>
+
+
+                </section>
+                <section id="get_variable_list">
+                            <input id="get_variable_list-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">get_variable_list</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">part_id</span><span class="p">:</span> <span class="nb">int</span>, </span><span class="param"><span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">list</span>:</span></span>
+
+                <label class="view-source-button" for="get_variable_list-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#get_variable_list"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="get_variable_list-111"><a href="#get_variable_list-111"><span class="linenos">111</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_variable_list</span><span class="p">(</span><span class="n">part_id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">list</span><span class="p">:</span>
+</span><span id="get_variable_list-112"><a href="#get_variable_list-112"><span class="linenos">112</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Get the value of a list variable of a part.\n&#39;&#39;&#39;</span>
+</span><span id="get_variable_list-113"><a href="#get_variable_list-113"><span class="linenos">113</span></a>    <span class="n">rec</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;true&lt;&lt;</span><span class="si">{</span><span class="n">_PART_SIGNALS</span><span class="p">[</span><span class="s1">&#39;get_variable_list&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">part_id</span><span class="si">}</span><span class="s2">&lt;&lt;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="get_variable_list-114"><a href="#get_variable_list-114"><span class="linenos">114</span></a>    <span class="k">return</span> <span class="n">rec</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Get the value of a list variable of a part.</p>
 </div>
 
 

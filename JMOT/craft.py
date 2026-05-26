@@ -4,7 +4,7 @@ import numpy as np
 
 _CRAFT_INFO_SIGNAL = {
     'name' : 200,
-    'craftname_of_target' : 201,
+    'target_craftname' : 201,
     'craftname_of_craftID' : 202,
     'part_count_of_craftID' : 203,
     'craftID_of_craftname' : 204,
@@ -16,9 +16,9 @@ class info:
         '''Get the current vessel's name.'''
         rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['name']}")
         return rec[0]
-    def craftname_of_target()->str:
+    def target_craftname()->str:
         '''Get the name of the current vessel's target.'''
-        rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['craftname_of_target']}")
+        rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['target_craftname']}")
         return rec[0]
     def craftname_of_craftID(craft_ID:int)->str:
         '''Get the name of a vessel by its craft ID.'''
@@ -63,17 +63,17 @@ class fuel:
         return rec[0]
 
 _CRAFT_PERFORMANCE_SIGNAL = {
-    'current_engine_thrust' : 229,
-    'mass' : 230,
-    'dry_mass' : 231,
-    'fuel_mass' : 232,
-    'max_engine_thrust' : 233,
-    'TWR' : 234,
-    'ISP' : 235,
-    'stage_delta_v' : 236,
-    'stage_burn_time' : 237,
-    'solar_radition' : 351,
-    'craft_mass' : 238
+    'current_engine_thrust' : 230,
+    'mass' : 231,
+    'dry_mass' : 232,
+    'fuel_mass' : 233,
+    'max_engine_thrust' : 234,
+    'TWR' : 235,
+    'ISP' : 236,
+    'stage_delta_v' : 237,
+    'stage_burn_time' : 238,
+    'solar_radition' : 239,
+    'craft_mass' : 240
 }
 
 class performance:
@@ -122,76 +122,20 @@ class performance:
         rec = connect._send_message(f"true<<{_CRAFT_PERFORMANCE_SIGNAL['craft_mass']}<<{craft_ID}")
         return rec[0]
 
-_CRAFT_POSITION_SIGNAL = {
-    'AGL' : 290,
-    'ASL' : 291,
-    'ASF' : 292,
-    'craft_ASL' : 300,
-    'is_ground' : 208,
-    'craft_is_ground' : 209,
-    'ECI_position' : 250,
-    'target_ECI_position' : 251,
-    'craft_ECI_position' : 252
-}
-
-class position:
-    def AGL()->float:
-        '''Get the current vessel's altitude above ground level in meters.'''
-        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['AGL']}")
-        return rec[0]
-    def ASL()->float:
-        '''Get the current vessel's altitude above sea level in meters.'''
-        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['ASL']}")
-        return rec[0]
-    def ASF()->float:
-        '''Get the current vessel's altitude above seabed in meters.'''
-        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['ASF']}")
-        return rec[0]
-    def craft_ASL(craft_ID:int)->float:
-        '''Get the altitude above sea level of a vessel in meters.'''
-        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['craft_ASL']}<<{craft_ID}")
-        return rec[0]
-    def is_ground()->bool:
-        '''Get whether the current vessel is on the ground.\n
-        T means the vessel is on the ground, F means it's not.
-        '''
-        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['is_ground']}")
-        return rec[0]
-    def craft_is_ground(craft_id:int)->bool:
-        '''Get whether a vessel is on the ground.\n
-        T means the vessel is on the ground, F means it's not.
-        '''
-        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['craft_is_ground']}<<{craft_id}")
-        return rec[0]
-    def ECI_position()->np.ndarray:
-        '''Get the current vessel's position in ECI coordinates.'''
-        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['ECI_position']}")
-        vec = extra.tuple2array(rec[0])
-        return vec
-    def target_ECI_position()->np.ndarray:
-        '''Get the target vessel's position in ECI coordinates.'''
-        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['target_ECI_position']}")
-        vec = extra.tuple2array(rec[0])
-        return vec
-    def craft_ECI_position(craft_ID:int)->np.ndarray:
-        '''Get the position of a vessel by its craft ID in ECI coordinates.'''
-        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['craft_ECI_position']}<<{craft_ID}")
-        vec = extra.tuple2array(rec[0])
-        return vec
 
 _CRAFT_ATTITUDE_SIGNAL = {
-    'craft_heading' : 255,
-    'craft_pitching' : 256,
-    'craft_autopilot_heading' : 257,
-    'craft_autopilot_pitching' : 258,
-    'craft_bank_angle' : 259,
-    'craft_AOA' : 260,
-    'craft_side_slip': 261,
-    'craft_north_vector' : 262,
-    'craft_east_vector' : 263,
-    'craft_roll_axis' : 264,
-    'craft_pitch_axis' : 265,
-    'craft_yaw_axis' : 266
+    'craft_heading' : 250,
+    'craft_pitching' : 251,
+    'craft_autopilot_heading' : 252,
+    'craft_autopilot_pitching' : 253,
+    'craft_bank_angle' : 254,
+    'craft_AOA' : 265,
+    'craft_side_slip': 256,
+    'craft_north_vector' : 257,
+    'craft_east_vector' : 258,
+    'craft_roll_axis' : 259,
+    'craft_pitch_axis' : 260,
+    'craft_yaw_axis' : 261
 }
 
 class attitude:
@@ -324,28 +268,86 @@ class velocity:
         rec = connect._send_message(f"true<<{_CRAFT_VELOCITY_SIGNAL['craft_velocity']}")
         vec = extra.tuple2array(rec[0])
         return vec
+    
+_CRAFT_POSITION_SIGNAL = {
+    'AGL' : 290,
+    'ASL' : 291,
+    'ASF' : 292,
+    'craft_ASL' : 293,
+    'is_ground' : 294,
+    'craft_is_ground' : 295,
+    'ECI_position' : 296,
+    'target_ECI_position' : 297,
+    'craft_ECI_position' : 298
+}
+
+class position:
+    def AGL()->float:
+        '''Get the current vessel's altitude above ground level in meters.'''
+        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['AGL']}")
+        return rec[0]
+    def ASL()->float:
+        '''Get the current vessel's altitude above sea level in meters.'''
+        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['ASL']}")
+        return rec[0]
+    def ASF()->float:
+        '''Get the current vessel's altitude above seabed in meters.'''
+        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['ASF']}")
+        return rec[0]
+    def craft_ASL(craft_ID:int)->float:
+        '''Get the altitude above sea level of a vessel in meters.'''
+        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['craft_ASL']}<<{craft_ID}")
+        return rec[0]
+    def is_ground()->bool:
+        '''Get whether the current vessel is on the ground.\n
+        T means the vessel is on the ground, F means it's not.
+        '''
+        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['is_ground']}")
+        return rec[0]
+    def craft_is_ground(craft_id:int)->bool:
+        '''Get whether a vessel is on the ground.\n
+        T means the vessel is on the ground, F means it's not.
+        '''
+        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['craft_is_ground']}<<{craft_id}")
+        return rec[0]
+    def ECI_position()->np.ndarray:
+        '''Get the current vessel's position in ECI coordinates.'''
+        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['ECI_position']}")
+        vec = extra.tuple2array(rec[0])
+        return vec
+    def target_ECI_position()->np.ndarray:
+        '''Get the target vessel's position in ECI coordinates.'''
+        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['target_ECI_position']}")
+        vec = extra.tuple2array(rec[0])
+        return vec
+    def craft_ECI_position(craft_ID:int)->np.ndarray:
+        '''Get the position of a vessel by its craft ID in ECI coordinates.'''
+        rec = connect._send_message(f"true<<{_CRAFT_POSITION_SIGNAL['craft_ECI_position']}<<{craft_ID}")
+        vec = extra.tuple2array(rec[0])
+        return vec
+
 
 _CRAFT_ORBIT_SIGNAL = {
-    'apoapsis' : 293,
-    'periapsis' : 294,
-    'apoapsis_time' : 295,
-    'periapsis_time' : 296,
-    'eccentricity' : 297,
-    'inclination' : 298,
-    'period' : 299,
-    'craft_apoapsis_position' : 301,
-    'craft_periapsis_position' : 302,
-    'craft_period' : 303,
-    'craft_apoapsis_time' : 304,
-    'craft_periapsis_time' : 305,
-    'craft_inclination' : 306,
-    'craft_eccentricity' : 307,
-    'craft_mean_anomaly' : 308,
-    'craft_mean_motion' : 309,
-    'craft_periapsis_argument' : 310,
-    'craft_right_ascension' : 311,
-    'craft_true_anomaly' : 312,
-    'craft_SMA' : 313
+    'apoapsis' : 305,
+    'periapsis' : 306,
+    'apoapsis_time' : 307,
+    'periapsis_time' : 308,
+    'eccentricity' : 309,
+    'inclination' : 310,
+    'period' : 311,
+    'craft_apoapsis_position' : 312,
+    'craft_periapsis_position' : 313,
+    'craft_period' : 314,
+    'craft_apoapsis_time' : 315,
+    'craft_periapsis_time' : 316,
+    'craft_inclination' : 317,
+    'craft_eccentricity' : 318,
+    'craft_mean_anomaly' : 319,
+    'craft_mean_motion' : 320,
+    'craft_periapsis_argument' : 321,
+    'craft_right_ascension' : 322,
+    'craft_true_anomaly' : 323,
+    'craft_SMA' : 324
 }
 
 class orbit:
@@ -433,21 +435,21 @@ class orbit:
         return rec[0]
 
 _CRAFT_INPUT_SIGNAL = {
-    'roll' : 320,
-    'pitch' : 321,
-    'yaw' : 322,
-    'throttle' : 323,
-    'brake' : 324,
-    'slider1' : 325,
-    'slider2' : 326,
-    'slider3' : 327,
-    'slider4' : 328,
-    'translate_foraward' : 329,
-    'translate_right' : 330,
-    'translate_up' : 331,
-    'translate_mode' : 332,
-    'pitch_pids' : 333,
-    'roll_pids' : 334
+    'roll' : 330,
+    'pitch' : 331,
+    'yaw' : 332,
+    'throttle' : 333,
+    'brake' : 334,
+    'slider1' : 335,
+    'slider2' : 336,
+    'slider3' : 337,
+    'slider4' : 338,
+    'translate_foraward' : 339,
+    'translate_right' : 340,
+    'translate_up' : 341,
+    'translate_mode' : 342,
+    'pitch_pids' : 343,
+    'roll_pids' : 344
 }
 
 class input:
@@ -521,8 +523,8 @@ _CRAFT_STATUS_SIGNAL = {
     'activing_stage' : 340,
     'num_of_stage' : 341,
     'ag_status' : 342,
-    'craft_is_destroyed' : 206,
-    'craft_is_player' : 207
+    'craft_is_destroyed' : 343,
+    'craft_is_player' : 344
 }
 
 class status:

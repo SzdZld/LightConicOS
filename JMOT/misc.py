@@ -2,13 +2,11 @@ from JMOT import connect, extra
 import numpy as np
 
 _MISC_CONVERT_SIGNALS = {
-    "position2LL_AGL":345,
-    "position2LL_ASL":346,
-    "LL_AGL2position":347,
-    "LL_ASL2position":348,
-    "cast_ray":343,
-    "part_loacl_to_eci":413,
-    "part_eci_to_local":414
+    "position2LL_AGL":360,
+    "position2LL_ASL":361,
+    "LL_AGL2position":362,
+    "LL_ASL2position":363,
+    "cast_ray":364,
 }
 
 class convert:
@@ -40,23 +38,12 @@ class convert:
         rec = connect._send_message(f"true<<{_MISC_CONVERT_SIGNALS['cast_ray']}<<{vec1}<<{vec2}")
         vec = extra.tuple2array(rec)
         return vec
-    def part_loacl_to_eci(partID:int, vector:np.ndarray)->np.ndarray:
-        '''Convert part vector in local coordinates of a part to ECI coordinates.\n'''
-        v = extra.array2tuple(vector)
-        rec = connect._send_message(f"true<<{_MISC_CONVERT_SIGNALS['part_loacl_to_eci']}<<{partID}<<{v}")
-        vec = extra.tuple2array(rec[0])
-        return vec
-    def part_eci_to_local(partID:int, vector:np.ndarray)->np.ndarray:
-        '''Convert part vector in ECI coordinates to local coordinates of a part.\n'''
-        v = extra.array2tuple(vector)
-        rec = connect._send_message(f"true<<{_MISC_CONVERT_SIGNALS['part_eci_to_local']}<<{partID}<<{v}")
-        vec = extra.tuple2array(rec[0])
-        return vec
+
 
 _MISC_CAMERA_SIGNALS = {
-    "camera_position":352,
-    "camera_pointing":353,
-    "camera_direction":354
+    "camera_position":370,
+    "camera_pointing":371,
+    "camera_direction":372
 }
 
 class camera:
@@ -77,10 +64,10 @@ class camera:
         return vec
 
 _MISC_FUNK_SIGNALS = {
-    "get_float":344,
-    "get_bool":344,
-    "get_string":344,
-    "get_int":344
+    "get_float":373,
+    "get_bool":373,
+    "get_string":373,
+    "get_int":373
 }
 
 class funk:

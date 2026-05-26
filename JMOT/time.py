@@ -7,7 +7,7 @@ _TIME_SIGNALS = {
     'frame_delta_time':222,
     'warp_amount':223,
     'real_time':224,
-    'set_time_mode':51
+    'set_time_mode':40
 }
 
 def time_since_launch()->float:

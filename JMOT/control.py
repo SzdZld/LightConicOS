@@ -19,12 +19,13 @@ _CONTROL_SIGNAL = {
     'set_heading_vector' : 26,
     'set_translate' : 27,
     'lock_head_mode' : 28,
-    'set_variable' : 40,
-    'part_active' : 9,
-    'part_focuse' : 10,
-    'part_name' : 11,
-    'part_explode' : 12,
-    'part_transfer' : 13
+    'set_variable' : 41,
+    'set_variable_list' : 42,
+    'set_part_active' : 9,
+    'set_part_focuse' : 10,
+    'set_part_name' : 11,
+    'set_part_explode' : 12,
+    'set_part_transfer' : 13
 }
 
 ATTITUDE = {
@@ -161,36 +162,49 @@ def set_variable(part_id:int, variable_name:str, value:all):
     ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['set_variable']}<<{part_id}<<{variable_name}<<{value}")
     connect._verify(ack)
 
-def part_active(part_id:int, part_status:bool):
+def set_variable_list(part_id: int, list_variable_name: str, value_list: int|float|str|bool):
+    '''Set the value of a list variable in a part.\n
+       part_id:the part ID of the part\n   
+       list_variable_name:the name of the list variable in the part\n
+       value_list:the list of values of the variable\n
+    '''
+    safe_value_list = [str(item) for item in value_list]
+    
+    ack = connect._send_message(
+        f"false<<{_CONTROL_SIGNAL['set_variable_list']}<<{part_id}<<{list_variable_name}<<{safe_value_list}"
+    )
+    connect._verify(ack)
+
+def set_part_active(part_id:int, part_status:bool):
     '''Set the status of a part.\n'''
-    ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['part_active']}<<{part_id}<<{part_status}")
+    ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['set_part_active']}<<{part_id}<<{part_status}")
     connect._verify(ack)
 
-def part_focuse(part_id:int, part_focuse:bool):
+def set_part_focuse(part_id:int, part_focuse:bool):
     '''Set the camera focus of a part.\n'''
-    ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['part_focuse']}<<{part_id}<<{part_focuse}")
+    ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['set_part_focuse']}<<{part_id}<<{part_focuse}")
     connect._verify(ack)
 
-def part_name(part_id:int, part_name:str):
+def set_part_name(part_id:int, part_name:str):
     '''Set the name of a part.\n'''
-    ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['part_name']}<<{part_id}<<{part_name}")
+    ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['set_part_name']}<<{part_id}<<{part_name}")
     connect._verify(ack)
 
-def part_explode(part_id:int, part_explode_power:float):
+def set_part_explode(part_id:int, part_explode_power:float):
     '''Explode a part.\n
     part_explode_power:the power of the explosion,\n
         0 means no explosion but drop down, 1 means full explosion.\n
     '''
-    ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['part_explode']}<<{part_id}<<{part_explode_power}")
+    ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['set_part_explode']}<<{part_id}<<{part_explode_power}")
     connect._verify(ack)
 
-def part_transfer(part_id:int, part_trans:float):
+def set_part_transfer(part_id:int, part_trans:float):
     '''Transfer a part.\n
     part_trans:the transfer value,\n
         <0 means exhuast\n
         0 means no transfer\n
         >0 means fill.\n
     '''
-    ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['part_transfer']}<<{part_id}<<{part_trans}")
+    ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['set_part_transfer']}<<{part_id}<<{part_trans}")
     connect._verify(ack)
     

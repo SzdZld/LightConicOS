@@ -13,7 +13,7 @@ with open(r"JMOT\connect.json", 'r') as f:
     connect_info = json.load(f)
     SERVER_IP = connect_info["SERVER_IP"]
     SERVER_DATA_PORT = connect_info["SERVER_DATA_PORT"]
-    SERVER_STREAM_PORT = connect_info["SERVER_STREAM_PORT"]
+    SERVER_STREAM_PORT = connect_info["SERVER_LIST_PORT"]
     SERVER_BUFFER = connect_info["SERVER_BUFFER"]
     f.close()
 
@@ -92,14 +92,14 @@ def _send_message(message:str, socket = None):
         socket = client_socket
     try:
         _send_message_with_length(socket, message)
-        logging.info(f'-> {message}')
+        logging.info(f'<- {message}')
         response = _receive_message_with_length(socket)
         if response is None or not _convert_value(response):
             logging.info("Send Failed")
             print("Send Failed")
         else:
             data = _parse_message_to_list(response)
-            logging.info(f'<- {data}')
+            logging.info(f'-> {data}')
             return data
 
     except Exception as e:

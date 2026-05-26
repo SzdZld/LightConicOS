@@ -18,6 +18,63 @@ def array2tuple(vec:np.ndarray)->tuple[float, float, float]:
     vec = tuple(vec)
     return vec
 
+    """
+    修复 JMOT 底层暴力拆解导致的列表错位问题。
+    将被切碎的 '[1'、'3)]' 等残骸重新拼接回完整的数字和元组。
+    """
+    if not raw_list:
+        return []
+        
+    result = []
+    i = 0
+    
+    while i < len(raw_list):
+        item = str(raw_list[i])
+        
+        # 1. 处理被切断的列表开头：比如 '[1' 
+        if item.startswith('['):
+            clean_num = item.lstrip("[").strip("' ")
+            try:
+                result.append(float(clean_num))
+            except ValueError:
+                result.append(clean_num)
+                
+        # 2. 处理被切断的元组：寻找以 '(' 开头但不以 ')' 结尾的碎片
+        elif item.startswith('(') and not item.endswith(')'):
+            tuple_parts = [item]
+            # 一直往后找，直到遇到以 ')' 结尾的碎片
+            j = i + 1
+            while j < len(raw_list):
+                tuple_parts.append(str(raw_list[j]))
+                if str(raw_list[j]).endswith(')'):
+                    break
+                j += 1
+            
+            # 把碎片拼起来，例如 "(1" + "2.0" + "3)" -> "(12.03)"
+            full_tuple_str = "".join(tuple_parts)
+            
+            # 提取括号内的内容并转为浮点数元组
+            inner = full_tuple_str.strip("()")
+            try:
+                nums = [float(x.strip()) for x in inner.split(",")]
+                result.append(tuple(nums))
+            except ValueError:
+                result.append(full_tuple_str)  # 转换失败则保留原样
+                
+            i = j  # 跳过已经处理过的碎片
+            
+        # 3. 处理普通的中间元素（如 "'aaa'" 或 3.14）
+        else:
+            clean_item = item.strip("' ")
+            try:
+                result.append(float(clean_item))
+            except ValueError:
+                result.append(clean_item)
+                
+        i += 1
+        
+    return result
+
 def eci2ecef(r_eci, total_seconds):
     '''DO NOT USE THIS FUNCTION, IT IS NOT ACCURATE ENOUGH'''
     theta = 2 * np.pi * (total_seconds / 86400)
