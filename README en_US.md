@@ -8,7 +8,7 @@ Developed mainly with C++ and assisted by Python, Light Conic is equipped with a
 The whole software consists of six independent functional modules: JMOT, AGS, VOMS, GTCC, DMS and RGS. The detailed module information and development progress are shown in the table below:
 |Sub-module|Function|Development Status|
 |---|---|---|
-|JMOT|Juno Monitoring Operation Tool|JMOT_py completed<br> JMOT_cpp under development|
+|[JMOT](https://gitee.com/szdzld/light-conic-os/blob/master/JMOT/JMOT%20README%20en_US.md)|Juno Monitoring Operation Tool|JMOT_py completed<br> JMOT_cpp under development|
 |AGS|Ascent Guidance System|Not started|
 |RGS|Reentry Guidance System|Not started|
 |DMS|Docking Management System|Not started|

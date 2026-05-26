@@ -1,5 +1,5 @@
 # JMOT
-![JMOT Logo](img/JMOT.png =300x300)
+![JMOT Logo](img/JMOT.png)
 
 ## JMOT简介
 JMOT(Juno操作监控工具)是基于Juno的监控工具，用于监控Juno的载具运行状态和性能，并提供外部控制方法。工具集成全流程航天器操控与状态监控能力，助力玩家更高效、更专业地完成各类航天发射与在轨任务。

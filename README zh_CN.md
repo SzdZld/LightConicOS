@@ -10,7 +10,7 @@
 
 |子模块|功能|状态|
 |----|----|----|
-|JMOT|Juno操作监控工具|JMOT_py开发完成，JMOT_cpp开发中|
+|[JMOT](https://gitee.com/szdzld/light-conic-os/blob/master/JMOT/JMOT%20README%20zh_CH.md)|Juno操作监控工具|JMOT_py开发完成，JMOT_cpp开发中|
 |AGS|上升制导系统|未开发|
 |RGS|再入制导系统|未开发|
 |DMS|交汇对接管理系统|未开发|
