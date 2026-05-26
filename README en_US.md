@@ -2,8 +2,9 @@
 ## Introduction
 **Light Conic OS** is an external auxiliary control tool developed for the 3D aerospace sandbox game Juno New Origins (formerly SimpleRockets 2). This software integrates full-process spacecraft control and real-time status monitoring functions, helping players complete various space launch and on-orbit missions more efficiently and professionally.
 
-Developed mainly with C++ and assisted by Python, Light Conic is equipped with an independent visual graphical user interface. No complex coding or tedious in-game manual operations are required. The built-in visual panel displays real-time spacecraft flight parameters, orbital data, flight attitude and other core information, supporting full-process visual monitoring and one-click control. It greatly lowers the operation threshold for high-precision aerospace missions.
+Developed mainly with C++ and assisted by Python, Light Conic is equipped with an independent visual graphical user interface. No complex coding or tedious in-game manual operations are required. The built-in visual panel displays real-time spacecraft flight parameters, orbital data, flight attitude and other core information, supporting full-process visual monitoring and one-click control. 
 
+## Features
 The whole software consists of six independent functional modules: JMOT, AGS, VOMS, GTCC, DMS and RGS. The detailed module information and development progress are shown in the table below:
 |Sub-module|Function|Development Status|
 |---|---|---|
