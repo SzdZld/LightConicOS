@@ -1,4 +1,4 @@
-import socket, json, sys, JMOT, logging
+import socket, sys, JMOT, logging, os
 
 def _verify(response):
         '''
@@ -9,15 +9,9 @@ def _verify(response):
         else:
             print("send error")
 
-with open(r"JMOT\connect.json", 'r') as f:
-    connect_info = json.load(f)
-    SERVER_IP = connect_info["SERVER_IP"]
-    SERVER_DATA_PORT = connect_info["SERVER_DATA_PORT"]
-    SERVER_STREAM_PORT = connect_info["SERVER_LIST_PORT"]
-    SERVER_BUFFER = connect_info["SERVER_BUFFER"]
-    f.close()
-
-logging.basicConfig(filename=r'JMOT\log\tran.log', level=logging.INFO, format='%(asctime)s %(message)s')
+if(os.path.exists(r'JMOT_log') == False):
+    os.makedirs(r'JMOT_log')
+logging.basicConfig(filename=r'JMOT_log\tran.log', level=logging.INFO, format='%(asctime)s %(message)s')
 
 def _send_message_with_length(sock, message):
     message_bytes = message.encode('utf-8')
@@ -65,15 +59,16 @@ def _parse_message_to_list(message):
     items = message.split("<<")
     return [_convert_value(item) for item in items if item.strip()]
 
-def data_connect():
+def data_connect(server_ip: str, server_data_port: int, server_buffer=2048):
     '''
     JMOT data connect from Juno New Origin
     '''
     try:
         print("JMOT connecting...")
-        global client_socket
+        global client_socket, SERVER_BUFFER
+        SERVER_BUFFER = server_buffer
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect((SERVER_IP, SERVER_DATA_PORT))
+        client_socket.connect((server_ip, server_data_port))
         version = _send_message("version", client_socket)[0]
         if version != JMOT.__version__:
             print("version error, please updates")

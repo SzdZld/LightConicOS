@@ -7,4 +7,6 @@
 /JMOT/__pycache__
 
 # log
-/JMOT/log
+/JMOT_log/
+
+# build
