@@ -129,7 +129,7 @@ _CRAFT_ATTITUDE_SIGNAL = {
     'craft_autopilot_heading' : 252,
     'craft_autopilot_pitching' : 253,
     'craft_bank_angle' : 254,
-    'craft_AOA' : 265,
+    'craft_AOA' : 255,
     'craft_side_slip': 256,
     'craft_north_vector' : 257,
     'craft_east_vector' : 258,
@@ -511,20 +511,18 @@ class input:
     def pitch_pids()->np.ndarray:
         '''Get the current vessel's pitch PID values as a numpy array.'''
         rec = connect._send_message(f"true<<{_CRAFT_INPUT_SIGNAL['pitch_pids']}")
-        vec = extra.tuple2array(rec[0])
-        return vec
+        return rec
     def roll_pids()->np.ndarray:
         '''Get the current vessel's roll PID values as a numpy array.'''
         rec = connect._send_message(f"true<<{_CRAFT_INPUT_SIGNAL['roll_pids']}")
-        vec = extra.tuple2array(rec[0])
-        return vec
+        return rec
     
 _CRAFT_STATUS_SIGNAL = {
-    'activing_stage' : 340,
-    'num_of_stage' : 341,
-    'ag_status' : 342,
-    'craft_is_destroyed' : 343,
-    'craft_is_player' : 344
+    'activing_stage' : 350,
+    'num_of_stage' : 351,
+    'ag_status' : 352,
+    'craft_is_destroyed' : 353,
+    'craft_is_player' : 354
 }
 
 class status:
