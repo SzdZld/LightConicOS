@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "JMOT"
 description = "Juno New Origin Monitor Operation System written in Python"
-"version" = "0.3a1.dev2"
+"version" = "0.3a1.dev3"
 dependencies = [
   "numpy>=2.0"
 ]

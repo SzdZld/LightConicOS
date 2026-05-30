@@ -30,24 +30,23 @@ def real_time()->float:
     '''Get the current real time since create of the game in seconds.'''
     rec = connect._send_message(f"true<<{_TIME_SIGNALS['real_time']}")
     return rec[0]
-def set_time_mode(time_mode:Literal[-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13]):
+def set_time_mode(time_mode:Literal[-1,0,1,2,3,4,5,6,7,8,9,10,11,12]):
     '''
     time_mode:the time mode of the vessel,\n
         -1:0.05x\n
         0:pause\n
         1:normal\n
-        2:fast(10x)\n
-        3:25x\n
-        4:100x\n
-        5:500x\n
-        6:2500x\n
-        7:1W x\n
-        8:5W x\n
-        9:25W x\n
-        10:100W x\n
-        11:500W x\n
-        12:2500W x\n
-        13:1Y x
+        2:fast(2x)\n
+        3:10x\n
+        4:25x\n
+        5:100x\n
+        6:500x\n
+        7:2500x\n
+        8:1W x\n
+        9:5W x\n
+        10:25W x\n
+        11:100W x\n
+        12:500W x\n
     '''
     ack = connect._send_message(f"false<<{_TIME_SIGNALS['set_time_mode']}<<{time_mode}")
     connect._verify(ack)
