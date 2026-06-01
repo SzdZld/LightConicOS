@@ -1,0 +1,5 @@
+.idea/
+cmake-build-debug/.cmake
+cmake-build-debug/Testing
+cmake-build-debug/CMakeFiles
+JMOT/
