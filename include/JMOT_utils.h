@@ -6,13 +6,20 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 #include <mutex>
 #include <tuple>
 
-// 版本号定义在这里，方便 Python 端通过某种方式读取或保持同步
+// 版本号
 #define JMOT_VERSION "0.3.a1"
 
 using Vector3d = std::tuple<double, double, double>;
+inline void show_vector(const Vector3d& vec) {
+    std::cout << std::get<0>(vec) << ", "
+    << std::get<1>(vec) << ", "
+    << std::get<2>(vec)
+    << std::endl;
+}
 
 class JMOT_Logger {
 public:

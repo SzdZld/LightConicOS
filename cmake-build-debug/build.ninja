@@ -63,17 +63,17 @@ build CMakeFiles/JMOT_utils.dir/src/JMOT_utils.cpp.obj: CXX_COMPILER__JMOT_utils
 
 
 #############################################
-# Link the shared library libJMOT_utils.dll
+# Link the shared library D:\git clone\JMOT_lib\bin\libJMOT_utils.dll
 
-build libJMOT_utils.dll libJMOT_utils.dll.a: CXX_SHARED_LIBRARY_LINKER__JMOT_utils_Debug CMakeFiles/JMOT_utils.dir/src/JMOT_utils.cpp.obj
+build D$:/git$ clone/JMOT_lib/bin/libJMOT_utils.dll D$:/git$ clone/JMOT_lib/lib/libJMOT_utils.dll.a: CXX_SHARED_LIBRARY_LINKER__JMOT_utils_Debug CMakeFiles/JMOT_utils.dir/src/JMOT_utils.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\JMOT_utils.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
   RESTAT = 1
-  TARGET_FILE = libJMOT_utils.dll
-  TARGET_IMPLIB = libJMOT_utils.dll.a
+  TARGET_FILE = "D:\git clone\JMOT_lib\bin\libJMOT_utils.dll"
+  TARGET_IMPLIB = "D:\git clone\JMOT_lib\lib\libJMOT_utils.dll.a"
   TARGET_PDB = JMOT_utils.dll.dbg
 
 # =============================================================================
@@ -99,17 +99,17 @@ build CMakeFiles/JMOT_client.dir/src/JMOT_client.cpp.obj: CXX_COMPILER__JMOT_cli
 
 
 #############################################
-# Link the shared library libJMOT_client.dll
+# Link the shared library D:\git clone\JMOT_lib\bin\libJMOT_client.dll
 
-build libJMOT_client.dll libJMOT_client.dll.a: CXX_SHARED_LIBRARY_LINKER__JMOT_client_Debug CMakeFiles/JMOT_client.dir/src/JMOT_client.cpp.obj | libJMOT_utils.dll.a || libJMOT_utils.dll
+build D$:/git$ clone/JMOT_lib/bin/libJMOT_client.dll D$:/git$ clone/JMOT_lib/lib/libJMOT_client.dll.a: CXX_SHARED_LIBRARY_LINKER__JMOT_client_Debug CMakeFiles/JMOT_client.dir/src/JMOT_client.cpp.obj | D$:/git$ clone/JMOT_lib/lib/libJMOT_utils.dll.a || D$:/git$ clone/JMOT_lib/bin/libJMOT_utils.dll
   LANGUAGE_COMPILE_FLAGS = -g
-  LINK_LIBRARIES = libJMOT_utils.dll.a  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = "D:/git clone/JMOT_lib/lib/libJMOT_utils.dll.a"  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\JMOT_client.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
   RESTAT = 1
-  TARGET_FILE = libJMOT_client.dll
-  TARGET_IMPLIB = libJMOT_client.dll.a
+  TARGET_FILE = "D:\git clone\JMOT_lib\bin\libJMOT_client.dll"
+  TARGET_IMPLIB = "D:\git clone\JMOT_lib\lib\libJMOT_client.dll.a"
   TARGET_PDB = JMOT_client.dll.dbg
 
 # =============================================================================
@@ -129,23 +129,79 @@ build CMakeFiles/JMOT.dir/src/JMOT.cpp.obj: CXX_COMPILER__JMOT_unscanned_Debug D
   OBJECT_DIR = CMakeFiles\JMOT.dir
   OBJECT_FILE_DIR = CMakeFiles\JMOT.dir\src
 
+build CMakeFiles/JMOT.dir/src/control.cpp.obj: CXX_COMPILER__JMOT_unscanned_Debug D$:/git$ clone/JMOT_lib/src/control.cpp || cmake_object_order_depends_target_JMOT
+  DEFINES = -DJMOT_EXPORTS
+  DEP_FILE = CMakeFiles\JMOT.dir\src\control.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -I"D:/git clone/JMOT_lib/include"
+  OBJECT_DIR = CMakeFiles\JMOT.dir
+  OBJECT_FILE_DIR = CMakeFiles\JMOT.dir\src
+
+build CMakeFiles/JMOT.dir/src/craft.cpp.obj: CXX_COMPILER__JMOT_unscanned_Debug D$:/git$ clone/JMOT_lib/src/craft.cpp || cmake_object_order_depends_target_JMOT
+  DEFINES = -DJMOT_EXPORTS
+  DEP_FILE = CMakeFiles\JMOT.dir\src\craft.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -I"D:/git clone/JMOT_lib/include"
+  OBJECT_DIR = CMakeFiles\JMOT.dir
+  OBJECT_FILE_DIR = CMakeFiles\JMOT.dir\src
+
+build CMakeFiles/JMOT.dir/src/part.cpp.obj: CXX_COMPILER__JMOT_unscanned_Debug D$:/git$ clone/JMOT_lib/src/part.cpp || cmake_object_order_depends_target_JMOT
+  DEFINES = -DJMOT_EXPORTS
+  DEP_FILE = CMakeFiles\JMOT.dir\src\part.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -I"D:/git clone/JMOT_lib/include"
+  OBJECT_DIR = CMakeFiles\JMOT.dir
+  OBJECT_FILE_DIR = CMakeFiles\JMOT.dir\src
+
+build CMakeFiles/JMOT.dir/src/planet.cpp.obj: CXX_COMPILER__JMOT_unscanned_Debug D$:/git$ clone/JMOT_lib/src/planet.cpp || cmake_object_order_depends_target_JMOT
+  DEFINES = -DJMOT_EXPORTS
+  DEP_FILE = CMakeFiles\JMOT.dir\src\planet.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -I"D:/git clone/JMOT_lib/include"
+  OBJECT_DIR = CMakeFiles\JMOT.dir
+  OBJECT_FILE_DIR = CMakeFiles\JMOT.dir\src
+
+build CMakeFiles/JMOT.dir/src/time.cpp.obj: CXX_COMPILER__JMOT_unscanned_Debug D$:/git$ clone/JMOT_lib/src/time.cpp || cmake_object_order_depends_target_JMOT
+  DEFINES = -DJMOT_EXPORTS
+  DEP_FILE = CMakeFiles\JMOT.dir\src\time.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -I"D:/git clone/JMOT_lib/include"
+  OBJECT_DIR = CMakeFiles\JMOT.dir
+  OBJECT_FILE_DIR = CMakeFiles\JMOT.dir\src
+
+build CMakeFiles/JMOT.dir/src/misc.cpp.obj: CXX_COMPILER__JMOT_unscanned_Debug D$:/git$ clone/JMOT_lib/src/misc.cpp || cmake_object_order_depends_target_JMOT
+  DEFINES = -DJMOT_EXPORTS
+  DEP_FILE = CMakeFiles\JMOT.dir\src\misc.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -I"D:/git clone/JMOT_lib/include"
+  OBJECT_DIR = CMakeFiles\JMOT.dir
+  OBJECT_FILE_DIR = CMakeFiles\JMOT.dir\src
+
+build CMakeFiles/JMOT.dir/src/extra.cpp.obj: CXX_COMPILER__JMOT_unscanned_Debug D$:/git$ clone/JMOT_lib/src/extra.cpp || cmake_object_order_depends_target_JMOT
+  DEFINES = -DJMOT_EXPORTS
+  DEP_FILE = CMakeFiles\JMOT.dir\src\extra.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -I"D:/git clone/JMOT_lib/include"
+  OBJECT_DIR = CMakeFiles\JMOT.dir
+  OBJECT_FILE_DIR = CMakeFiles\JMOT.dir\src
+
 
 # =============================================================================
 # Link build statements for SHARED_LIBRARY target JMOT
 
 
 #############################################
-# Link the shared library libJMOT.dll
+# Link the shared library D:\git clone\JMOT_lib\bin\libJMOT.dll
 
-build libJMOT.dll libJMOT.dll.a: CXX_SHARED_LIBRARY_LINKER__JMOT_Debug CMakeFiles/JMOT.dir/src/JMOT.cpp.obj | libJMOT_client.dll.a libJMOT_utils.dll.a || libJMOT_client.dll libJMOT_utils.dll
+build D$:/git$ clone/JMOT_lib/bin/libJMOT.dll D$:/git$ clone/JMOT_lib/lib/libJMOT.dll.a: CXX_SHARED_LIBRARY_LINKER__JMOT_Debug CMakeFiles/JMOT.dir/src/JMOT.cpp.obj CMakeFiles/JMOT.dir/src/control.cpp.obj CMakeFiles/JMOT.dir/src/craft.cpp.obj CMakeFiles/JMOT.dir/src/part.cpp.obj CMakeFiles/JMOT.dir/src/planet.cpp.obj CMakeFiles/JMOT.dir/src/time.cpp.obj CMakeFiles/JMOT.dir/src/misc.cpp.obj CMakeFiles/JMOT.dir/src/extra.cpp.obj | D$:/git$ clone/JMOT_lib/lib/libJMOT_client.dll.a D$:/git$ clone/JMOT_lib/lib/libJMOT_utils.dll.a || D$:/git$ clone/JMOT_lib/bin/libJMOT_client.dll D$:/git$ clone/JMOT_lib/bin/libJMOT_utils.dll
   LANGUAGE_COMPILE_FLAGS = -g
-  LINK_LIBRARIES = libJMOT_client.dll.a  libJMOT_utils.dll.a  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = "D:/git clone/JMOT_lib/lib/libJMOT_client.dll.a"  "D:/git clone/JMOT_lib/lib/libJMOT_utils.dll.a"  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\JMOT.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
   RESTAT = 1
-  TARGET_FILE = libJMOT.dll
-  TARGET_IMPLIB = libJMOT.dll.a
+  TARGET_FILE = "D:\git clone\JMOT_lib\bin\libJMOT.dll"
+  TARGET_IMPLIB = "D:\git clone\JMOT_lib\lib\libJMOT.dll.a"
   TARGET_PDB = JMOT.dll.dbg
 
 
@@ -216,11 +272,17 @@ build install/strip: phony CMakeFiles/install/strip.util
 # =============================================================================
 # Target aliases.
 
-build JMOT: phony libJMOT.dll
+build JMOT: phony D$:/git$ clone/JMOT_lib/bin/libJMOT.dll
 
-build JMOT_client: phony libJMOT_client.dll
+build JMOT_client: phony D$:/git$ clone/JMOT_lib/bin/libJMOT_client.dll
 
-build JMOT_utils: phony libJMOT_utils.dll
+build JMOT_utils: phony D$:/git$ clone/JMOT_lib/bin/libJMOT_utils.dll
+
+build libJMOT.dll: phony D$:/git$ clone/JMOT_lib/bin/libJMOT.dll
+
+build libJMOT_client.dll: phony D$:/git$ clone/JMOT_lib/bin/libJMOT_client.dll
+
+build libJMOT_utils.dll: phony D$:/git$ clone/JMOT_lib/bin/libJMOT_utils.dll
 
 # =============================================================================
 # Folder targets.
@@ -230,7 +292,7 @@ build JMOT_utils: phony libJMOT_utils.dll
 #############################################
 # Folder: D:/git clone/JMOT_lib/cmake-build-debug
 
-build all: phony libJMOT_utils.dll libJMOT_client.dll libJMOT.dll
+build all: phony D$:/git$ clone/JMOT_lib/bin/libJMOT_utils.dll D$:/git$ clone/JMOT_lib/bin/libJMOT_client.dll D$:/git$ clone/JMOT_lib/bin/libJMOT.dll
 
 # =============================================================================
 # Built-in targets

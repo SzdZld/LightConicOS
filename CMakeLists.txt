@@ -6,6 +6,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
+# 设置构建阶段的输出目录（可选，根据你的需求决定是否添加）
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
 # JMOT_utils library
 add_library(JMOT_utils SHARED
     src/JMOT_utils.cpp
@@ -29,6 +34,13 @@ endif ()
 # JMOT core library
 add_library(JMOT SHARED
     src/JMOT.cpp
+        src/control.cpp
+        src/craft.cpp
+        src/part.cpp
+        src/planet.cpp
+        src/time.cpp
+        src/misc.cpp
+        src/extra.cpp
 )
 target_include_directories(JMOT PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
