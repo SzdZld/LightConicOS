@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Program name="JMOT_var_sock">
+  <Variables>
+    <Variable name="aaa">
+      <Items />
+    </Variable>
+    <Variable name="abc" number="0" />
+    <Variable name="str" number="0" />
+    <Variable name="N" number="0" />
+    <Variable name="T" number="0" />
+    <Variable name="L1">
+      <Items />
+    </Variable>
+    <Variable name="Text" number="0" />
+    <Variable name="SocketErrorLog" number="0" />
+    <Variable name="bbb">
+      <Items />
+    </Variable>
+  </Variables>
+  <Instructions>
+    <Event event="ReceiveMessage" id="0" style="receive-msg" pos="-37.1392,-339.8973">
+      <Constant canReplace="false" text="get{recv_part_id}" />
+    </Event>
+    <BroadcastMessage global="false" local="false" id="1" style="broadcast-msg-craft">
+      <Constant text="{send_part_id}" />
+      <EvaluateExpression style="evaluate-expression">
+        <Variable list="false" local="true" variableName="data" />
+      </EvaluateExpression>
+    </BroadcastMessage>
+    <LogMessage id="2" style="log">
+      <StringOp op="join" style="join">
+        <Constant text="&lt;&lt;" />
+        <Constant text="get" />
+        <Constant text="&lt;&lt;" />
+        <EvaluateExpression style="evaluate-expression">
+          <Variable list="false" local="true" variableName="data" />
+        </EvaluateExpression>
+        <Constant text="" />
+      </StringOp>
+    </LogMessage>
+  </Instructions>
+  <Instructions>
+    <Event event="ReceiveMessage" id="3" style="receive-msg" pos="-40.27103,-544.0076">
+      <Constant canReplace="false" text="set{recv_part_id}" />
+    </Event>
+    <SetVariable id="4" style="set-variable">
+      <ListOp op="get" style="list-get">
+        <Variable list="false" local="true" variableName="data" />
+        <Constant number="1" />
+      </ListOp>
+      <ListOp op="get" style="list-get">
+        <Variable list="false" local="true" variableName="data" />
+        <Constant text="2" />
+      </ListOp>
+    </SetVariable>
+    <LogMessage id="5" style="log">
+      <StringOp op="join" style="join">
+        <Constant text="&lt;&lt;" />
+        <Constant text="set" />
+        <Constant text="&lt;&lt;" />
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant number="1" />
+        </ListOp>
+        <Constant text="&lt;&lt;" />
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant text="2" />
+        </ListOp>
+        <Constant text="" />
+      </StringOp>
+    </LogMessage>
+  </Instructions>
+  <Instructions>
+    <Event event="ReceiveMessage" id="6" style="receive-msg" pos="-934.1302,-1551.127">
+      <Constant canReplace="false" text="set_list2" />
+    </Event>
+    <If id="7" style="if">
+      <StringOp op="contains" style="contains">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant number="1" />
+        </ListOp>
+        <Constant text="aaa" />
+      </StringOp>
+      <Instructions>
+        <If id="8" style="if">
+          <StringOp op="contains" style="contains">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="add" />
+          </StringOp>
+          <Instructions>
+            <SetList op="add" id="9" style="list-add">
+              <Variable list="true" local="false" variableName="aaa" />
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="2" />
+              </ListOp>
+            </SetList>
+            <BroadcastMessage global="false" local="false" id="10" style="broadcast-msg-craft">
+              <Constant text="0" />
+              <Constant style="true" bool="true" />
+            </BroadcastMessage>
+          </Instructions>
+        </If>
+        <ElseIf id="11" style="else-if">
+          <StringOp op="contains" style="contains">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="selist" />
+          </StringOp>
+          <Instructions>
+            <SetVariable id="12" style="list-init">
+              <Variable list="true" local="false" variableName="aaa" />
+              <ListOp op="create" style="list-create">
+                <ListOp op="get" style="list-get">
+                  <Variable list="false" local="true" variableName="data" />
+                  <Constant text="2" />
+                </ListOp>
+              </ListOp>
+            </SetVariable>
+            <BroadcastMessage global="false" local="false" id="13" style="broadcast-msg-craft">
+              <Constant text="0" />
+              <Constant style="true" bool="true" />
+            </BroadcastMessage>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="14" style="else-if">
+          <StringOp op="contains" style="contains">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="4" />
+            </ListOp>
+            <Constant text="set" />
+          </StringOp>
+          <Instructions>
+            <SetList op="set" id="15" style="list-set">
+              <Variable list="true" local="false" variableName="aaa" />
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="3" />
+              </ListOp>
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="2" />
+              </ListOp>
+            </SetList>
+            <BroadcastMessage global="false" local="false" id="16" style="broadcast-msg-craft">
+              <Constant text="0" />
+              <Constant style="true" bool="true" />
+            </BroadcastMessage>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="17" style="else-if">
+          <StringOp op="contains" style="contains">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="3" />
+            </ListOp>
+            <Constant text="remove" />
+          </StringOp>
+          <Instructions>
+            <SetList op="remove" id="18" style="list-remove">
+              <Variable list="true" local="false" variableName="aaa" />
+              <ListOp op="get" style="list-get">
+                <Variable list="false" local="true" variableName="data" />
+                <Constant text="2" />
+              </ListOp>
+            </SetList>
+            <BroadcastMessage global="false" local="false" id="19" style="broadcast-msg-craft">
+              <Constant text="0" />
+              <Constant style="true" bool="true" />
+            </BroadcastMessage>
+          </Instructions>
+        </ElseIf>
+        <ElseIf id="20" style="else-if">
+          <StringOp op="contains" style="contains">
+            <ListOp op="get" style="list-get">
+              <Variable list="false" local="true" variableName="data" />
+              <Constant text="2" />
+            </ListOp>
+            <Constant text="remall" />
+          </StringOp>
+          <Instructions>
+            <SetList op="clear" id="21" style="list-clear">
+              <Variable list="true" local="false" variableName="aaa" />
+            </SetList>
+            <BroadcastMessage global="false" local="false" id="22" style="broadcast-msg-craft">
+              <Constant text="0" />
+              <Constant style="true" bool="true" />
+            </BroadcastMessage>
+          </Instructions>
+        </ElseIf>
+      </Instructions>
+    </If>
+    <ElseIf id="23" style="else-if">
+      <StringOp op="contains" style="contains">
+        <ListOp op="get" style="list-get">
+          <Variable list="false" local="true" variableName="data" />
+          <Constant number="1" />
+        </ListOp>
+        <Constant text="bbb" />
+      </StringOp>
+    </ElseIf>
+    <ElseIf id="24" style="else">
+      <Constant bool="true" />
+      <Instructions>
+        <LogMessage id="25" style="log">
+          <StringOp op="join" style="join">
+            <Variable list="false" local="true" variableName="data" />
+            <Constant text=":" />
+            <Constant text="no this list" />
+            <Constant text="" />
+          </StringOp>
+        </LogMessage>
+        <BroadcastMessage global="false" local="false" id="26" style="broadcast-msg-craft">
+          <Constant text="0" />
+          <Constant style="false" bool="false" />
+        </BroadcastMessage>
+      </Instructions>
+    </ElseIf>
+  </Instructions>
+  <Expressions />
+</Program>

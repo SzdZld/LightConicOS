@@ -19,8 +19,7 @@ _CONTROL_SIGNAL = {
     'set_heading_vector' : 26,
     'set_translate' : 27,
     'lock_head_mode' : 28,
-    'set_variable' : 41,
-    'set_variable_list' : 42,
+    'set_variable' : 50,
     'set_part_active' : 9,
     'set_part_focuse' : 10,
     'set_part_name' : 11,
@@ -160,19 +159,6 @@ def set_variable(part_id:int, variable_name:str, value:all):
         value:the value of the variable\n
     '''
     ack = connect._send_message(f"false<<{_CONTROL_SIGNAL['set_variable']}<<{part_id}<<{variable_name}<<{value}")
-    connect._verify(ack)
-
-def set_variable_list(part_id: int, list_variable_name: str, value_list: int|float|str|bool):
-    '''Set the value of a list variable in a part.\n
-       part_id:the part ID of the part\n   
-       list_variable_name:the name of the list variable in the part\n
-       value_list:the list of values of the variable\n
-    '''
-    safe_value_list = [str(item) for item in value_list]
-    
-    ack = connect._send_message(
-        f"false<<{_CONTROL_SIGNAL['set_variable_list']}<<{part_id}<<{list_variable_name}<<{safe_value_list}"
-    )
     connect._verify(ack)
 
 def set_part_active(part_id:int, part_status:bool):

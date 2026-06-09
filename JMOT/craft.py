@@ -4,10 +4,10 @@ import numpy as np
 
 _CRAFT_INFO_SIGNAL = {
     'name' : 200,
-    'target_craftname' : 201,
-    'craftname_of_craftID' : 202,
+    'target_craftName' : 201,
+    'craftName_of_craftID' : 202,
     'part_count_of_craftID' : 203,
-    'craftID_of_craftname' : 204,
+    'craftID_of_craftName' : 204,
     'planet_of_craft' : 205
 }
 
@@ -16,21 +16,21 @@ class info:
         '''Get the current vessel's name.'''
         rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['name']}")
         return rec[0]
-    def target_craftname()->str:
+    def target_craftName()->str:
         '''Get the name of the current vessel's target.'''
-        rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['target_craftname']}")
+        rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['target_craftName']}")
         return rec[0]
-    def craftname_of_craftID(craft_ID:int)->str:
+    def craftName_of_craftID(craft_ID:int)->str:
         '''Get the name of a vessel by its craft ID.'''
-        rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['craftname_of_craftID']}<<{craft_ID}")
+        rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['craftName_of_craftID']}<<{craft_ID}")
         return rec[0]
     def part_count_of_craftID(craft_ID:int)->int:
         '''Get the part count of a vessel by its craft ID.'''
         rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['part_count_of_craftID']}<<{craft_ID}")
         return rec[0]
-    def craftID_of_craftname(craft_name:str)->int:
+    def craftID_of_craftName(craft_name:str)->int:
         '''Get the craft ID of a vessel by its name.'''
-        rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['craftID_of_craftname']}<<{craft_name}")
+        rec = connect._send_message(f"true<<{_CRAFT_INFO_SIGNAL['craftID_of_craftName']}<<{craft_name}")
         return rec[0]
     def planet_of_craft(craft_ID:int)->str:
         '''Get the name of the planet that a vessel is currently orbiting.'''
@@ -359,11 +359,11 @@ class orbit:
         '''Get the current vessel's periapsis altitude in meters.'''
         rec = connect._send_message(f"true<<{_CRAFT_ORBIT_SIGNAL['periapsis']}")
         return rec[0]
-    def apoapsis_time()->float:
+    def time_to_apoapsis()->float:
         '''Get the time to current vessel's apoapsis in seconds.'''
         rec = connect._send_message(f"true<<{_CRAFT_ORBIT_SIGNAL['apoapsis_time']}")
         return rec[0]
-    def periapsis_time()->float:
+    def time_to_periapsis()->float:
         '''Get the time to current vessel's periapsis in seconds.'''
         rec = connect._send_message(f"true<<{_CRAFT_ORBIT_SIGNAL['periapsis_time']}")
         return rec[0]
@@ -393,11 +393,11 @@ class orbit:
         '''Get the orbital period of a vessel by its craft ID in seconds.'''
         rec = connect._send_message(f"true<<{_CRAFT_ORBIT_SIGNAL['craft_period']}<<{craft_ID}")
         return rec[0]
-    def craft_apoapsis_time(craft_ID:int)->float:
+    def craft_time_to_apoapsis(craft_ID:int)->float:
         '''Get the time to current vessel'''
         rec = connect._send_message(f"true<<{_CRAFT_ORBIT_SIGNAL['craft_apoapsis_time']}<<{craft_ID}")
         return rec[0]
-    def craft_periapsis_time(craft_ID:int)->float:
+    def craft_time_to_periapsis(craft_ID:int)->float:
         '''Get the time to current vessel's periapsis in seconds.'''
         rec = connect._send_message(f"true<<{_CRAFT_ORBIT_SIGNAL['craft_periapsis_time']}<<{craft_ID}")
         return rec[0]

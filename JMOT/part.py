@@ -18,29 +18,28 @@ _PART_SIGNALS = {
     "is_part_under_water": 412,
     "partID_of_partname": 415,
     "get_variable": 416,
-    "get_variable_list": 417,
     "part_loacl_to_eci":365,
     "part_eci_to_local":366
 }
 
 class info:
-    def partname_of_partID(partID:int)->str:
+    def partName_of_partID(partID:int)->str:
         '''Get the name of a part ID.\n'''
         rec = connect._send_message(f"true<<{_PART_SIGNALS['partname_of_partID']}<<{partID}")
         return rec[0]
-    def partID_of_partname(part_name:str)->int:
+    def partID_of_partName(part_name:str)->int:
         '''Get the part ID of a part name.\n'''
         rec = connect._send_message(f"true<<{_PART_SIGNALS['partID_of_partname']}<<{part_name}")
         return rec[0]
-    def this_part_id(partID=1)->int:
+    def this_partID(partID=1)->int:
         '''Get the part ID of the part that is currently being called.\n'''
         rec = connect._send_message(f"true<<{_PART_SIGNALS['this_part_id']}<<{partID}")
         return rec[0]
-    def min_part_id(partID=1)->int:
+    def min_partID(partID=1)->int:
         '''Get the minimum part ID of the current vessel.\n'''
         rec = connect._send_message(f"true<<{_PART_SIGNALS['min_part_id']}<<{partID}")
         return rec[0]
-    def max_part_id(partID=1)->int:
+    def max_partID(partID=1)->int:
         '''Get the maximum part ID of the current vessel.\n'''
         rec = connect._send_message(f"true<<{_PART_SIGNALS['max_part_id']}<<{partID}")
         return rec[0]
@@ -103,11 +102,8 @@ def part_eci_to_local(partID:int, vector:np.ndarray)->np.ndarray:
 
 def get_variable(part_id:int, variable_name:str)->str:
     '''Get the value of a variable of a part.\n
-    i don't know what return when part_id is 0.???
+    NOTE: The variable has been created.\n
+    =======
     '''
     rec = connect._send_message(f"true<<{_PART_SIGNALS['get_variable']}<<{part_id}<<{variable_name}")
     return rec[0]
-def get_variable_list(part_id:int, variable_name:str)->list:
-    '''Get the value of a list variable of a part.\n'''
-    rec = connect._send_message(f"true<<{_PART_SIGNALS['get_variable_list']}<<{part_id}<<{variable_name}")
-    return rec

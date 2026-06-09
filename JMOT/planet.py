@@ -81,7 +81,7 @@ class info:
         return list(rec[0])
 
 _PLANET_ATMOSPHERE_SIGNALS = {
-    "air_desity":130,
+    "air_density":130,
     "air_pressure":131,
     "speed_of_sound":132,
     "temperature":133,
@@ -91,9 +91,9 @@ _PLANET_ATMOSPHERE_SIGNALS = {
 }
 
 class atmosphere:
-    def air_desity()->float:
+    def air_density()->float:
         '''Get the air density at the current vessel's location in kg/m^3.'''
-        rec = connect._send_message(f"true<<{_PLANET_ATMOSPHERE_SIGNALS['air_desity']}")
+        rec = connect._send_message(f"true<<{_PLANET_ATMOSPHERE_SIGNALS['air_density']}")
         return rec[0]
     def air_pressure()->float:
         '''Get the air pressure at the current vessel's location in Pa.'''
@@ -164,11 +164,11 @@ class orbit:
         '''Get the orbital period of a planet in seconds.\n'''
         rec = connect._send_message(f"true<<{_PLANET_ORBIT_SIGNALS['planet_period']}<<{planet}")
         return rec[0]
-    def planet_apoapsis_time(planet:str)->float:
-        '''Get the time of apoapsis of a planet in seconds.\n'''
+    def planet_time_to_apoapsis(planet:str)->float:
+        '''Get the time to apoapsis of a planet in seconds.\n'''
         rec = connect._send_message(f"true<<{_PLANET_ORBIT_SIGNALS['planet_apoapsis_time']}<<{planet}")
         return rec[0]
-    def planet_periapsis_time(planet:str)->float:
+    def planet_time_to_periapsis(planet:str)->float:
         '''Get the time of periapsis of a planet in seconds.\n'''
         rec = connect._send_message(f"true<<{_PLANET_ORBIT_SIGNALS['planet_periapsis_time']}<<{planet}")
         return rec[0]

@@ -71,7 +71,7 @@ def data_connect(server_ip: str, server_data_port: int, server_buffer=2048):
         client_socket.connect((server_ip, server_data_port))
         version = _send_message("version", client_socket)[0]
         if version != JMOT.__version__:
-            print("version error, please updates")
+            print(f"version error, server version: {version}, client version: {JMOT.__version__}")
             sys.exit(1)
         else:
             print(f"JMOT v{JMOT.__version__} connect successful")
